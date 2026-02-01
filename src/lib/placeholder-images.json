@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-before",
+      "description": "A screenshot of the ChatGPT interface.",
+      "imageUrl": "https://images.unsplash.com/photo-1762330467572-5199bc772a20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjaGF0Ym90JTIwaW50ZXJmYWNlfGVufDB8fHx8MTc2OTkzMDAzM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chatbot interface"
+    },
+    {
+      "id": "hero-after",
+      "description": "A screenshot of a code editor with integration code.",
+      "imageUrl": "https://images.unsplash.com/photo-1603943761979-879c839ac8e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZWRpdG9yfGVufDB8fHx8MTc2OTg2NDAyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "code editor"
+    },
+    {
+      "id": "case-study-1-before",
+      "description": "A mockup of a messy spreadsheet representing a manual process.",
+      "imageUrl": "https://images.unsplash.com/photo-1621863367744-7363895606b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzcHJlYWRzaGVldCUyMG1hbnVhbHxlbnwwfHx8fDE3Njk5MzAwMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "spreadsheet manual"
+    },
+    {
+      "id": "case-study-1-after",
+      "description": "A clean, automated dashboard showing data.",
+      "imageUrl": "https://images.unsplash.com/photo-1748609160056-7b95f30041f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkYXNoYm9hcmQlMjBjaGFydHxlbnwwfHx8fDE3Njk4ODE1MTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard chart"
+    },
+    {
+      "id": "case-study-2-before",
+      "description": "A diagram showing disconnected business systems.",
+      "imageUrl": "https://images.unsplash.com/photo-1612203264166-e00118d63b94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmbG93Y2hhcnQlMjBkaXNjb25uZWN0ZWR8ZW58MHx8fHwxNzY5OTMwMDMzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "flowchart disconnected"
+    },
+    {
+      "id": "case-study-2-after",
+      "description": "A diagram showing integrated systems with data flowing smoothly.",
+      "imageUrl": "https://images.unsplash.com/photo-1588422273146-c799447ccb81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmbG93Y2hhcnQlMjBjb25uZWN0ZWR8ZW58MHx8fHwxNzY5OTMwMDMzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "flowchart connected"
+    },
+    {
+      "id": "about-headshot",
+      "description": "A professional headshot of the founder.",
+      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3Njk5MTMxNDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional headshot"
+    }
+  ]
 }
