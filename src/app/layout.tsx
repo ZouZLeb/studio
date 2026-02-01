@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { GoogleAnalytics } from 'next/third-parties/google';
+import Script from 'next/script';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
@@ -38,11 +38,23 @@ export default function RootLayout({
     `,
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-0000000000"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            gtag('config', 'G-0000000000');
+          `}
+        </Script>
       </head>
       <body className={cn('font-body antialiased')}>
         {children}
         <Toaster />
-        <GoogleAnalytics gaId="G-0000000000" /> {/* Replace with your GA ID */}
       </body>
     </html>
   );
