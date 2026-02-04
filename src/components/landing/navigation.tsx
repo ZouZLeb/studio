@@ -23,7 +23,7 @@ export default function Navigation() {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
         isScrolled 
-          ? "bg-background/90 backdrop-blur-md border-b py-3 shadow-md" 
+          ? "bg-background/95 backdrop-blur-md border-b py-3 shadow-md" 
           : "bg-transparent py-6"
       )}
     >
@@ -31,7 +31,7 @@ export default function Navigation() {
         <Link href="/" className="flex items-center gap-2 group">
           <div className={cn(
             "p-1.5 rounded-lg transition-all duration-300",
-            isScrolled ? "bg-primary/10 shadow-sm" : "bg-white/10 group-hover:bg-white/20"
+            isScrolled ? "bg-primary/10" : "bg-white/20 group-hover:bg-white/30"
           )}>
             <CodeXml className={cn("w-6 h-6", isScrolled ? "text-primary" : "text-white")} />
           </div>
@@ -51,8 +51,8 @@ export default function Navigation() {
               className={cn(
                 "transition-all duration-200", 
                 isScrolled 
-                  ? "text-muted-foreground hover:text-primary" 
-                  : "text-white/70 hover:text-white"
+                  ? "text-muted-foreground hover:text-primary font-semibold" 
+                  : "text-white/90 hover:text-white"
               )}
             >
               {item}
@@ -62,16 +62,18 @@ export default function Navigation() {
 
         <div className="flex items-center gap-4">
           <div className={cn(
-            "flex items-center gap-2 rounded-full px-2 py-1 transition-colors",
-            !isScrolled && "bg-black/10 backdrop-blur-sm"
+            "flex items-center gap-2 rounded-full transition-colors",
+            !isScrolled && "bg-black/20 backdrop-blur-sm px-1"
           )}>
             <ModeToggle />
           </div>
           <Button 
             asChild 
             className={cn(
-              "font-bold transition-all h-9 px-5",
-              !isScrolled && "bg-white text-slate-950 hover:bg-slate-100 shadow-xl"
+              "font-bold transition-all h-10 px-6",
+              !isScrolled 
+                ? "bg-white text-slate-950 hover:bg-slate-100 shadow-lg border-none" 
+                : "bg-primary text-primary-foreground"
             )}
           >
             <Link href="#contact">Book a Call</Link>
