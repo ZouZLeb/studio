@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 15px;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
@@ -13,16 +17,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 221 83% 45%; /* Deep professional blue for light mode contrast */
+    --primary: 221 83% 45%;
     --primary-foreground: 210 20% 98%;
 
     --secondary: 220 14.3% 95.9%;
     --secondary-foreground: 220.9 39.3% 11%;
 
     --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 10% 40%; /* Darker gray for better readability */
+    --muted-foreground: 220 10% 40%;
 
-    --accent: 173 80% 30%; /* Darker teal for light mode contrast */
+    --accent: 173 80% 30%;
     --accent-foreground: 210 20% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -45,19 +49,19 @@
   }
 
   .dark {
-    --background: 222 47% 4%; /* Slightly deeper background */
+    --background: 222 47% 4%;
     --foreground: 210 40% 98%;
     --card: 222 47% 7%;
     --card-foreground: 210 40% 98%;
     --popover: 222 47% 7%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%; /* Vibrant blue for dark mode contrast */
+    --primary: 217 91% 60%;
     --primary-foreground: 222 47% 4%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20% 75%; /* Brighter muted text for dark mode */
-    --accent: 173 80% 50%; /* Vibrant teal for dark mode contrast */
+    --muted-foreground: 215 20% 75%;
+    --accent: 173 80% 50%;
     --accent-foreground: 222 47% 4%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
