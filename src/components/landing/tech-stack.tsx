@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -15,28 +16,28 @@ import {
   OAuthLogo,
   N8NLogo,
 } from "../icons/tech-logos";
-import { cn } from "@/lib/utils";
-import type { FC, SVGProps } from "react";
+import type { FC } from "react";
+import type { IconProps } from "@icons-pack/react-simple-icons";
 
 type Tech = {
   name: string;
-  logo: FC<SVGProps<SVGSVGElement>>;
+  Logo: FC<IconProps>;
   description: string;
 };
 
 const technologies: Tech[] = [
-  { name: "n8n", logo: N8NLogo, description: "Private workflow core" },
-  { name: "Python", logo: PythonLogo, description: "Advanced custom logic" },
-  { name: "OpenAI", logo: OpenAILogo, description: "Secure reasoning" },
-  { name: "Anthropic", logo: AnthropicLogo, description: "Private AI models" },
-  { name: "PostgreSQL", logo: PostgreSQLLogo, description: "Private data vault" },
-  { name: "AWS", logo: AWSLogo, description: "Secure cloud hosting" },
-  { name: "Docker", logo: DockerLogo, description: "Isolated environments" },
-  { name: "OAuth 2.0", logo: OAuthLogo, description: "Secure auth protocols" },
-  { name: "HubSpot", logo: HubSpotLogo, description: "CRM synchronization" },
-  { name: "Slack", logo: SlackLogo, description: "Team communication" },
-  { name: "Jira", logo: JiraLogo, description: "Project architecture" },
-  { name: "LangChain", logo: LangChainLogo, description: "Private data linking" },
+  { name: "n8n", Logo: N8NLogo, description: "Private workflow core" },
+  { name: "Python", Logo: PythonLogo, description: "Advanced custom logic" },
+  { name: "OpenAI", Logo: OpenAILogo, description: "Secure reasoning" },
+  { name: "Anthropic", Logo: AnthropicLogo, description: "Private AI models" },
+  { name: "PostgreSQL", Logo: PostgreSQLLogo, description: "Private data vault" },
+  { name: "AWS", Logo: AWSLogo, description: "Secure cloud hosting" },
+  { name: "Docker", Logo: DockerLogo, description: "Isolated environments" },
+  { name: "OAuth 2.0", Logo: OAuthLogo, description: "Secure auth protocols" },
+  { name: "HubSpot", Logo: HubSpotLogo, description: "CRM synchronization" },
+  { name: "Slack", Logo: SlackLogo, description: "Team communication" },
+  { name: "Jira", Logo: JiraLogo, description: "Project architecture" },
+  { name: "LangChain", Logo: LangChainLogo, description: "Private data linking" },
 ];
 
 export default function TechStack() {
@@ -69,7 +70,7 @@ export default function TechStack() {
               className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all hover:bg-white/10 group"
             >
               <div className="flex-shrink-0 text-gray-400 group-hover:text-primary transition-colors">
-                <tech.logo className="w-6 h-6 md:w-7 md:h-7" />
+                <tech.Logo size={28} />
               </div>
               <div className="min-w-0">
                 <h4 className="font-bold text-sm leading-none mb-1">{tech.name}</h4>
