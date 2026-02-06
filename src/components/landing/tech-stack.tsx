@@ -6,7 +6,6 @@ import {
   AnthropicLogo,
   LangChainLogo,
   PythonLogo,
-  NodeJsLogo,
   PostgreSQLLogo,
   AWSLogo,
   DockerLogo,
@@ -14,6 +13,7 @@ import {
   SlackLogo,
   JiraLogo,
   OAuthLogo,
+  N8NLogo,
 } from "../icons/tech-logos";
 import { cn } from "@/lib/utils";
 import type { FC, SVGProps } from "react";
@@ -25,7 +25,7 @@ type Tech = {
 };
 
 const technologies: Tech[] = [
-  { name: "n8n", logo: NodeJsLogo, description: "Private workflow core" },
+  { name: "n8n", logo: N8NLogo, description: "Private workflow core" },
   { name: "Python", logo: PythonLogo, description: "Advanced custom logic" },
   { name: "OpenAI", logo: OpenAILogo, description: "Secure reasoning" },
   { name: "Anthropic", logo: AnthropicLogo, description: "Private AI models" },
