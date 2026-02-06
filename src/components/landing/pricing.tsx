@@ -3,9 +3,7 @@
 import { Check, ShieldCheck, Zap, Code, Database, UserCheck, FileText, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { Card } from "../ui/card";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 const valuePropositions = [
   {
@@ -37,47 +35,6 @@ const valuePropositions = [
     icon: FileText,
     title: "Full Documentation",
     description: "Every system comes with comprehensive technical docs and training for your internal team to maintain control."
-  }
-];
-
-const buildTiers = [
-  {
-    name: "Standard Optimization",
-    scope: "Single Core Process",
-    features: [
-      "Custom n8n workflow engineering",
-      "Deep-system API integrations",
-      "Custom data transformation logic",
-      "Basic security hardening",
-      "14-day post-launch support"
-    ],
-    bestFor: "Eliminating one major manual bottleneck."
-  },
-  {
-    name: "Enterprise Architecture",
-    scope: "Multi-Department Infrastructure",
-    features: [
-      "High-availability n8n deployment",
-      "Advanced Python/Node.js scripting",
-      "Encrypted secret management",
-      "Legacy system synchronization",
-      "Full architecture audit & documentation",
-      "30-day post-launch engineering support"
-    ],
-    bestFor: "Replacing fragmented SaaS tools with a unified core.",
-    highlighted: true
-  },
-  {
-    name: "Custom R&D Lab",
-    scope: "Continuous Innovation",
-    features: [
-      "Dedicated senior engineer resource",
-      "Unlimited system adjustments",
-      "New feature prototyping",
-      "Monthly security patching",
-      "Emergency incident response (4hr SLA)"
-    ],
-    bestFor: "Companies needing an external engineering arm."
   }
 ];
 
@@ -117,66 +74,6 @@ export default function Pricing() {
                   </p>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="text-center mb-12">
-          <h3 className="text-2xl font-bold mb-2">Flexible Engagement Models</h3>
-          <p className="text-muted-foreground">Tailored to your architectural needs and business scale.</p>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16 items-start">
-          {buildTiers.map((tier, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className={cn(tier.highlighted && "transform lg:scale-105 z-10")}
-            >
-              <Card
-                className={cn(
-                  "h-full flex flex-col transition-all duration-500",
-                  tier.highlighted
-                    ? "bg-primary text-primary-foreground border-2 border-primary shadow-2xl"
-                    : "bg-card border-border shadow-sm"
-                )}
-              >
-                <div className="p-8">
-                  {tier.highlighted && (
-                    <div className="bg-yellow-400 text-blue-950 text-[10px] font-black py-1 px-4 rounded-full inline-block mb-4 absolute -top-3 left-1/2 -translate-x-1/2 shadow-lg tracking-widest uppercase">
-                      Most Requested
-                    </div>
-                  )}
-                  <h3 className="text-2xl font-black mb-1">{tier.name}</h3>
-                  <div className={cn("text-xs font-bold uppercase tracking-widest mb-4", tier.highlighted ? "text-primary-foreground/80" : "text-primary")}>
-                    {tier.scope}
-                  </div>
-                  <p className={cn("mb-6 text-sm", tier.highlighted ? "text-primary-foreground/90" : "text-muted-foreground")}>
-                    {tier.bestFor}
-                  </p>
-                  
-                  <Button asChild className={cn("w-full font-bold h-12", tier.highlighted ? "bg-white text-primary hover:bg-slate-100" : "bg-primary text-white")} size="lg">
-                    <Link href="#contact">Consult with an Engineer</Link>
-                  </Button>
-                </div>
-                
-                <div className="p-8 bg-black/5 dark:bg-white/5 flex-grow">
-                   <h4 className="font-bold text-[10px] mb-6 uppercase tracking-[0.2em] opacity-60">Deliverables include:</h4>
-                  <ul className="space-y-4">
-                    {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <Check
-                          className={cn("w-4 h-4 mt-0.5 flex-shrink-0", tier.highlighted ? "text-green-300" : "text-green-600")}
-                        />
-                        <span className="text-sm font-medium leading-snug">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Card>
             </motion.div>
           ))}
         </div>
