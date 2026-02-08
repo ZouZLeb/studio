@@ -40,8 +40,8 @@ const technologies: Tech[] = [
 ];
 
 export default function TechStack() {
-  // Duplicate for seamless looping
-  const duplicatedTechs = [...technologies, ...technologies, ...technologies];
+  // Use exactly two sets for a perfect 0 to -50% loop
+  const duplicatedTechs = [...technologies, ...technologies];
 
   return (
     <section id="tech-stack" className="bg-transparent overflow-hidden py-12 md:py-16">
@@ -63,17 +63,17 @@ export default function TechStack() {
 
         <div className="relative w-full pointer-events-none select-none">
           {/* Gradient Fades for the edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
           
           <div className="flex overflow-hidden">
             <motion.div
               className="flex gap-4 py-4"
               animate={{
-                x: [0, -100 * technologies.length + "%"],
+                x: [0, "-50%"],
               }}
               transition={{
-                duration: 40,
+                duration: 60, // Slower, smoother movement
                 ease: "linear",
                 repeat: Infinity,
               }}
