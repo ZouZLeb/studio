@@ -89,10 +89,10 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" className="h-12 px-8 font-bold text-base bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+            <Button size="lg" className="h-12 px-8 font-bold text-base" variant="default" asChild>
               <Link href="#why-custom">Ownership vs Renting</Link>
             </Button>
-            <Button size="lg" variant="outline" className="h-12 px-8 font-bold text-base border-input dark:border-white/30 text-foreground dark:text-white hover:bg-accent/5 dark:hover:bg-white/10" asChild>
+            <Button size="lg" variant="outline" className="h-12 px-8 font-bold text-base" asChild>
               <Link href="#contact">Book Free Consultation</Link>
             </Button>
           </motion.div>

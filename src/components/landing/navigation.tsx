@@ -56,7 +56,8 @@ export default function Navigation() {
           <ModeToggle />
           <Button 
             asChild 
-            className="font-bold transition-all h-10 px-6 border-none shadow-lg bg-primary text-primary-foreground hover:bg-primary/90"
+            className="font-bold px-6 shadow-xl"
+            variant="default"
           >
             <Link href="#contact">Book a Call</Link>
           </Button>
