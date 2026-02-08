@@ -40,7 +40,7 @@ export default function Navigation() {
           </span>
         </Link>
         
-        <nav className="hidden md:flex items-center gap-8 text-[13px] font-bold uppercase tracking-[0.1em]">
+        <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
           {['Why Custom', 'Services', 'Pricing', 'About'].map((item) => (
             <Link 
               key={item}
@@ -54,11 +54,9 @@ export default function Navigation() {
 
         <div className="flex items-center gap-4">
           <ModeToggle />
-          <Button asChild variant="default" className="p-0">
+          <Button asChild variant="default">
             <Link href="#contact">
-              <div className="btn-custom-glass-inner">
-                <div className="btn-custom-glass-text">Book a Call</div>
-              </div>
+              Book a Call
             </Link>
           </Button>
         </div>

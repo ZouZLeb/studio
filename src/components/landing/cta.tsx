@@ -45,11 +45,9 @@ export default function CtaSection() {
                   A 15-minute technical discussion about your needs. No sales pitch, no commitment.
                 </p>
                 <div className="mt-auto">
-                  <div className="btn-custom-glass w-full">
-                    <div className="btn-custom-glass-inner text-center">
-                      <div className="btn-custom-glass-text">Schedule Now</div>
-                    </div>
-                  </div>
+                  <Button variant="default" className="w-full pointer-events-none">
+                    Schedule Now
+                  </Button>
                 </div>
               </Card>
             </motion.div>
@@ -71,11 +69,9 @@ export default function CtaSection() {
                   Not ready to talk? Download our in-depth case studies and technical examples.
                 </p>
                  <div className="mt-auto">
-                  <div className="btn-custom-glass opacity-80 hover:opacity-100 w-full">
-                    <div className="btn-custom-glass-inner text-center">
-                      <div className="btn-custom-glass-text">Download PDF</div>
-                    </div>
-                  </div>
+                  <Button variant="secondary" className="w-full pointer-events-none">
+                    Download PDF
+                  </Button>
                 </div>
               </a>
             </motion.div>

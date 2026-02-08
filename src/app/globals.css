@@ -82,28 +82,32 @@
 
 @layer components {
   .btn-custom-glass {
-    @apply relative inline-flex items-center justify-center p-0 transition-all duration-300 no-underline cursor-pointer border-none overflow-hidden rounded-full;
+    @apply relative inline-flex items-center justify-center p-[1.5px] transition-all duration-500 no-underline cursor-pointer border-none overflow-hidden rounded-full;
     box-shadow: none;
     background-image: linear-gradient(90deg, #6998e3, #56c0f8 25%, #958bf8 50%, #cc59f3 75%, #f769ab);
+    background-size: 200% auto;
+  }
+
+  .btn-custom-glass:hover {
+    background-position: right center;
   }
 
   .btn-custom-glass-inner {
-    @apply block w-full h-full transition-all duration-300 ease-in-out bg-white dark:bg-[#0e2042] rounded-full;
-    margin: 1.5px;
-    padding: 11.5px 22.5px 9.5px;
+    @apply flex items-center justify-center w-full h-full transition-all duration-300 ease-in-out bg-white/90 dark:bg-[#0e2042]/90 backdrop-blur-xl rounded-full;
+    padding: 10px 24px;
   }
 
   .btn-custom-glass:hover .btn-custom-glass-inner {
     background-color: transparent !important;
+    backdrop-blur: 0px;
   }
 
   .btn-custom-glass-text {
-    @apply text-sm font-bold transition-colors duration-300;
-    color: inherit;
+    @apply text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 text-foreground dark:text-white;
   }
 
   .btn-custom-glass:hover .btn-custom-glass-text {
-    color: #fff !important;
+    @apply text-white;
   }
 }
 

@@ -9,9 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "btn-custom-glass text-foreground dark:text-white",
-        outline: "btn-custom-glass opacity-90 hover:opacity-100 text-foreground dark:text-white",
-        secondary: "btn-custom-glass opacity-70 hover:opacity-100 text-foreground dark:text-white",
+        default: "btn-custom-glass",
+        outline: "btn-custom-glass opacity-90 hover:opacity-100",
+        secondary: "btn-custom-glass opacity-70 hover:opacity-100",
         ghost: "hover:bg-white/10 backdrop-blur-sm transition-colors shadow-none text-foreground",
         link: "text-primary underline-offset-4 hover:underline shadow-none",
       },
@@ -49,15 +49,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ref={ref}
           {...props}
         >
-          {asChild ? (
-            children
-          ) : (
-            <div className="btn-custom-glass-inner">
-              <div className="btn-custom-glass-text flex items-center justify-center gap-2">
-                {children}
-              </div>
+          <div className="btn-custom-glass-inner">
+            <div className="btn-custom-glass-text flex items-center justify-center gap-2">
+              {children}
             </div>
-          )}
+          </div>
         </Comp>
       )
     }
