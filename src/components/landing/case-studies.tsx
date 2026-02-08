@@ -160,7 +160,7 @@ export default function CaseStudies() {
   const getImg = (id: string) => PlaceHolderImages.find((img) => img.id === id);
 
   return (
-    <section id="case-studies" className="bg-background">
+    <section id="case-studies" className="bg-transparent">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline">
@@ -185,10 +185,10 @@ export default function CaseStudies() {
                 return (
                   <CarouselItem key={study.id} className="pl-6 md:basis-1/2 lg:basis-1/3 py-4">
                     <Card
-                      className="h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer group flex flex-col border-border"
+                      className="h-full overflow-hidden transition-all duration-300 bg-card/40 backdrop-blur-md hover:shadow-2xl hover:-translate-y-1 cursor-pointer group flex flex-col border-border/50"
                       onClick={() => setSelectedCase(study)}
                     >
-                      <div className="relative h-48 bg-muted">
+                      <div className="relative h-48 bg-muted/20">
                         {studyImg && (
                           <Image
                             src={studyImg.imageUrl}
@@ -210,7 +210,7 @@ export default function CaseStudies() {
                           {study.problem}
                         </p>
                         
-                        <div className="grid grid-cols-3 gap-2 py-4 border-t border-b bg-muted/30 -mx-6 px-4">
+                        <div className="grid grid-cols-3 gap-2 py-4 border-t border-b bg-muted/10 -mx-6 px-4">
                           <div className="text-center">
                             <div className="text-lg font-bold text-primary">
                               <CountUp end={study.metrics.timeSaved} duration={2} />{study.metrics.timeSaved % 1 !== 0 ? '' : '+'}
@@ -237,7 +237,7 @@ export default function CaseStudies() {
                           </div>
                         </div>
                         
-                        <Button variant="link" className="mt-4 self-start p-0 h-auto text-primary group-hover:underline text-xs">
+                        <Button variant="link" className="mt-4 self-start p-0 h-auto text-primary group-hover:underline text-xs shadow-none">
                           View Full System Details <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
                         </Button>
                       </CardContent>
@@ -254,7 +254,7 @@ export default function CaseStudies() {
         </div>
 
         <div className="mt-16 max-w-5xl mx-auto">
-          <Card className="flex flex-col md:flex-row bg-muted/50 border-dashed p-8 items-center gap-8">
+          <Card className="flex flex-col md:flex-row bg-card/40 backdrop-blur-md border-border/50 border-dashed p-8 items-center gap-8">
             <div className="flex-shrink-0 bg-primary/10 p-4 rounded-full">
               <ShieldCheck className="w-12 h-12 text-primary" />
             </div>
@@ -288,7 +288,7 @@ export default function CaseStudies() {
       </div>
 
       <Dialog open={selectedCase !== null} onOpenChange={(isOpen) => !isOpen && setSelectedCase(null)}>
-        <DialogContent className="sm:max-w-2xl">
+        <DialogContent className="sm:max-w-2xl bg-background/95 backdrop-blur-xl">
           <DialogHeader>
             <Badge variant="secondary" className="mb-2 w-fit">{selectedCase?.industry}</Badge>
             <DialogTitle className="text-2xl">{selectedCase?.clientType}</DialogTitle>
@@ -310,7 +310,7 @@ export default function CaseStudies() {
               <p className="text-sm text-muted-foreground">{selectedCase?.fullDetails.timeline}</p>
             </div>
             {selectedCase?.fullDetails.testimonial && (
-              <blockquote className="mt-2 border-l-2 pl-4 italic text-muted-foreground bg-muted/30 py-4 pr-4 rounded-r-lg">
+              <blockquote className="mt-2 border-l-2 pl-4 italic text-muted-foreground bg-muted/20 py-4 pr-4 rounded-r-lg">
                 "{selectedCase.fullDetails.testimonial}"
               </blockquote>
             )}
