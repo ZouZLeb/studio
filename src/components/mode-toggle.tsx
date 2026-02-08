@@ -19,7 +19,7 @@ export function ModeToggle() {
 
   if (!mounted) {
     return (
-      <div className="h-10 w-10 rounded-full border border-border/50 bg-background/20 backdrop-blur-sm" />
+      <div className="h-10 w-10 rounded-full border border-border/50 bg-background/20 backdrop-blur-sm flex-shrink-0" />
     )
   }
 
@@ -33,8 +33,9 @@ export function ModeToggle() {
       size="icon"
       className={cn(
         "h-10 w-10 rounded-full relative overflow-hidden group transition-all duration-300 border backdrop-blur-md shadow-sm",
-        "bg-white/10 border-white/20 dark:bg-black/20 dark:border-white/10",
-        "hover:bg-white/20 dark:hover:bg-black/30"
+        "bg-primary/5 border-primary/20 dark:bg-black/20 dark:border-white/10",
+        "hover:bg-primary/10 dark:hover:bg-black/30",
+        "flex-shrink-0 aspect-square p-0"
       )}
       onClick={toggleTheme}
       title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
