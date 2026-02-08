@@ -47,14 +47,13 @@ export default function RoiCalculator() {
       : Math.round((baseMonthlyPrice + (integrations * 50)) * complexityMultiplier * supportMultiplier);
 
     // 3. Labor and Savings
-    const weeklyLabor = hourlyRate * weeklyHours;
-    const annualLabor = weeklyLabor * 52;
+    const annualLabor = (hourlyRate * weeklyHours) * 52;
     const annualInvestment = buildCost + (monthlyCost * 12);
     
     // Savings calculation (Labor - 1st Year Total Investment)
-    const firstYearSavings = Math.max(0, annualLabor - annualInvestment);
+    const firstYearSavings = annualLabor - annualInvestment;
     
-    return { buildCost, monthlyCost, annualLabor, firstYearSavings, weeklyLabor };
+    return { buildCost, monthlyCost, annualLabor, firstYearSavings, annualInvestment };
   }, [integrations, complexityIdx, maintenanceIdx, hourlyRate, weeklyHours]);
 
   const formatCurrency = (value: number) => {
@@ -218,15 +217,15 @@ export default function RoiCalculator() {
 
               <div className="space-y-4 pt-8 border-t border-border/50">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase opacity-60">Current Weekly Loss</span>
-                  <span className="font-bold">{formatCurrency(calculations.weeklyLabor)}</span>
+                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly System Cost</span>
+                  <span className="font-bold">{formatCurrency(calculations.annualInvestment)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase opacity-60">Manual Labor / Yr</span>
+                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly Labor Cost</span>
                   <span className="font-bold">{formatCurrency(calculations.annualLabor)}</span>
                 </div>
                 <div className="flex justify-between items-center text-green-600 dark:text-green-400">
-                  <span className="text-[10px] font-bold uppercase opacity-60">1st Year Net Gain</span>
+                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly Saved</span>
                   <span className="font-bold text-lg">{formatCurrency(calculations.firstYearSavings)}</span>
                 </div>
               </div>
