@@ -11,45 +11,45 @@ import { motion } from "framer-motion";
 
 const comparisonData = [
   {
-    feature: "Data Privacy & Control",
+    feature: "Data Privacy & Safety",
     chatgpt: { status: "no", text: "Data shared with LLM providers" },
-    nocode: { status: "partial", text: "Third-party server storage" },
-    custom: { status: "yes", text: "Self-hosted or private cloud" },
+    nocode: { status: "partial", text: "Stored on 3rd party servers" },
+    custom: { status: "yes", text: "100% Private & Self-Hosted" },
     details:
-      "Most 'AI agencies' use tools that feed your sensitive company data back into LLM training loops. We build systems using self-hosted n8n or private scripts, ensuring your data never leaves your controlled environment unless you want it to.",
+      "Generic AI tools often feed your sensitive business data back into training models. We build isolated systems where your data never leaves your private environment, ensuring complete security and compliance.",
   },
   {
     feature: "System Ownership",
     chatgpt: { status: "no", text: "Subscription-locked" },
-    nocode: { status: "no", text: "Platform-locked" },
-    custom: { status: "yes", text: "You own 100% of the code" },
+    nocode: { status: "no", text: "Platform-dependent" },
+    custom: { status: "yes", text: "You own the source code" },
     details:
-      "Stop paying per-task fees. When we build a system, it's yours. We deliver the source code and workflow files. If we part ways, your automation keeps running exactly as it was, with no dependencies on our billing.",
+      "Stop paying 'SaaS taxes'. When we build your system, we deliver the full source code and workflow files. You own the intellectual property 100%, with no recurring fees to keep your automation running.",
   },
   {
-    feature: "Technical Depth",
-    chatgpt: { status: "no", text: "Prompt-based only" },
-    nocode: { status: "partial", text: "Drag-and-drop limits" },
-    custom: { status: "yes", text: "Full custom logic & scripts" },
+    feature: "Reliability & Scale",
+    chatgpt: { status: "no", text: "Basic prompt logic" },
+    nocode: { status: "partial", text: "Fragile templates" },
+    custom: { status: "yes", text: "Production-grade code" },
     details:
-      "Templates break. We use real software development practices—Node.js, Python, and advanced n8n logic—to handle edge cases, complex data transformations, and legacy system integrations that 'no-code' tools can't touch.",
+      "Generic templates break when your business grows. We use professional engineering practices (Node.js/Python) to handle complex logic, multi-app syncs, and heavy workloads that no-code tools can't manage.",
   },
   {
-    feature: "Security Certification",
-    chatgpt: { status: "no", text: "None" },
-    nocode: { status: "partial", text: "Standard SaaS terms" },
-    custom: { status: "yes", text: "Built by Security+ Engineers" },
+    feature: "Engineering Standard",
+    chatgpt: { status: "no", text: "Hobbyist level" },
+    nocode: { status: "partial", text: "Standard drag-and-drop" },
+    custom: { status: "yes", text: "Certified Security Engineers" },
     details:
-      "We aren't just 'AI enthusiasts'. We are certified software and cybersecurity professionals. Every line of code is written with threat modeling, encryption, and the principle of least privilege in mind.",
+      "We aren't just 'AI enthusiasts'. Every system is designed by Security+ and AWS certified developers using threat modeling, encryption, and the principle of least privilege.",
   },
 ];
 
 const StatusIcon = ({ status }: { status: "yes" | "no" | "partial" }) => {
   if (status === "yes")
-    return <CheckCircle className="w-6 h-6 text-green-600 mx-auto" />;
+    return <CheckCircle className="w-5 h-5 text-green-500 mx-auto" />;
   if (status === "no")
-    return <XCircle className="w-6 h-6 text-red-600 mx-auto" />;
-  return <AlertTriangle className="w-6 h-6 text-yellow-500 mx-auto" />;
+    return <XCircle className="w-5 h-5 text-red-500 mx-auto" />;
+  return <AlertTriangle className="w-5 h-5 text-yellow-500 mx-auto" />;
 };
 
 export default function DifferentiationTable() {
@@ -60,8 +60,8 @@ export default function DifferentiationTable() {
           <h2 className="text-3xl md:text-4xl font-bold font-headline">
             Automation Built for Professionals
           </h2>
-          <p className="text-lg text-muted-foreground mt-4 max-w-3xl mx-auto">
-            Don't trust your business data to &apos;prompt wrappers&apos;. See how our engineering approach protects your bottom line and your privacy.
+          <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
+            Compare our engineering approach to generic "AI agencies" and standard no-code tools.
           </p>
         </div>
 
@@ -70,19 +70,19 @@ export default function DifferentiationTable() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-6xl mx-auto bg-card/50 backdrop-blur-md rounded-lg border shadow-sm"
+          className="max-w-5xl mx-auto bg-card/40 backdrop-blur-md rounded-2xl border border-border/50 shadow-sm overflow-hidden"
         >
-          <div className="hidden md:grid md:grid-cols-5 p-4 border-b font-bold text-center">
-            <div className="text-left font-headline text-lg col-span-2">Critical Business Need</div>
-            <div>AI Wrappers</div>
-            <div>No-Code Apps</div>
-            <div>SecureCustom Build</div>
+          <div className="hidden md:grid md:grid-cols-5 p-5 border-b border-border/50 font-bold text-center bg-muted/20">
+            <div className="text-left font-headline text-sm uppercase tracking-wider text-muted-foreground col-span-2">Strategic Benefit</div>
+            <div className="text-xs uppercase tracking-tighter">AI Wrappers</div>
+            <div className="text-xs uppercase tracking-tighter">No-Code Tools</div>
+            <div className="text-xs uppercase tracking-tighter text-primary">Secure Build</div>
           </div>
           <Accordion type="single" collapsible className="w-full">
             {comparisonData.map((row, idx) => (
-              <AccordionItem value={`item-${idx}`} key={idx} className="border-border/50">
-                <AccordionTrigger className="grid md:grid-cols-5 w-full p-4 hover:bg-muted/30 transition-colors text-left md:text-center group">
-                  <span className="col-span-2 text-left font-semibold text-foreground">
+              <AccordionItem value={`item-${idx}`} key={idx} className="border-border/50 last:border-0">
+                <AccordionTrigger className="grid md:grid-cols-5 w-full p-5 hover:bg-muted/30 transition-colors text-left md:text-center group">
+                  <span className="col-span-2 text-left font-bold text-foreground pr-4">
                     {row.feature}
                   </span>
                   <div className="hidden md:block">
@@ -96,30 +96,44 @@ export default function DifferentiationTable() {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="p-6 bg-primary/5 border-t border-border/50">
-                    <div className="grid md:grid-cols-3 gap-6 text-sm">
-                      <div className="md:hidden grid grid-cols-2 gap-y-2 text-sm mb-4 border-b pb-4">
-                        <span className="font-semibold">AI Wrappers:</span> <StatusIcon status={row.chatgpt.status} />
-                        <span className="font-semibold">No-Code:</span> <StatusIcon status={row.nocode.status} />
-                        <span className="font-semibold">Custom:</span> <StatusIcon status={row.custom.status} />
+                  <div className="px-5 pb-6 pt-2">
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div className="md:hidden grid grid-cols-2 gap-y-3 text-sm mb-6 border-b border-border/50 pb-6">
+                        <div className="flex items-center gap-2">
+                          <StatusIcon status={row.chatgpt.status} />
+                          <span className="text-muted-foreground text-xs">AI Wrappers</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <StatusIcon status={row.nocode.status} />
+                          <span className="text-muted-foreground text-xs">No-Code Tools</span>
+                        </div>
+                        <div className="flex items-center gap-2 col-span-2">
+                          <StatusIcon status={row.custom.status} />
+                          <span className="text-primary font-bold text-xs">Secure Custom Build</span>
+                        </div>
                       </div>
-                      <div className="md:hidden">
-                        <p className="text-foreground">{row.details}</p>
+                      
+                      <div className="col-span-3">
+                        <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
+                           <p className="text-foreground/90 leading-relaxed italic">
+                             "{row.details}"
+                           </p>
+                        </div>
                       </div>
-                      <div className="hidden md:block">
-                        <h4 className="font-bold mb-2">AI Wrappers</h4>
-                        <p className="text-muted-foreground">{row.chatgpt.text}</p>
+
+                      <div className="hidden md:block space-y-1">
+                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">AI Wrappers</h4>
+                        <p className="text-sm font-medium opacity-80">{row.chatgpt.text}</p>
                       </div>
-                      <div className="hidden md:block">
-                        <h4 className="font-bold mb-2">No-Code Tools</h4>
-                        <p className="text-muted-foreground">{row.nocode.text}</p>
+                      <div className="hidden md:block space-y-1">
+                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">No-Code</h4>
+                        <p className="text-sm font-medium opacity-80">{row.nocode.text}</p>
                       </div>
-                      <div className="hidden md:block">
-                        <h4 className="font-bold mb-2">Secure Custom Build</h4>
-                        <p className="text-muted-foreground">{row.custom.text}</p>
+                      <div className="hidden md:block space-y-1">
+                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary">Secure Build</h4>
+                        <p className="text-sm font-bold">{row.custom.text}</p>
                       </div>
                     </div>
-                     <p className="hidden md:block text-muted-foreground mt-4 pt-4 border-t border-border/50">{row.details}</p>
                   </div>
                 </AccordionContent>
               </AccordionItem>

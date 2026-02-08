@@ -89,12 +89,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button asChild variant="default">
-              <Link href="#why-custom">
-                Ownership vs Renting
-              </Link>
-            </Button>
-            <Button asChild variant="secondary">
+            
+            <Button className=" w-auto" asChild variant="default">
               <Link href="#contact">
                 Book Free Consultation
               </Link>
