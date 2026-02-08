@@ -89,16 +89,20 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link href="#why-custom" className="btn-custom-glass">
-              <div className="btn-custom-glass-inner">
-                <div className="btn-custom-glass-text px-4">Ownership vs Renting</div>
-              </div>
-            </Link>
-            <Link href="#contact" className="btn-custom-glass opacity-80 hover:opacity-100">
-              <div className="btn-custom-glass-inner">
-                <div className="btn-custom-glass-text px-4">Book Free Consultation</div>
-              </div>
-            </Link>
+            <Button asChild variant="default" className="p-0 h-auto">
+              <Link href="#why-custom">
+                <div className="btn-custom-glass-inner">
+                  <div className="btn-custom-glass-text px-4">Ownership vs Renting</div>
+                </div>
+              </Link>
+            </Button>
+            <Button asChild variant="secondary" className="p-0 h-auto">
+              <Link href="#contact">
+                <div className="btn-custom-glass-inner">
+                  <div className="btn-custom-glass-text px-4">Book Free Consultation</div>
+                </div>
+              </Link>
+            </Button>
           </motion.div>
         </div>
 

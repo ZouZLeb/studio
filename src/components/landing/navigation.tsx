@@ -54,11 +54,13 @@ export default function Navigation() {
 
         <div className="flex items-center gap-4">
           <ModeToggle />
-          <Link href="#contact" className="btn-custom-glass">
-            <div className="btn-custom-glass-inner">
-              <div className="btn-custom-glass-text">Book a Call</div>
-            </div>
-          </Link>
+          <Button asChild variant="default" className="p-0">
+            <Link href="#contact">
+              <div className="btn-custom-glass-inner">
+                <div className="btn-custom-glass-text">Book a Call</div>
+              </div>
+            </Link>
+          </Button>
         </div>
       </div>
     </header>

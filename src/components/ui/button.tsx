@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "btn-custom-glass",
-        outline: "btn-custom-glass opacity-80 hover:opacity-100",
-        secondary: "btn-custom-glass opacity-60 hover:opacity-100",
-        ghost: "hover:bg-white/10 backdrop-blur-sm transition-colors shadow-none",
+        default: "btn-custom-glass text-foreground dark:text-white",
+        outline: "btn-custom-glass opacity-90 hover:opacity-100 text-foreground dark:text-white",
+        secondary: "btn-custom-glass opacity-70 hover:opacity-100 text-foreground dark:text-white",
+        ghost: "hover:bg-white/10 backdrop-blur-sm transition-colors shadow-none text-foreground",
         link: "text-primary underline-offset-4 hover:underline shadow-none",
       },
       size: {
-        default: "",
+        default: "min-h-[44px]",
         sm: "scale-90",
         lg: "scale-110",
         icon: "h-10 w-10",
@@ -39,18 +39,26 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
-    // If it's a regular button (not asChild) and using one of our glass variants, wrap content
-    if (!asChild && (variant === "default" || variant === "outline" || variant === "secondary")) {
+    // Check if it's one of our custom glass variants
+    const isGlass = variant === "default" || variant === "outline" || variant === "secondary";
+
+    if (isGlass) {
       return (
-        <button
+        <Comp
           className={cn(buttonVariants({ variant, size, className }))}
           ref={ref}
           {...props}
         >
-          <div className="btn-custom-glass-inner">
-            <div className="btn-custom-glass-text">{children}</div>
-          </div>
-        </button>
+          {asChild ? (
+            children
+          ) : (
+            <div className="btn-custom-glass-inner">
+              <div className="btn-custom-glass-text flex items-center justify-center gap-2">
+                {children}
+              </div>
+            </div>
+          )}
+        </Comp>
       )
     }
 

@@ -8,7 +8,7 @@
   }
 
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 224 71.4% 4.1%;
 
     --card: 0 0% 100%;
@@ -36,16 +36,10 @@
     --input: 220 13% 91%;
     --ring: 221 83% 45%;
 
-    --radius: 0.75rem;
+    --radius: 2rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --btn-inner-bg: 0 0% 100%;
+    --btn-text: 224 71.4% 4.1%;
   }
 
   .dark {
@@ -68,14 +62,9 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 217 91% 60%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --btn-inner-bg: 222 47% 8%;
+    --btn-text: 0 0% 100%;
   }
 }
 
@@ -93,25 +82,28 @@
 
 @layer components {
   .btn-custom-glass {
-    @apply relative inline-flex items-center justify-center p-0 transition-all duration-300 no-underline cursor-pointer border-none overflow-hidden rounded-[34px];
+    @apply relative inline-flex items-center justify-center p-0 transition-all duration-300 no-underline cursor-pointer border-none overflow-hidden rounded-full;
     box-shadow: none;
-    color: #fff !important;
-    background-color: #0f2349;
     background-image: linear-gradient(90deg, #6998e3, #56c0f8 25%, #958bf8 50%, #cc59f3 75%, #f769ab);
   }
 
   .btn-custom-glass-inner {
-    @apply block w-full h-full transition-colors duration-200 ease-in-out bg-[#0e2042] rounded-[32px];
+    @apply block w-full h-full transition-all duration-300 ease-in-out bg-white dark:bg-[#0e2042] rounded-full;
     margin: 1.5px;
     padding: 11.5px 22.5px 9.5px;
   }
 
   .btn-custom-glass:hover .btn-custom-glass-inner {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 
   .btn-custom-glass-text {
-    @apply text-sm font-bold;
+    @apply text-sm font-bold transition-colors duration-300;
+    color: inherit;
+  }
+
+  .btn-custom-glass:hover .btn-custom-glass-text {
+    color: #fff !important;
   }
 }
 
