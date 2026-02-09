@@ -40,7 +40,7 @@ const valuePropositions = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-transparent py-16 md:py-20">
+    <section id="pricing" className="bg-transparent md:py-20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-extrabold font-headline mb-4">

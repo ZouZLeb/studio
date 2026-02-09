@@ -17,7 +17,7 @@ import {
 
 const navItems = [
   { name: 'Why Custom', href: '#why-custom' },
-  { name: 'Services', href: '#services' },
+  { name: 'Services', href: '#case-studies' },
   { name: 'Pricing', href: '#pricing' },
   { name: 'About', href: '#about' },
 ];

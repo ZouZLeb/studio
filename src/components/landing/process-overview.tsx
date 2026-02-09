@@ -66,7 +66,7 @@ const steps = [
 
 export default function ProcessOverview() {
   return (
-    <section id="services" className="bg-transparent py-10 md:py-16 relative overflow-hidden">
+    <section id="lifecycle" className="bg-transparent py-10 md:py-16 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-black font-headline mb-4 tracking-tight">
@@ -78,10 +78,10 @@ export default function ProcessOverview() {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          {/* Central spine line */}
-          <div className="absolute left-8 md:left-1/2 top-[60px] bottom-[60px] w-px bg-gradient-to-b from-primary to-primary -translate-x-1/2 opacity-30 z-0" />
+          {/* Central spine line - Aligned left on mobile, center on md+ */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/30 to-primary/50 -translate-x-1/2 z-0" />
 
-          <div className="space-y-4 md:space-y-0">
+          <div className="space-y-12 md:space-y-0">
             {steps.map((step, idx) => (
               <motion.div
                 key={idx}
@@ -103,7 +103,7 @@ export default function ProcessOverview() {
                   )} 
                 />
 
-                {/* Horizontal Connector Line (Mobile) */}
+                {/* Horizontal Connector Line (Mobile) - Starts at spine (left-8) and goes to card */}
                 <div 
                   className={cn(
                     "absolute left-8 top-1/2 -translate-y-1/2 w-8 h-[2px] z-[1] block md:hidden pointer-events-none bg-gradient-to-r",
@@ -113,7 +113,7 @@ export default function ProcessOverview() {
 
                 {/* Content Card */}
                 <div className={cn(
-                  "w-full md:w-[42%] ml-16 sm:ml-0 z-10",
+                  "w-full md:w-[42%] pl-20 md:pl-0 z-10",
                   idx % 2 === 0 ? "md:text-right" : "md:text-left"
                 )}>
                   <Card className="border-border/50 bg-card/60 backdrop-blur-md hover:border-primary/50 transition-all duration-300 group shadow-none hover:shadow-lg">
@@ -136,8 +136,8 @@ export default function ProcessOverview() {
                   </Card>
                 </div>
 
-                {/* Timeline Node Icon */}
-                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
+                {/* Timeline Node Icon - Fixed at left-8 on mobile, md:left-1/2 */}
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
                   <div className={cn(
                     "w-12 h-12 rounded-full border-4 border-background bg-card flex items-center justify-center shadow-xl ring-1 ring-border",
                     "hover:scale-110 transition-transform duration-300 group"
@@ -146,7 +146,7 @@ export default function ProcessOverview() {
                   </div>
                 </div>
 
-                {/* Spacer for alternating layout */}
+                {/* Spacer for alternating layout (Desktop only) */}
                 <div className="hidden md:block w-[42%]" />
               </motion.div>
             ))}
@@ -154,8 +154,8 @@ export default function ProcessOverview() {
         </div>
 
         {/* Closing summary bar */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <div className="grid sm:grid-cols-3 gap-6 text-center border-t border-border/30 pt-10">
+        <div className="mt-20 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center border-t border-border/30 pt-10">
             <div className="space-y-1">
                <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Zero Task Fees</h4>
                <p className="text-[11px] text-muted-foreground">Run unlimited tasks on your own infrastructure.</p>
