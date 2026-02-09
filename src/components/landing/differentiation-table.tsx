@@ -1,67 +1,54 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const comparisonData = [
   {
-    feature: "Data Privacy & Safety",
-    chatgpt: { status: "no", text: "Data shared with LLM providers" },
-    nocode: { status: "partial", text: "Stored on 3rd party servers" },
-    custom: { status: "yes", text: "100% Private & Self-Hosted" },
-    details:
-      "Generic AI tools often feed your sensitive business data back into training models. We build isolated systems where your data never leaves your private environment, ensuring complete security and compliance.",
+    feature: "Data Privacy",
+    chatgpt: { status: "no", text: "Shared with LLMs" },
+    nocode: { status: "partial", text: "Cloud Stored" },
+    custom: { status: "yes", text: "100% Private" },
   },
   {
-    feature: "System Ownership",
-    chatgpt: { status: "no", text: "Subscription-locked" },
-    nocode: { status: "no", text: "Platform-dependent" },
-    custom: { status: "yes", text: "You own the source code" },
-    details:
-      "Stop paying 'SaaS taxes'. When we build your system, we deliver the full source code and workflow files. You own the intellectual property 100%, with no recurring fees to keep your automation running.",
+    feature: "Ownership",
+    chatgpt: { status: "no", text: "Subscription Locked" },
+    nocode: { status: "no", text: "Platform Owned" },
+    custom: { status: "yes", text: "You own the Code" },
   },
   {
-    feature: "Reliability & Scale",
-    chatgpt: { status: "no", text: "Basic prompt logic" },
-    nocode: { status: "partial", text: "Fragile templates" },
-    custom: { status: "yes", text: "Production-grade code" },
-    details:
-      "Generic templates break when your business grows. We use professional engineering practices (Node.js/Python) to handle complex logic, multi-app syncs, and heavy workloads that no-code tools can't manage.",
+    feature: "Reliability",
+    chatgpt: { status: "no", text: "Simple Prompts" },
+    nocode: { status: "partial", text: "Fragile Templates" },
+    custom: { status: "yes", text: "Production Grade" },
   },
   {
-    feature: "Engineering Standard",
-    chatgpt: { status: "no", text: "Hobbyist level" },
-    nocode: { status: "partial", text: "Standard drag-and-drop" },
-    custom: { status: "yes", text: "Certified Security Engineers" },
-    details:
-      "We aren't just 'AI enthusiasts'. Every system is designed by Security+ and AWS certified developers using threat modeling, encryption, and the principle of least privilege.",
+    feature: "Expert Build",
+    chatgpt: { status: "no", text: "Hobbyist Level" },
+    nocode: { status: "partial", text: "Generalist" },
+    custom: { status: "yes", text: "Security Engineers" },
   },
 ];
 
 const StatusIcon = ({ status }: { status: "yes" | "no" | "partial" }) => {
   if (status === "yes")
-    return <CheckCircle className="w-5 h-5 text-green-500 mx-auto" />;
+    return <CheckCircle className="w-5 h-5 text-green-500" />;
   if (status === "no")
-    return <XCircle className="w-5 h-5 text-red-500 mx-auto" />;
-  return <AlertTriangle className="w-5 h-5 text-yellow-500 mx-auto" />;
+    return <XCircle className="w-5 h-5 text-red-500" />;
+  return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
 };
 
 export default function DifferentiationTable() {
   return (
-    <section id="why-custom" className="bg-transparent">
+    <section id="why-custom" className="bg-transparent py-20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-headline">
-            Automation Built for Professionals
+          <h2 className="text-3xl md:text-4xl font-black font-headline tracking-tight">
+            Built for Professionals
           </h2>
           <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Compare our engineering approach to generic "AI agencies" and standard no-code tools.
+            A clear look at why real engineering beats generic shortcuts.
           </p>
         </div>
 
@@ -70,76 +57,62 @@ export default function DifferentiationTable() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-5xl mx-auto bg-card/40 backdrop-blur-md rounded-2xl border border-border/50 shadow-sm overflow-hidden"
+          className="max-w-4xl mx-auto bg-card/40 backdrop-blur-md rounded-2xl border border-border/50 shadow-xl overflow-hidden"
         >
-          <div className="hidden md:grid md:grid-cols-5 p-5 border-b border-border/50 font-bold text-center bg-muted/20">
-            <div className="text-left font-headline text-sm uppercase tracking-wider text-muted-foreground col-span-2">Strategic Benefit</div>
-            <div className="text-xs uppercase tracking-tighter">AI Wrappers</div>
-            <div className="text-xs uppercase tracking-tighter">No-Code Tools</div>
-            <div className="text-xs uppercase tracking-tighter text-primary">Secure Build</div>
+          {/* Header */}
+          <div className="grid grid-cols-2 md:grid-cols-4 p-6 border-b border-border/50 bg-muted/20 items-center">
+            <div className="font-headline text-xs uppercase font-black tracking-widest text-muted-foreground hidden md:block">
+              Strategic Benefit
+            </div>
+            <div className="text-center md:text-left text-xs uppercase font-bold text-muted-foreground md:col-start-2">
+              AI Wrappers
+            </div>
+            <div className="text-center md:text-left text-xs uppercase font-bold text-muted-foreground">
+              No-Code Tools
+            </div>
+            <div className="text-center md:text-left text-xs uppercase font-black tracking-widest text-primary">
+              Secure Build
+            </div>
           </div>
-          <Accordion type="single" collapsible className="w-full">
-            {comparisonData.map((row, idx) => (
-              <AccordionItem value={`item-${idx}`} key={idx} className="border-border/50 last:border-0">
-                <AccordionTrigger className="grid md:grid-cols-5 w-full p-5 hover:bg-muted/30 transition-colors text-left md:text-center group">
-                  <span className="col-span-2 text-left font-bold text-foreground pr-4">
-                    {row.feature}
-                  </span>
-                  <div className="hidden md:block">
-                    <StatusIcon status={row.chatgpt.status} />
-                  </div>
-                  <div className="hidden md:block">
-                    <StatusIcon status={row.nocode.status} />
-                  </div>
-                  <div className="hidden md:block">
-                    <StatusIcon status={row.custom.status} />
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="px-5 pb-6 pt-2">
-                    <div className="grid md:grid-cols-3 gap-6">
-                      <div className="md:hidden grid grid-cols-2 gap-y-3 text-sm mb-6 border-b border-border/50 pb-6">
-                        <div className="flex items-center gap-2">
-                          <StatusIcon status={row.chatgpt.status} />
-                          <span className="text-muted-foreground text-xs">AI Wrappers</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <StatusIcon status={row.nocode.status} />
-                          <span className="text-muted-foreground text-xs">No-Code Tools</span>
-                        </div>
-                        <div className="flex items-center gap-2 col-span-2">
-                          <StatusIcon status={row.custom.status} />
-                          <span className="text-primary font-bold text-xs">Secure Custom Build</span>
-                        </div>
-                      </div>
-                      
-                      <div className="col-span-3">
-                        <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
-                           <p className="text-foreground/90 leading-relaxed italic">
-                             "{row.details}"
-                           </p>
-                        </div>
-                      </div>
 
-                      <div className="hidden md:block space-y-1">
-                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">AI Wrappers</h4>
-                        <p className="text-sm font-medium opacity-80">{row.chatgpt.text}</p>
-                      </div>
-                      <div className="hidden md:block space-y-1">
-                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">No-Code</h4>
-                        <p className="text-sm font-medium opacity-80">{row.nocode.text}</p>
-                      </div>
-                      <div className="hidden md:block space-y-1">
-                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary">Secure Build</h4>
-                        <p className="text-sm font-bold">{row.custom.text}</p>
-                      </div>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+          {/* Rows */}
+          <div className="divide-y divide-border/30">
+            {comparisonData.map((row, idx) => (
+              <div 
+                key={idx} 
+                className="grid grid-cols-1 md:grid-cols-4 p-6 items-center gap-4 hover:bg-white/5 transition-colors"
+              >
+                <div className="font-bold text-foreground text-sm md:text-base">
+                  {row.feature}
+                </div>
+                
+                {/* AI Wrappers */}
+                <div className="flex items-center gap-3 md:border-l md:border-border/20 md:pl-4">
+                  <StatusIcon status={row.chatgpt.status as any} />
+                  <span className="text-xs md:text-sm text-muted-foreground">{row.chatgpt.text}</span>
+                </div>
+
+                {/* No-Code */}
+                <div className="flex items-center gap-3 md:border-l md:border-border/20 md:pl-4">
+                  <StatusIcon status={row.nocode.status as any} />
+                  <span className="text-xs md:text-sm text-muted-foreground">{row.nocode.text}</span>
+                </div>
+
+                {/* Secure Build */}
+                <div className="flex items-center gap-3 md:border-l md:border-border/20 md:pl-4 bg-primary/5 -m-2 p-2 rounded-lg">
+                  <StatusIcon status={row.custom.status as any} />
+                  <span className="text-xs md:text-sm font-bold text-primary">{row.custom.text}</span>
+                </div>
+              </div>
             ))}
-          </Accordion>
+          </div>
         </motion.div>
+        
+        <div className="mt-8 text-center">
+          <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
+            Zero Monthly SaaS Taxes • Complete Source Code Control • Security Certified
+          </p>
+        </div>
       </div>
     </section>
   );
