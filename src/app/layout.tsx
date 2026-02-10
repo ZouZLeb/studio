@@ -6,9 +6,9 @@ import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'SecureAutomate | Engineering Private & Owned AI Infrastructure',
+  title: 'SecureAutomate | Custom Business Tools You Own',
   description:
-    'Custom automation built with n8n and real code by certified security engineers. Own your systems, protect your data, and eliminate opaque AI wrappers.',
+    'We build custom business automations that keep your data private. Own your systems, save time, and protect your company secrets.',
 };
 
 export default function RootLayout({
@@ -37,12 +37,12 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
 
-        {/* Analytics & Monitoring - Using Next.js Script component for security & performance */}
+        {/* Analytics & Monitoring */}
         <Script id="hotjar-snippet" strategy="afterInteractive">
           {`
             (function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:0,hjsv:6}; // Placeholder ID: Replace with your actual Hotjar ID
+                h._hjSettings={hjid:0,hjsv:6};
                 a=o.getElementsByTagName('head')[0];
                 r=o.createElement('script');r.async=1;
                 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
@@ -59,7 +59,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-0000000000'); // Placeholder ID: Replace with your actual GA ID
+            gtag('config', 'G-0000000000');
           `}
         </Script>
       </body>

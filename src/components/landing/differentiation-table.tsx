@@ -6,28 +6,28 @@ import { cn } from "@/lib/utils";
 
 const comparisonData = [
   {
-    feature: "Data Privacy",
-    chatgpt: { status: "no", text: "Shared with LLMs" },
-    nocode: { status: "partial", text: "Cloud Stored" },
+    feature: "Your Privacy",
+    chatgpt: { status: "no", text: "They see everything" },
+    nocode: { status: "partial", text: "Stored in their cloud" },
     custom: { status: "yes", text: "100% Private" },
   },
   {
-    feature: "Ownership",
-    chatgpt: { status: "no", text: "Subscription Locked" },
-    nocode: { status: "no", text: "Platform Owned" },
-    custom: { status: "yes", text: "You own the Code" },
+    feature: "Who Owns It?",
+    chatgpt: { status: "no", text: "You rent it monthly" },
+    nocode: { status: "no", text: "They own the platform" },
+    custom: { status: "yes", text: "You own the code" },
   },
   {
     feature: "Reliability",
-    chatgpt: { status: "no", text: "Simple Prompts" },
-    nocode: { status: "partial", text: "Fragile Templates" },
-    custom: { status: "yes", text: "Production Grade" },
+    chatgpt: { status: "no", text: "Simple & fragile" },
+    nocode: { status: "partial", text: "Easily breaks" },
+    custom: { status: "yes", text: "Built to last" },
   },
   {
-    feature: "Expert Build",
-    chatgpt: { status: "no", text: "Hobbyist Level" },
-    nocode: { status: "partial", text: "Generalist" },
-    custom: { status: "yes", text: "Security Engineers" },
+    feature: "Expert Support",
+    chatgpt: { status: "no", text: "DIY / Hobbyist" },
+    nocode: { status: "partial", text: "General help" },
+    custom: { status: "yes", text: "Pro Developers" },
   },
 ];
 
@@ -45,10 +45,10 @@ export default function DifferentiationTable() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-black font-headline tracking-tight">
-            Built for Professionals
+            Built for Real Businesses
           </h2>
           <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-            A clear look at why real engineering beats generic shortcuts.
+            A clear look at why customized engineering beats generic shortcuts.
           </p>
         </div>
 
@@ -62,16 +62,16 @@ export default function DifferentiationTable() {
           {/* Header */}
           <div className="grid grid-cols-2 md:grid-cols-4 p-6 border-b border-border/50 bg-muted/20 items-center">
             <div className="font-headline text-xs uppercase font-black tracking-widest text-muted-foreground hidden md:block">
-              Strategic Benefit
+              Main Benefit
             </div>
             <div className="text-center md:text-left text-xs uppercase font-bold text-muted-foreground md:col-start-2">
-              AI Wrappers
+              Standard AI
             </div>
             <div className="text-center md:text-left text-xs uppercase font-bold text-muted-foreground">
-              No-Code Tools
+              DIY Tools
             </div>
             <div className="text-center md:text-left text-xs uppercase font-black tracking-widest text-primary">
-              Secure Build
+              Our Custom Build
             </div>
           </div>
 
@@ -80,26 +80,26 @@ export default function DifferentiationTable() {
             {comparisonData.map((row, idx) => (
               <div 
                 key={idx} 
-                className="grid grid-cols-1 md:grid-cols-4 p-6 items-center gap-4 hover:bg-white/5 transition-colors"
+                className="grid grid-cols-1 md:grid-cols-4 p-6 items-center hover:bg-white/5 transition-colors"
               >
                 <div className="font-bold text-foreground text-sm md:text-base">
                   {row.feature}
                 </div>
                 
-                {/* AI Wrappers */}
-                <div className="flex items-center gap-3 md:border-l md:border-border/20 md:pl-4">
+                {/* Standard AI */}
+                <div className="flex items-center gap-3 md:border-l md:border-border/20">
                   <StatusIcon status={row.chatgpt.status as any} />
                   <span className="text-xs md:text-sm text-muted-foreground">{row.chatgpt.text}</span>
                 </div>
 
-                {/* No-Code */}
-                <div className="flex items-center gap-3 md:border-l md:border-border/20 md:pl-4">
+                {/* DIY Tools */}
+                <div className="flex items-center gap-3 md:border-l md:border-border/20">
                   <StatusIcon status={row.nocode.status as any} />
                   <span className="text-xs md:text-sm text-muted-foreground">{row.nocode.text}</span>
                 </div>
 
-                {/* Secure Build */}
-                <div className="flex items-center gap-3 md:border-l md:border-border/20 md:pl-4 bg-primary/5 -m-2 p-2 rounded-lg">
+                {/* Custom Build */}
+                <div className="flex items-center gap-3 md:border-l md:border-border/20 bg-primary/5 -m-2 p-2 rounded-lg">
                   <StatusIcon status={row.custom.status as any} />
                   <span className="text-xs md:text-sm font-bold text-primary">{row.custom.text}</span>
                 </div>
@@ -110,7 +110,7 @@ export default function DifferentiationTable() {
         
         <div className="mt-8 text-center">
           <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-            Zero Monthly SaaS Taxes • Complete Source Code Control • Security Certified
+            No Monthly Fees • You Own the Code • Private & Secure
           </p>
         </div>
       </div>

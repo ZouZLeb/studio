@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -28,10 +27,10 @@ import {
 const caseStudiesData = [
   {
     id: 1,
-    clientType: "Omni-Channel Lead Concierge",
+    clientType: "Instant Lead Assistant",
     industry: "Sales & Real Estate",
-    problem: "Leads arriving via Email, DMs, and SMS were being missed or taking 12+ hours to receive a response.",
-    solution: "A private n8n-powered AI agent that handles instant responses across all channels. It qualifies leads, inserts data into the CRM, and books appointments on the sales team's calendar automatically.",
+    problem: "Customer messages from Email, DMs, and SMS were being missed or taking hours to answer.",
+    solution: "A private AI helper that answers customers instantly. It qualifies leads, updates the database, and books meetings automatically.",
     imageId: "case-leads",
     metrics: {
       timeSaved: 20,
@@ -39,20 +38,20 @@ const caseStudiesData = [
       roi: 2,
       roiUnit: "weeks",
       improvement: 95,
-      improvementLabel: "Response Rate ↑",
+      improvementLabel: "More Replies ↑",
     },
     fullDetails: {
-      techStack: ["n8n", "OpenAI API (Private)", "Twilio", "HubSpot"],
+      techStack: ["n8n", "Private AI", "Twilio", "CRM"],
       timeline: "2 weeks",
-      testimonial: "The response is so fast and natural that clients think they are talking to a dedicated assistant. It's booked 15 meetings this week alone without us touching it.",
+      testimonial: "It's so fast that clients think they are talking to a human. It's booked 15 meetings this week without us doing anything.",
     },
   },
   {
     id: 2,
-    clientType: "The 'Infinite Pipeline' Marketing Engine",
-    industry: "SaaS & Agencies",
-    problem: "Thousands of old leads were sitting dormant in the database because the manual follow-up workload was impossible.",
-    solution: "An automated sales system that initiates personalized conversations with all leads, revisits 'cold' leads every 30 days, and notifies the team via Slack only when a lead shows 'high-intent' buying signals.",
+    clientType: "Smart Marketing Engine",
+    industry: "Marketing Agencies",
+    problem: "Thousands of old leads were sitting untouched because following up manually was impossible.",
+    solution: "A system that checks in with every lead every 30 days. It only alerts the sales team when someone is ready to buy.",
     imageId: "case-marketing",
     metrics: {
       timeSaved: 40,
@@ -63,17 +62,17 @@ const caseStudiesData = [
       improvementLabel: "Revenue ↑",
     },
     fullDetails: {
-      techStack: ["n8n", "Node.js", "Slack API", "Custom Lead Scoring"],
+      techStack: ["n8n", "Slack", "Database Sync"],
       timeline: "3 weeks",
-      testimonial: "It's like having a 24/7 sales rep who never gets tired. We are closing deals from leads we talked to 6 months ago that we would have otherwise forgotten.",
+      testimonial: "We are closing deals from leads we talked to 6 months ago that we would have completely forgotten about.",
     },
   },
   {
     id: 3,
-    clientType: "Autonomous Project Architect",
-    industry: "Construction & Engineering",
-    problem: "Project blueprints, inventory dispatching, and client status updates were manual, causing frequent delays and overhead.",
-    solution: "A trained project agent that handles blueprint preparation, inventory checks via ERP, and streamlines the entire project status workflow for the client portal.",
+    clientType: "Paperwork Automator",
+    industry: "Construction",
+    problem: "Managing blueprints and project updates was manual, causing frequent delays and high overhead.",
+    solution: "An AI system that prepares documents and handles status updates automatically for clients and engineers.",
     imageId: "case-pm",
     metrics: {
       timeSaved: 15,
@@ -81,75 +80,12 @@ const caseStudiesData = [
       roi: 4,
       roiUnit: "weeks",
       improvement: 60,
-      improvementLabel: "Admin Work ↓",
+      improvementLabel: "Less Admin ↓",
     },
     fullDetails: {
-      techStack: ["Python", "n8n", "ERP Integration", "Auto-Blueprinting"],
+      techStack: ["Python", "n8n", "File Automator"],
       timeline: "5 weeks",
-      testimonial: "Admin overhead was killing our margins. This system handles the paperwork so our engineers can actually focus on building.",
-    },
-  },
-  {
-    id: 4,
-    clientType: "Precision Invoice & Quote Engine",
-    industry: "Professional Services",
-    problem: "Crafting quotes and invoices took hours of manual data entry and was prone to pricing errors.",
-    solution: "A custom generator that takes client details and project scope to craft perfect quotes with dynamic discounts. Once agreed, it generates a full invoice and sends it directly via the client's preferred channel.",
-    imageId: "case-billing",
-    metrics: {
-      timeSaved: 8,
-      timeUnit: "hrs/week",
-      roi: 2,
-      roiUnit: "weeks",
-      improvement: 100,
-      improvementLabel: "Accuracy ↑",
-    },
-    fullDetails: {
-      techStack: ["Node.js", "n8n", "Stripe API", "PDF Generation"],
-      timeline: "2 weeks",
-      testimonial: "What used to take half a day now happens in 2 minutes. The professional look of our quotes has significantly increased our win rate.",
-    },
-  },
-  {
-    id: 5,
-    clientType: "Smart Recruitment & Onboarding",
-    industry: "Corporate HR",
-    problem: "Screening hundreds of resumes and manually handling new hire paperwork was slowing down company growth.",
-    solution: "Automated screening logic that ranks candidates based on criteria, schedules interviews, and handles the entire document signature and onboarding sequence without human intervention.",
-    imageId: "case-hr",
-    metrics: {
-      timeSaved: 25,
-      timeUnit: "hrs/week",
-      roi: 6,
-      roiUnit: "weeks",
-      improvement: 70,
-      improvementLabel: "Hiring Speed ↑",
-    },
-    fullDetails: {
-      techStack: ["n8n", "Greenhouse API", "DocuSign", "Private LLM"],
-      timeline: "4 weeks",
-      testimonial: "Our HR team can finally focus on culture and strategy rather than chasing signatures and sorting through resumes.",
-    },
-  },
-  {
-    id: 6,
-    clientType: "Secure Knowledge Base Assistant",
-    industry: "Enterprise / Legal",
-    problem: "Staff spent hours searching through internal documentation and legacy files for technical answers.",
-    solution: "A self-hosted, private AI assistant integrated with the company's internal tools. It provides instant, accurate answers while ensuring zero data leaks to public LLM models.",
-    imageId: "case-support",
-    metrics: {
-      timeSaved: 12,
-      timeUnit: "hrs/staff/mo",
-      roi: 8,
-      roiUnit: "weeks",
-      improvement: 50,
-      improvementLabel: "Search Time ↓",
-    },
-    fullDetails: {
-      techStack: ["PostgreSQL (Vector)", "n8n", "Custom Python RAG", "Self-Hosted"],
-      timeline: "6 weeks",
-      testimonial: "Our data is our lifeblood. Having a system this smart that we also completely own and control is the ultimate competitive advantage.",
+      testimonial: "Admin work was killing our profits. This system handles the boring stuff so our team can actually build.",
     },
   },
 ];
@@ -164,10 +100,10 @@ export default function CaseStudies() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline">
-            Real Automations, Real Results
+            Real Work, Real Results
           </h2>
           <p className="text-lg text-muted-foreground mt-4 max-w-3xl mx-auto">
-            High-performance systems built by software engineers, designed for security and massive ROI.
+            Custom tools built for businesses that want to save time and grow faster.
           </p>
         </div>
 
@@ -224,7 +160,7 @@ export default function CaseStudies() {
                               <CountUp end={study.metrics.roi} duration={2} />
                             </div>
                             <div className="text-[9px] uppercase font-bold text-muted-foreground">
-                              ROI in {study.metrics.roiUnit}
+                              Pays off in {study.metrics.roiUnit}
                             </div>
                           </div>
                           <div className="text-center">
@@ -238,7 +174,7 @@ export default function CaseStudies() {
                         </div>
                         
                         <Button variant="link" className="mt-4 self-start p-0 h-auto text-primary group-hover:underline text-xs shadow-none">
-                          View Full System Details <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                          See How it Works <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
                         </Button>
                       </CardContent>
                     </Card>
@@ -247,7 +183,6 @@ export default function CaseStudies() {
               })}
             </CarouselContent>
             
-            {/* Custom Navigation Container */}
             <div className="flex items-center justify-end gap-3 mt-4 md:mt-0">
               <CarouselPrevious className="static md:absolute md:-left-12 left-auto top-auto md:top-1/2 translate-y-0 md:-translate-y-1/2 h-10 w-10" />
               <CarouselNext className="static md:absolute md:-right-12 right-auto top-auto md:top-1/2 translate-y-0 md:-translate-y-1/2 h-10 w-10" />
@@ -265,17 +200,17 @@ export default function CaseStudies() {
           </DialogHeader>
           <div className="grid gap-6 py-4">
             <div>
-              <h4 className="font-semibold mb-2">The Engineered Solution</h4>
+              <h4 className="font-semibold mb-2">What We Built</h4>
               <p className="text-sm text-muted-foreground">{selectedCase?.solution}</p>
             </div>
              <div>
-              <h4 className="font-semibold mb-2">Technology Stack</h4>
+              <h4 className="font-semibold mb-2">Tools Used</h4>
               <div className="flex flex-wrap gap-2">
                 {selectedCase?.fullDetails.techStack.map(tech => <Badge key={tech} variant="outline">{tech}</Badge>)}
               </div>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">Build Timeline</h4>
+              <h4 className="font-semibold mb-2">Time to Build</h4>
               <p className="text-sm text-muted-foreground">{selectedCase?.fullDetails.timeline}</p>
             </div>
             {selectedCase?.fullDetails.testimonial && (
@@ -284,7 +219,7 @@ export default function CaseStudies() {
               </blockquote>
             )}
             <Button size="lg" className="w-full mt-4" asChild>
-              <a href="#contact">Discuss a Similar Build for Your Team</a>
+              <a href="#contact">Get a Similar System for Your Team</a>
             </Button>
           </div>
         </DialogContent>

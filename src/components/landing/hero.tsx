@@ -69,7 +69,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.1]">
-              Stop Sending Your Data to <span className="text-primary italic">Opaque AI Wrappers</span>
+              Stop Sending Your Private Data to <span className="text-primary italic">Random Chat Apps</span>
             </h1>
           </motion.div>
 
@@ -79,8 +79,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto font-medium"
           >
-            We build high-performance automation with n8n and custom scripts. 
-            Real engineering for security-first businesses. No data leaks, no monthly per-task fees, complete ownership.
+            We build custom tools that run on your own private servers. 
+            No data leaks, no monthly per-task fees, and 100% ownership. It's real engineering for businesses that care about security.
           </motion.p>
 
           <motion.div
@@ -91,7 +91,7 @@ export default function Hero() {
           >
             <Button className=" w-auto" asChild variant="default">
               <Link href="#contact">
-                Book Free Consultation
+                Talk to an Expert
               </Link>
             </Button>
           </motion.div>
@@ -105,8 +105,8 @@ export default function Hero() {
           >
             <ComparisonCard
               type="before"
-              title="Generic AI Agencies"
-              description="Your data feeds their models via generic SaaS tools"
+              title="Generic Chat Tools"
+              description="Your company secrets feed their AI models"
               imageId="hero-before"
             />
           </motion.div>
@@ -117,8 +117,8 @@ export default function Hero() {
           >
             <ComparisonCard
               type="after"
-              title="Our Engineered Systems"
-              description="Private n8n workflows & custom scripts you own"
+              title="Our Custom Systems"
+              description="Private tools that only you can see and control"
               imageId="hero-after"
             />
           </motion.div>

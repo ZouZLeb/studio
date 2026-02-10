@@ -9,15 +9,15 @@ import { ShieldCheck, Database, ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const COMPLEXITY_LEVELS = [
-  { label: "Standard", multiplier: 1, description: "n8n + Standard Nodes" },
-  { label: "Advanced", multiplier: 1.8, description: "Custom JS & API Hooks" },
-  { label: "Enterprise", multiplier: 3.5, description: "High-Security / Scale" },
+  { label: "Simple", multiplier: 1, description: "Standard Connections" },
+  { label: "Custom", multiplier: 1.8, description: "Custom Code & Sync" },
+  { label: "High-Scale", multiplier: 3.5, description: "Maximum Security" },
 ];
 
 const MAINTENANCE_LEVELS = [
-  { label: "One-Time", multiplier: 0, description: "Build only" },
-  { label: "Priority", multiplier: 1, description: "Priority support" },
-  { label: "Managed", multiplier: 2, description: "Full lifecycle" },
+  { label: "Build Only", multiplier: 0, description: "You manage it" },
+  { label: "Priority", multiplier: 1, description: "We help you out" },
+  { label: "Managed", multiplier: 2, description: "Full maintenance" },
 ];
 
 export default function RoiCalculator() {
@@ -28,7 +28,6 @@ export default function RoiCalculator() {
   const [weeklyHours, setWeeklyHours] = useState(10);
 
   const calculations = useMemo(() => {
-    // 1. Initial Build Cost (One-time)
     const baseBuildPrice = 499;
     const pricePerIntegration = 500;
     const complexityMultiplier = COMPLEXITY_LEVELS[complexityIdx].multiplier;
@@ -37,20 +36,15 @@ export default function RoiCalculator() {
       (baseBuildPrice + ((integrations - 1) * pricePerIntegration)) * complexityMultiplier
     );
 
-    // 2. Monthly Maintenance Cost
     const baseMonthlyPrice = 250;
     const supportMultiplier = MAINTENANCE_LEVELS[maintenanceIdx].multiplier;
     
-    // Monthly cost is $0 if One-Time is selected
     const monthlyCost = maintenanceIdx === 0 
       ? 0 
       : Math.round((baseMonthlyPrice + (integrations * 50)) * complexityMultiplier/2 * supportMultiplier);
 
-    // 3. Labor and Savings
     const annualLabor = (hourlyRate * weeklyHours) * 52;
     const annualInvestment = buildCost + (monthlyCost * 12);
-    
-    // Savings calculation (Labor - 1st Year Total Investment)
     const firstYearSavings = annualLabor - annualInvestment;
     
     return { buildCost, monthlyCost, annualLabor, firstYearSavings, annualInvestment };
@@ -66,26 +60,23 @@ export default function RoiCalculator() {
   };
 
   return (
-    <section id="pricing" className="bg-transparent py-12">
+    <section id="roi-calculator" className="bg-transparent py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-black font-headline tracking-tight">Estimate Your Investment</h2>
-          <p className="text-muted-foreground mt-2">See how an engineered system pays for itself in weeks.</p>
+          <h2 className="text-3xl md:text-4xl font-black font-headline tracking-tight">Estimate Your Savings</h2>
+          <p className="text-muted-foreground mt-2">See how quickly a custom system pays for itself.</p>
         </div>
 
         <Card className="overflow-hidden border border-border/50 shadow-2xl flex flex-col md:flex-row bg-card/40 backdrop-blur-lg">
-          {/* Inputs Column */}
           <div className="md:w-3/5 p-8 lg:p-10 space-y-12">
             
-            {/* Build & Maintenance Group */}
             <div className="space-y-6">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary/80 border-b border-primary/10 pb-2">1. System Scope & Maintenance</h3>
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary/80 border-b border-primary/10 pb-2">1. Your Project Scope</h3>
               
               <div className="grid sm:grid-cols-2 gap-8">
-                {/* Integrations */}
                 <div className="space-y-4">
                   <div className="flex justify-between items-end">
-                    <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Number of Integrations</Label>
+                    <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Apps to Connect</Label>
                     <span className="text-xl font-black text-primary">{integrations < 12 ? integrations : `${integrations+"+"}` }</span>
                   </div>
                   <Slider 
@@ -98,9 +89,8 @@ export default function RoiCalculator() {
                   />
                 </div>
 
-                {/* Complexity */}
                 <div className="space-y-4">
-                  <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Build Complexity</Label>
+                  <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Level of Customization</Label>
                   <div className="grid grid-cols-3 gap-1.5">
                     {COMPLEXITY_LEVELS.map((level, idx) => (
                       <button
@@ -120,9 +110,8 @@ export default function RoiCalculator() {
                 </div>
               </div>
 
-              {/* Support Level */}
               <div className="space-y-4">
-                <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Support & Maintenance Level</Label>
+                <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Monthly Support Level</Label>
                 <div className="grid grid-cols-3 gap-1.5">
                   {MAINTENANCE_LEVELS.map((level, idx) => (
                     <button
@@ -142,15 +131,13 @@ export default function RoiCalculator() {
               </div>
             </div>
 
-            {/* Labor Cost Group */}
             <div className="space-y-6 pt-4">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary/80 border-b border-primary/10 pb-2">2. Current Manual Labor Costs</h3>
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary/80 border-b border-primary/10 pb-2">2. Your Current Manual Work</h3>
               
               <div className="grid sm:grid-cols-2 gap-8">
-                {/* Weekly Hours */}
                 <div className="space-y-4">
                   <div className="flex justify-between items-end">
-                    <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Hours Worked/Week</Label>
+                    <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Hours Spent/Week</Label>
                     <span className="text-xl font-black text-primary">{weeklyHours}h</span>
                   </div>
                   <Slider 
@@ -163,10 +150,9 @@ export default function RoiCalculator() {
                   />
                 </div>
 
-                {/* Hourly Rate */}
                 <div className="space-y-4">
                   <div className="flex justify-between items-end">
-                    <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Hourly Rate</Label>
+                    <Label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Cost per Hour</Label>
                     <span className="text-xl font-black text-primary">{formatCurrency(hourlyRate)}/h</span>
                   </div>
                   <Slider 
@@ -180,52 +166,39 @@ export default function RoiCalculator() {
                 </div>
               </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border/30 border-dashed">
-              <div className="flex items-center gap-2 text-[9px] font-bold text-muted-foreground uppercase">
-                <ShieldCheck className="w-3 h-3 text-primary" /> Privacy
-              </div>
-              <div className="flex items-center gap-2 text-[9px] font-bold text-muted-foreground uppercase">
-                <Database className="w-3 h-3 text-primary" /> Ownership
-              </div>
-              <div className="flex items-center gap-2 text-[9px] font-bold text-muted-foreground uppercase">
-                <Zap className="w-3 h-3 text-primary" /> n8n Power
-              </div>
-            </div>
           </div>
 
-          {/* Results Column */}
           <div className="md:w-2/5 bg-primary/5 p-8 lg:p-10 flex flex-col justify-between border-l border-border/50">
             <div className="space-y-8">
               <div className="space-y-6">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Initial Build Investment</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Initial Investment</span>
                   <div className="text-3xl lg:text-4xl font-black tracking-tighter text-primary">
                     {formatCurrency(calculations.buildCost)}
                   </div>
-                  <div className="text-[10px] opacity-70 font-medium">One-time engineering fee</div>
+                  <div className="text-[10px] opacity-70 font-medium">One-time fee to build your system</div>
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Monthly Support & Maintenance</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-80">Monthly Help (Optional)</span>
                   <div className="text-3xl lg:text-4xl font-black tracking-tighter text-foreground">
                     {formatCurrency(calculations.monthlyCost)}
                   </div>
-                  <div className="text-[10px] opacity-70 font-medium">Monthly recurring cost</div>
+                  <div className="text-[10px] opacity-70 font-medium">Recurring support and updates</div>
                 </div>
               </div>
 
               <div className="space-y-4 pt-8 border-t border-border/50">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly System Cost</span>
+                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly Cost</span>
                   <span className="font-bold">{formatCurrency(calculations.annualInvestment)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly Labor Cost</span>
+                  <span className="text-[10px] font-bold uppercase opacity-60">Your Current Yearly Cost</span>
                   <span className="font-bold">{formatCurrency(calculations.annualLabor)}</span>
                 </div>
                 <div className="flex justify-between items-center text-green-600 dark:text-green-400">
-                  <span className="text-[10px] font-bold uppercase opacity-60">Total Yearly Saved</span>
+                  <span className="text-[10px] font-bold uppercase opacity-60">Yearly Savings</span>
                   <span className="font-bold text-lg">{formatCurrency(calculations.firstYearSavings)}</span>
                 </div>
               </div>
@@ -235,7 +208,7 @@ export default function RoiCalculator() {
               <Link href="#contact" className="btn-custom-glass w-full">
                 <div className="btn-custom-glass-inner">
                   <div className="btn-custom-glass-text flex items-center justify-center gap-2">
-                    Get Architecture Audit
+                    Get a Free Review
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
