@@ -70,7 +70,7 @@ export default function ProcessOverview() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-black font-headline mb-4 tracking-tight">
-            How We Work Together
+            The AImatic Process
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A simple, step-by-step journey from manual work to complete automation.
@@ -78,7 +78,8 @@ export default function ProcessOverview() {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          <div className="absolute left-8 md:left-1/2 top-[60px] bottom-[60px] w-px bg-gradient-to-b from-primary/50 via-primary/30 to-primary/50 -translate-x-1/2 z-0" />
+          {/* Timeline Spine */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 -translate-x-1/2 z-0" />
 
           <div className="space-y-12 md:space-y-0">
             {steps.map((step, idx) => (
@@ -89,30 +90,35 @@ export default function ProcessOverview() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className={cn(
-                  "relative flex flex-col md:flex-row items-center justify-between min-h-[140px]",
+                  "relative flex flex-col md:flex-row items-center justify-between min-h-[160px]",
                   idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 )}
               >
+                {/* Horizontal Connector Line (Desktop) */}
                 <div 
                   className={cn(
-                    "absolute top-1/2 -translate-y-1/2 h-[2px] z-[1] hidden md:block pointer-events-none bg-gradient-to-r",
+                    "absolute top-1/2 -translate-y-1/2 h-[2px] z-[1] hidden md:block pointer-events-none opacity-40",
+                    "bg-gradient-to-r",
                     step.gradient,
                     idx % 2 === 0 ? "right-1/2 w-[8%]" : "left-1/2 w-[8%]"
                   )} 
                 />
 
+                {/* Horizontal Connector Line (Mobile) */}
                 <div 
                   className={cn(
-                    "absolute left-8 top-1/2 -translate-y-1/2 w-12 h-[2px] z-[1] block md:hidden pointer-events-none bg-gradient-to-r",
+                    "absolute left-8 top-1/2 -translate-y-1/2 w-12 h-[2px] z-[1] block md:hidden pointer-events-none opacity-40",
+                    "bg-gradient-to-r",
                     step.gradient
                   )} 
                 />
 
+                {/* Content Card */}
                 <div className={cn(
                   "w-full md:w-[42%] pl-20 md:pl-0 z-10",
                   idx % 2 === 0 ? "md:text-right" : "md:text-left"
                 )}>
-                  <Card className="border-border/50 bg-card/60 backdrop-blur-md hover:border-primary/50 transition-all duration-300 group shadow-none hover:shadow-lg">
+                  <Card className="border-border/50 bg-card/60 backdrop-blur-md hover:border-primary/50 transition-all duration-300 group shadow-none">
                     <CardContent className="p-6">
                       <div className={cn(
                         "flex items-center gap-2 mb-3",
@@ -132,10 +138,11 @@ export default function ProcessOverview() {
                   </Card>
                 </div>
 
+                {/* Icon Hub */}
                 <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
                   <div className={cn(
                     "w-12 h-12 rounded-full border-4 border-background bg-card flex items-center justify-center shadow-xl ring-1 ring-border",
-                    "hover:scale-110 transition-transform duration-300 group"
+                    "transition-transform duration-300"
                   )}>
                     <step.icon size={20} className={step.color} />
                   </div>

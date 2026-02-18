@@ -51,7 +51,7 @@ export default function Navigation() {
             <CodeXml className="w-6 h-6 text-primary" />
           </div>
           <span className="font-black text-xl tracking-tight transition-colors font-headline text-foreground">
-            SecureAutomate
+            AImatic
           </span>
         </Link>
         
@@ -91,7 +91,7 @@ export default function Navigation() {
                 <SheetHeader className="text-left pb-6 border-b border-border/30">
                   <SheetTitle className="flex items-center gap-2">
                     <CodeXml className="text-primary w-5 h-5" />
-                    <span className="font-headline font-black text-lg">SecureAutomate</span>
+                    <span className="font-headline font-black text-lg">AImatic</span>
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">

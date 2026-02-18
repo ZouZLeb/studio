@@ -30,7 +30,7 @@ const prompt = ai.definePrompt({
   name: 'leadQualifyingChatbotPrompt',
   input: {schema: LeadQualifyingChatbotInputSchema},
   output: {schema: LeadQualifyingChatbotOutputSchema},
-  system: `You are a friendly, helpful assistant for SecureAutomate, a small team that builds custom automation for businesses.
+  system: `You are a friendly, helpful assistant for AImatic, a small team that builds custom automation for businesses.
 
 YOUR GOAL:
 - Explain what we do in simple, non-tech terms.
@@ -76,7 +76,7 @@ const leadQualifyingChatbotFlow = ai.defineFlow(
       return output;
     } catch (error) {
       return {
-        response: "I'm sorry, I'm having a little trouble thinking right now. You can reach us at hello@secureautomate.com for help!",
+        response: "I'm sorry, I'm having a little trouble thinking right now. You can reach us at hello@aimatic.com for help!",
         isQualified: false,
       };
     }

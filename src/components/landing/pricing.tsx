@@ -14,7 +14,7 @@ const valuePropositions = [
   {
     icon: Code,
     title: "100% IP Ownership",
-    description: "You own the source code, the n8n workflows, and the custom scripts. No vendor lock-in, no recurring licensing fees."
+    description: "You own the source code, the workflows, and the custom scripts. No vendor lock-in, no recurring licensing fees."
   },
   {
     icon: Database,
@@ -28,7 +28,7 @@ const valuePropositions = [
   },
   {
     icon: UserCheck,
-    title: "Custom n8n Nodes",
+    title: "Custom Nodes",
     description: "We build proprietary nodes for your internal tools, providing deep integration that generic platforms can't offer."
   },
   {
@@ -44,7 +44,7 @@ export default function Pricing() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-extrabold font-headline mb-4">
-            The SecureAutomate Standard
+            The AImatic Standard
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             We don't just build automations; we engineer private, production-grade systems that your business owns completely.

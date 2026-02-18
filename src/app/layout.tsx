@@ -6,7 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'SecureAutomate | Custom Business Tools You Own',
+  title: 'AImatic | Custom Business Tools You Own',
   description:
     'We build custom business automations that keep your data private. Own your systems, save time, and protect your company secrets.',
 };

@@ -1,6 +1,6 @@
-# SecureAutomate | Technical Walkthrough
+# AImatic | Technical Walkthrough
 
-This document provides a detailed overview of the SecureAutomate project architecture, file structure, and implementation details.
+This document provides a detailed overview of the AImatic project architecture, file structure, and implementation details.
 
 ## 🏗 Project Architecture
 

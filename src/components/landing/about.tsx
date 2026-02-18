@@ -28,7 +28,7 @@ export default function AboutSection() {
                   {headshot && (
                     <Image
                       src={headshot.imageUrl}
-                      alt="The SecureAutomate Team"
+                      alt="The AImatic Team"
                       fill
                       className="rounded-lg object-cover shadow-lg"
                       data-ai-hint={headshot.imageHint}
@@ -64,7 +64,7 @@ export default function AboutSection() {
                   </p>
 
                   <p className="font-semibold text-foreground">
-                    We're building something different. Our team consists of real developers 
+                    We're building something different. Our team at AImatic consists of real developers 
                     with a background in security. We build systems that live on your servers, 
                     using your existing tools, so you stay in control.
                   </p>

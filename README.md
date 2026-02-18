@@ -1,6 +1,6 @@
-# SecureAutomate | Privacy-First Business Automation
+# AImatic | Privacy-First Business Automation
 
-SecureAutomate is a premium engineering agency site built to showcase custom, self-hosted automation solutions. We help businesses save hours of manual work by building "software robots" that they own completely, ensuring data privacy and zero recurring per-task fees.
+AImatic is a premium engineering agency site built to showcase custom, self-hosted automation solutions. We help businesses save hours of manual work by building "software robots" that they own completely, ensuring data privacy and zero recurring per-task fees.
 
 ## 🚀 The Mission
 
