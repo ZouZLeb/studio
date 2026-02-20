@@ -79,7 +79,7 @@ export default function ProcessOverview() {
 
         <div className="relative max-w-5xl mx-auto">
           {/* Timeline Spine */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 -translate-x-1/2 z-0" />
+          <div className="absolute left-8 md:left-1/2 top-[60px] bottom-[60px] w-px bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 -translate-x-1/2 z-0" />
 
           <div className="space-y-12 md:space-y-0">
             {steps.map((step, idx) => (

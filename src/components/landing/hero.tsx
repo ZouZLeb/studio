@@ -4,17 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { motion } from "framer-motion";
-import { ShieldCheck, Database } from "lucide-react";
+import { ShieldCheck, AlertCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 const ComparisonCard = ({
   type,
+  label,
   title,
   description,
   imageId,
 }: {
-  type: "before" | "after";
+  type: "competitor" | "aimatic";
+  label: string;
   title: string;
   description: string;
   imageId: string;
@@ -23,35 +26,48 @@ const ComparisonCard = ({
 
   return (
     <Card
-      className={`relative overflow-hidden border-2 transition-all duration-300 hover:shadow-xl ${
-        type === "after" 
-          ? "border-primary/50 bg-primary/5 backdrop-blur-sm" 
-          : "border-destructive/40 bg-destructive/5 backdrop-blur-sm"
+      className={`relative overflow-hidden border-2 transition-all duration-300 ${
+        type === "aimatic" 
+          ? "border-primary/50 bg-primary/5 shadow-primary/10 shadow-xl" 
+          : "border-destructive/20 bg-muted/30 grayscale-[0.5] opacity-80"
       }`}
     >
-      <CardContent className="p-5">
+      <div className="absolute top-4 right-4 z-20">
+        <Badge 
+          variant={type === "aimatic" ? "default" : "destructive"}
+          className="uppercase tracking-widest text-[10px] font-black px-3 py-1"
+        >
+          {label}
+        </Badge>
+      </div>
+      
+      <CardContent className="p-6">
         <div className="flex items-center gap-3 mb-4">
-          {type === "after" ? (
-            <ShieldCheck className="w-6 h-6 text-green-600 dark:text-green-400" />
-          ) : (
-            <Database className="w-6 h-6 text-red-600 dark:text-red-400" />
-          )}
+          <div className={`p-2 rounded-lg ${type === "aimatic" ? "bg-primary/20" : "bg-destructive/10"}`}>
+            {type === "aimatic" ? (
+              <ShieldCheck className="w-6 h-6 text-primary" />
+            ) : (
+              <AlertCircle className="w-6 h-6 text-destructive" />
+            )}
+          </div>
           <div>
-            <h3 className="font-bold text-lg text-foreground">{title}</h3>
-            <p className="text-sm text-muted-foreground">{description}</p>
+            <h3 className="font-black text-lg text-foreground tracking-tight">{title}</h3>
+            <p className="text-xs text-muted-foreground font-medium">{description}</p>
           </div>
         </div>
-        <div className="aspect-video relative rounded-md overflow-hidden bg-slate-900/40">
+        
+        <div className="aspect-[16/10] relative rounded-xl overflow-hidden border border-border/50 bg-slate-900/40">
           {imageData && (
             <Image
               src={imageData.imageUrl}
               alt={description}
               fill
-              className="object-cover opacity-90 hover:opacity-100 transition-opacity"
+              className="object-cover opacity-90 transition-all duration-500"
               sizes="(max-width: 768px) 100vw, 50vw"
               data-ai-hint={imageData.imageHint}
             />
           )}
+          <div className={`absolute inset-0 bg-gradient-to-t ${type === "aimatic" ? "from-primary/20" : "from-black/40"} to-transparent pointer-events-none`} />
         </div>
       </CardContent>
     </Card>
@@ -62,14 +78,15 @@ export default function Hero() {
   return (
     <section className="relative flex flex-col justify-center pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden bg-transparent">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center mb-12">
+        <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.1]">
-              Stop Sending Your Private Data to <span className="text-primary italic">Random Chat Apps</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.05]">
+              Own Your Automation. <br />
+              <span className="text-primary italic">Protect Your Data.</span>
             </h1>
           </motion.div>
 
@@ -77,10 +94,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto font-medium"
+            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-medium"
           >
-            We build custom tools that run on your own private servers. 
-            No data leaks, no monthly per-task fees, and 100% ownership. It's real engineering for businesses that care about security.
+            Don't rent your business logic from "AI Agencies" that glue generic prompts together. 
+            AImatic builds custom, high-security systems you own forever.
           </motion.p>
 
           <motion.div
@@ -89,36 +106,48 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button className=" w-auto" asChild variant="default">
-              <Link href="#contact">
-                Talk to an Expert
+            <Button size="lg" className="px-8" asChild>
+              <Link href="#contact" className="flex items-center gap-2">
+                Get Your Free Audit <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="ghost" asChild>
+              <Link href="#why-custom">
+                Why Custom Engineering?
               </Link>
             </Button>
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto relative">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-background border-2 border-border shadow-xl font-black text-sm italic text-muted-foreground">
+            VS
+          </div>
+          
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
           >
             <ComparisonCard
-              type="before"
-              title="Generic Chat Tools"
-              description="Your company secrets feed their AI models"
+              type="competitor"
+              label="Standard Agencies"
+              title="The 'Prompt' Wrapper"
+              description="Fragile tools built on rented platforms with no data privacy."
               imageId="hero-before"
             />
           </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
           >
             <ComparisonCard
-              type="after"
-              title="Our Custom Systems"
-              description="Private tools that only you can see and control"
+              type="aimatic"
+              label="The AImatic Way"
+              title="Custom Engineering"
+              description="Secure, self-hosted code that stays within your business walls."
               imageId="hero-after"
             />
           </motion.div>
