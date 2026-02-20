@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, MessageSquare, Send, X, User, Loader } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
+import { generateSignature, getDeviceFingerprint } from "@/lib/security";
 
 type Message = {
   id: number;
@@ -31,7 +32,7 @@ export default function Chatbot() {
     {
       id: 1,
       sender: "bot",
-      text: "Hello! I can help you determine if our custom automation solutions are a good fit for you. What industry are you in, and what kind of project are you considering?",
+      text: "Hello! I'm the AImatic assistant. I can help you find out if custom automation is right for your business. What kind of tasks take up most of your time lately?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -61,7 +62,20 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      const response = await leadQualifyingChatbot({ message: input });
+      // SECURITY LAYER: Generate verification metadata
+      const nonce = Math.random().toString(36).substring(7);
+      const timestamp = Date.now();
+      const signature = await generateSignature(input, nonce, timestamp);
+      const fingerprint = getDeviceFingerprint();
+
+      const response = await leadQualifyingChatbot({ 
+        message: input,
+        nonce,
+        timestamp,
+        signature,
+        fingerprint
+      });
+
       const botMessage: Message = {
         id: Date.now() + 1,
         sender: "bot",
@@ -74,7 +88,7 @@ export default function Chatbot() {
       const errorMessage: Message = {
         id: Date.now() + 1,
         sender: "bot",
-        text: "Sorry, I'm having trouble connecting. Please try again later.",
+        text: "I'm having a little trouble connecting. Please try again or email us at hello@aimatic.com!",
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -95,17 +109,17 @@ export default function Chatbot() {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="fixed bottom-24 right-4 sm:right-6 z-50"
           >
-            <Card className="w-[calc(100vw-32px)] sm:w-96 shadow-2xl">
-              <CardHeader className="flex flex-row items-center justify-between">
+            <Card className="w-[calc(100vw-32px)] sm:w-96 shadow-2xl border-border/50 bg-background/95 backdrop-blur-xl">
+              <CardHeader className="flex flex-row items-center justify-between border-b border-border/30">
                 <div className="flex items-center gap-3">
                   <Avatar>
                     <AvatarFallback className="bg-primary text-primary-foreground">
                       <Bot />
                     </AvatarFallback>
                   </Avatar>
-                  <CardTitle className="text-lg">Lead Qualifier</CardTitle>
+                  <CardTitle className="text-lg font-headline">AImatic Helper</CardTitle>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="rounded-full">
                   <X className="h-4 w-4" />
                 </Button>
               </CardHeader>
@@ -117,7 +131,7 @@ export default function Chatbot() {
                         key={message.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 * index }}
+                        transition={{ delay: 0.05 }}
                         className={cn("flex items-end gap-2", {
                           "justify-end": message.sender === "user",
                         })}
@@ -131,24 +145,24 @@ export default function Chatbot() {
                         )}
                         <div
                           className={cn(
-                            "max-w-[80%] rounded-lg px-3 py-2 text-sm",
+                            "max-w-[80%] rounded-2xl px-4 py-2 text-sm",
                             {
-                              "bg-primary text-primary-foreground":
+                              "bg-primary text-primary-foreground rounded-br-none":
                                 message.sender === "user",
-                              "bg-muted": message.sender === "bot",
+                              "bg-muted text-foreground rounded-bl-none": message.sender === "bot",
                             }
                           )}
                         >
-                          <p>{message.text}</p>
-                          {isLastMessage(index) && message.isQualified && message.nextStep && (
+                          <p className="leading-relaxed">{message.text}</p>
+                          {isLastMessage(index) && message.isQualified && (
                              <Button
                                size="sm"
-                               className="mt-2 w-full"
+                               variant="outline"
+                               className="mt-3 w-full bg-background/50"
                                onClick={() => {
-                                 // This could open the calendly modal
-                                 // For now, we will just log it
-                                 console.log("Schedule consultation clicked");
-                                 // In a real app, you would have state management to open the CTASection's modal
+                                 const contactSection = document.getElementById('contact');
+                                 if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+                                 setIsOpen(false);
                                }}
                              >
                                Schedule a consultation
@@ -171,16 +185,16 @@ export default function Chatbot() {
                                 <Bot className="h-5 w-5" />
                                 </AvatarFallback>
                             </Avatar>
-                            <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm bg-muted flex items-center">
+                            <div className="max-w-[80%] rounded-2xl rounded-bl-none px-4 py-2 text-sm bg-muted flex items-center">
                                 <Loader className="w-4 h-4 animate-spin mr-2"/>
-                                Thinking...
+                                Typing...
                             </div>
                         </div>
                     )}
                   </div>
                 </ScrollArea>
               </CardContent>
-              <CardFooter className="pt-4">
+              <CardFooter className="pt-4 border-t border-border/30">
                 <form
                   onSubmit={handleSendMessage}
                   className="flex w-full items-center space-x-2"
@@ -188,13 +202,13 @@ export default function Chatbot() {
                   <Input
                     id="message"
                     placeholder="Type your message..."
-                    className="flex-1"
+                    className="flex-1 rounded-full bg-muted/50 border-none"
                     autoComplete="off"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     disabled={isLoading}
                   />
-                  <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
+                  <Button type="submit" size="icon" className="rounded-full h-10 w-10" disabled={isLoading || !input.trim()}>
                     <Send className="h-4 w-4" />
                     <span className="sr-only">Send</span>
                   </Button>
@@ -213,11 +227,11 @@ export default function Chatbot() {
       >
         <Button
           size="icon"
-          className="rounded-full w-16 h-16 shadow-lg"
+          className="rounded-full w-14 h-14 shadow-2xl border-4 border-background"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle Chatbot"
         >
-          {isOpen ? <X size={32} /> : <MessageSquare size={32} />}
+          {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
         </Button>
       </motion.div>
     </>

@@ -1,10 +1,11 @@
 'use server';
 /**
- * @fileOverview A helpful AI assistant that explains our automation services.
+ * @fileOverview A helpful AI assistant for AImatic with multi-layer security validation.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'genkit';
+import { verifySignature } from '@/lib/security';
 
 const ChatMessageSchema = z.object({
   role: z.enum(['user', 'assistant']).describe('The role of the message sender.'),
@@ -15,6 +16,11 @@ export type ChatMessage = z.infer<typeof ChatMessageSchema>;
 const LeadQualifyingChatbotInputSchema = z.object({
   message: z.string().describe('The user message to the chatbot.'),
   conversationHistory: z.array(ChatMessageSchema).optional().describe('Previous messages in the conversation.'),
+  // Security Layer Fields
+  nonce: z.string(),
+  timestamp: z.number(),
+  signature: z.string(),
+  fingerprint: z.string(),
 });
 export type LeadQualifyingChatbotInput = z.infer<typeof LeadQualifyingChatbotInputSchema>;
 
@@ -28,8 +34,8 @@ export type LeadQualifyingChatbotOutput = z.infer<typeof LeadQualifyingChatbotOu
 
 const prompt = ai.definePrompt({
   name: 'leadQualifyingChatbotPrompt',
-  input: {schema: LeadQualifyingChatbotInputSchema},
-  output: {schema: LeadQualifyingChatbotOutputSchema},
+  input: { schema: LeadQualifyingChatbotInputSchema },
+  output: { schema: LeadQualifyingChatbotOutputSchema },
   system: `You are a friendly, helpful assistant for AImatic, a small team that builds custom automation for businesses.
 
 YOUR GOAL:
@@ -70,8 +76,17 @@ const leadQualifyingChatbotFlow = ai.defineFlow(
     outputSchema: LeadQualifyingChatbotOutputSchema,
   },
   async input => {
+    // SECURITY LAYER: Verify Signature
+    const isValid = await verifySignature(input.message, input.nonce, input.timestamp, input.signature);
+    if (!isValid) {
+      return {
+        response: "Security validation failed. Please refresh the page and try again.",
+        isQualified: false,
+      };
+    }
+
     try {
-      const {output} = await prompt(input);
+      const { output } = await prompt(input);
       if (!output) throw new Error('No output');
       return output;
     } catch (error) {

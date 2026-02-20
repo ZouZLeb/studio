@@ -16,22 +16,39 @@ import {
 } from "@/components/ui/sheet";
 
 const navItems = [
-  { name: 'Why Custom', href: '#why-custom' },
-  { name: 'Services', href: '#case-studies' },
-  { name: 'Pricing', href: '#pricing' },
-  { name: 'About', href: '#about' },
+  { name: 'Why AImatic', href: '#why-custom' },
+  { name: 'Projects', href: '#case-studies' },
+  { name: 'Process', href: '#lifecycle' },
+  { name: 'Calculator', href: '#roi-calculator' },
 ];
 
 export default function Navigation() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     return scrollY.on("change", (latest) => {
       setIsScrolled(latest > 20);
     });
   }, [scrollY]);
+
+  if (!mounted) {
+    return (
+      <header className="fixed top-0 z-50 w-full py-6 bg-transparent">
+        <div className="container mx-auto px-6 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 rounded-lg bg-primary/20">
+              <CodeXml className="w-6 h-6 text-primary" />
+            </div>
+            <span className="font-black text-xl tracking-tight font-headline">AImatic</span>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header
