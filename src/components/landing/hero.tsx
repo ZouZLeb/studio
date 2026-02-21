@@ -29,7 +29,7 @@ const ComparisonCard = ({
       className={`relative overflow-hidden border-2 transition-all duration-300 ${
         type === "aimatic" 
           ? "border-primary/50 bg-primary/5 shadow-primary/10 shadow-xl" 
-          : "border-destructive/20 bg-muted/30 grayscale-[0.5] opacity-80"
+          : "border-destructive/100 bg-muted/30 grayscale-[0.5] opacity-80"
       }`}
     >
       <div className="absolute top-4 right-4 z-20">
@@ -45,9 +45,9 @@ const ComparisonCard = ({
         <div className="flex items-center gap-3 mb-4">
           <div className={`p-2 rounded-lg ${type === "aimatic" ? "bg-primary/20" : "bg-destructive/10"}`}>
             {type === "aimatic" ? (
-              <ShieldCheck className="w-6 h-6 text-primary" />
+              <ShieldCheck className="w-6 h-6 text-primary" aria-hidden="true" />
             ) : (
-              <AlertCircle className="w-6 h-6 text-destructive" />
+              <AlertCircle className="w-6 h-6 text-destructive" aria-hidden="true" />
             )}
           </div>
           <div>
@@ -60,7 +60,7 @@ const ComparisonCard = ({
           {imageData && (
             <Image
               src={imageData.imageUrl}
-              alt={description}
+              alt={`${label}: ${description}`}
               fill
               className="object-cover opacity-90 transition-all duration-500"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -76,7 +76,7 @@ const ComparisonCard = ({
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col justify-center pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden bg-transparent">
+    <section className="relative flex flex-col justify-center pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden bg-transparent" aria-labelledby="hero-title">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.div
@@ -84,7 +84,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.05]">
+            <h1 id="hero-title" className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.05]">
               Own Your Automation. <br />
               <span className="text-primary italic">Protect Your Data.</span>
             </h1>
@@ -96,8 +96,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-medium"
           >
-            Don't rent your business logic from "AI Agencies" that glue generic prompts together. 
-            AImatic builds custom, high-security systems you own forever.
+            Don't rent your business logic from generic AI agencies. 
+            AImatic builds custom, high-security systems you own forever. Professional automation for business owners.
           </motion.p>
 
           <motion.div
@@ -106,14 +106,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" className="px-8" asChild>
+            <Button size="lg" className="px-8" asChild aria-label="Book a free automation audit">
               <Link href="#contact" className="flex items-center gap-2">
                 Get Your Free Audit <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="ghost" asChild>
-              <Link href="#why-custom">
-                Why Custom Engineering?
               </Link>
             </Button>
           </motion.div>

@@ -16,47 +16,47 @@ import { cn } from "@/lib/utils";
 const steps = [
   {
     title: "Free Problem Review",
-    description: "A quick 15-minute call to find where your business is losing time.",
+    description: "A quick 15-minute call to find where your business is losing time and where automation can help.",
     icon: PhoneCall,
     badge: "Step 01",
     color: "text-blue-500",
     gradient: "from-blue-500 to-blue-500/20",
   },
   {
-    title: "Get Your Custom Plan",
-    description: "We give you a clear project scope with a one-time fixed price.",
+    title: "Custom Project Roadmap",
+    description: "We provide a clear project scope with a fixed price. No hidden fees or recurring subscriptions.",
     icon: FileText,
     badge: "Step 02",
     color: "text-amber-500",
     gradient: "from-amber-500/20 to-amber-500",
   },
   {
-    title: "We Build Your System",
-    description: "Our developers write the code and set up your private automation.",
+    title: "Expert Build Phase",
+    description: "Our security-certified developers write the code and set up your private n8n or Python automation.",
     icon: Code2,
     badge: "Step 03",
     color: "text-purple-500",
     gradient: "from-purple-500 to-purple-500/20",
   },
   {
-    title: "Privacy & Safety Check",
-    description: "We test everything to ensure your company data stays 100% private.",
+    title: "Privacy & Data Security",
+    description: "We perform rigorous testing to ensure your company data stays 100% private and protected.",
     icon: ShieldCheck,
     badge: "Step 04",
     color: "text-green-500",
     gradient: "from-green-500/20 to-green-500",
   },
   {
-    title: "Handover & Training",
-    description: "You get the keys. 100% ownership of your tools with full instructions.",
+    title: "System Handover",
+    description: "You get the full keys. 100% ownership of your tools, source code, and complete documentation.",
     icon: Rocket,
     badge: "Step 05",
     color: "text-red-500",
     gradient: "from-red-500 to-red-500/20",
   },
   {
-    title: "Ongoing Support",
-    description: "Optional monthly help to keep your systems updated and growing.",
+    title: "Long-term Support",
+    description: "Optional monthly help to keep your systems updated, secure, and growing with your business.",
     icon: RefreshCcw,
     badge: "Step 06",
     color: "text-cyan-500",
@@ -66,14 +66,14 @@ const steps = [
 
 export default function ProcessOverview() {
   return (
-    <section id="lifecycle" className="bg-transparent py-10 md:py-16 relative overflow-hidden">
+    <section id="lifecycle" className="bg-transparent py-10 md:py-16 relative overflow-hidden" aria-labelledby="process-title">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl md:text-5xl font-black font-headline mb-4 tracking-tight">
-            The AImatic Process
+          <h2 id="process-title" className="text-3xl md:text-5xl font-black font-headline mb-4 tracking-tight">
+            The AImatic Engineering Process
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A simple, step-by-step journey from manual work to complete automation.
+            Our step-by-step journey from manual business tasks to complete, secure, self-hosted automation.
           </p>
         </div>
 
@@ -114,7 +114,7 @@ export default function ProcessOverview() {
                 />
 
                 {/* Content Card */}
-                <div className={cn(
+                <article className={cn(
                   "w-full md:w-[42%] pl-20 md:pl-0 z-10",
                   idx % 2 === 0 ? "md:text-right" : "md:text-left"
                 )}>
@@ -136,7 +136,7 @@ export default function ProcessOverview() {
                       </p>
                     </CardContent>
                   </Card>
-                </div>
+                </article>
 
                 {/* Icon Hub */}
                 <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
@@ -144,7 +144,7 @@ export default function ProcessOverview() {
                     "w-12 h-12 rounded-full border-4 border-background bg-card flex items-center justify-center shadow-xl ring-1 ring-border",
                     "transition-transform duration-300"
                   )}>
-                    <step.icon size={20} className={step.color} />
+                    <step.icon size={20} className={step.color} aria-hidden="true" />
                   </div>
                 </div>
 
@@ -158,15 +158,15 @@ export default function ProcessOverview() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center border-t border-border/30 pt-10">
             <div className="space-y-1">
                <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Zero Monthly Fees</h4>
-               <p className="text-[11px] text-muted-foreground">Run your tools forever without per-task costs.</p>
+               <p className="text-[11px] text-muted-foreground">Run your business tools forever without task costs.</p>
             </div>
             <div className="space-y-1">
-               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Full Ownership</h4>
-               <p className="text-[11px] text-muted-foreground">You get 100% of the code and instructions at handover.</p>
+               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Full System Ownership</h4>
+               <p className="text-[11px] text-muted-foreground">You get 100% of the source code and documentation.</p>
             </div>
             <div className="space-y-1">
-               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">100% Privacy</h4>
-               <p className="text-[11px] text-muted-foreground">Your business data never touches our servers.</p>
+               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">100% Data Sovereignty</h4>
+               <p className="text-[11px] text-muted-foreground">Your sensitive business data never touches our servers.</p>
             </div>
           </div>
         </div>
