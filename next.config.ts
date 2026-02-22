@@ -3,18 +3,14 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    allowedDevOrigins: [
-      '6000-firebase-studio-1769926578928.cluster-dndfhnsjmzfcouv57ryymn7ttg.cloudworkstations.dev',
-      '*.cloudworkstations.dev'
-    ]
-  },
+  allowedDevOrigins: [
+    '6000-firebase-studio-1769926578928.cluster-dndfhnsjmzfcouv57ryymn7ttg.cloudworkstations.dev',
+    '*.cloudworkstations.dev',
+    '192.168.56.1',
+    '192.168.1.68',
+    'localhost:9002'
+  ],
+  serverExternalPackages: ['express', 'genkit', '@genkit-ai/google-genai', '@genkit-ai/next', '@genkit-ai/core'],
   images: {
     remotePatterns: [
       {

@@ -9,6 +9,10 @@
 export async function generateSignature(message: string, nonce: string, timestamp: number): Promise<string> {
   const secret = process.env.NEXT_PUBLIC_CHAT_SECRET || 'aimatic-default-secret';
   const data = `${message}:${nonce}:${timestamp}`;
+  if (typeof crypto === 'undefined' || !crypto.subtle) {
+    console.error('Crypto Subtle is not available. This usually happens in non-secure (HTTP) contexts.');
+    return 'insecure-context-dummy-signature';
+  }
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
     'raw',
@@ -38,6 +42,12 @@ export async function verifySignature(
 
   // 2. Signature verification
   const expected = await generateSignature(message, nonce, timestamp);
+  
+  // allow dummy signature in development for insecure local contexts (like mobile testing)
+  if (process.env.NODE_ENV === 'development' && signature === 'insecure-context-dummy-signature') {
+    return true;
+  }
+
   return expected === signature;
 }
 

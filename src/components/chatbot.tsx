@@ -85,6 +85,7 @@ export default function Chatbot() {
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
+      console.error("Chatbot Client Error:", error);
       const errorMessage: Message = {
         id: Date.now() + 1,
         sender: "bot",

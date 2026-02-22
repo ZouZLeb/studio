@@ -44,7 +44,7 @@ YOUR GOAL:
 - See if they care about keeping their business data private.
 
 WHAT WE DO:
-- We build custom software "robots" that do boring tasks automatically.
+- We build custom software and systems that do boring tasks automatically.
 - We help businesses save hours of manual work every week.
 - IMPORTANT: You own the tools we build. There are no monthly "rent" fees for the software.
 - IMPORTANT: Everything is private. Your company data stays inside your own business.
@@ -90,6 +90,7 @@ const leadQualifyingChatbotFlow = ai.defineFlow(
       if (!output) throw new Error('No output');
       return output;
     } catch (error) {
+      console.error('Chatbot AI Error:', error);
       return {
         response: "I'm sorry, I'm having a little trouble thinking right now. You can reach us at hello@aimatic.com for help!",
         isQualified: false,
@@ -99,5 +100,25 @@ const leadQualifyingChatbotFlow = ai.defineFlow(
 );
 
 export async function leadQualifyingChatbot(input: LeadQualifyingChatbotInput): Promise<LeadQualifyingChatbotOutput> {
-  return leadQualifyingChatbotFlow(input);
+  const apiKey = process.env.GOOGLE_GENAI_API_KEY || process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.error('Chatbot Error: GEMINI_API_KEY or GOOGLE_GENAI_API_KEY is missing');
+    return {
+      response: "I'm sorry, my AI connection is not configured correctly. Please check the server environment variables.",
+      isQualified: false,
+    };
+  }
+
+  try {
+    // We execute the flow and return its result directly. 
+    // Flow results are plain JSON-serializable objects.
+    const result = await leadQualifyingChatbotFlow(input);
+    return result;
+  } catch (error: any) {
+    console.error('Chatbot Server Action Error:', error);
+    return {
+      response: "I'm having a little trouble connecting to my brain. Please try again or reach out to us directly!",
+      isQualified: false,
+    };
+  }
 }
