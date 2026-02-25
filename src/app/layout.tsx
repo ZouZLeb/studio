@@ -4,11 +4,12 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ChatWidget } from '../components/chat';
 
 export const metadata: Metadata = {
-  title: 'AImatic | Professional AI Automation & Security Engineering',
+  title: 'AImatic Dev Solutions | Professional AI Automation & Security Engineering',
   description:
-    'AImatic builds custom, secure business automations. We specialize in n8n workflows, private AI systems, and secure API integrations that you own 100%. Stop renting your business logic.',
+    'AImatic Dev Solutions builds custom, secure business automations. We specialize in n8n workflows, private AI systems, and secure API integrations that you own 100%. Stop renting your business logic.',
   keywords: [
     'AI Automation Agency',
     'Custom AI Development',
@@ -19,18 +20,18 @@ export const metadata: Metadata = {
     'Private AI Chatbots',
     'AImatic Automation',
   ],
-  authors: [{ name: 'AImatic Team' }],
+  authors: [{ name: 'AImatic Dev Team' }],
   openGraph: {
-    title: 'AImatic | Custom Business Tools You Own',
+    title: 'AImatic Dev Solutions | Custom Business Tools You Own',
     description: 'Privacy-first automation engineering. Secure, self-hosted code that stays within your business walls.',
     url: 'https://aimatic.com',
-    siteName: 'AImatic',
+    siteName: 'AImatic Dev Solutions',
     images: [
       {
         url: 'https://picsum.photos/seed/aimatic-og/1200/630',
         width: 1200,
         height: 630,
-        alt: 'AImatic Professional Automation',
+        alt: 'AImatic Dev Solutions Professional Automation',
       },
     ],
     locale: 'en_US',
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AImatic | Secure AI Automation',
+    title: 'AImatic Dev Solutions | Secure AI Automation',
     description: 'Own your automation. Protect your data. Professional engineering for modern businesses.',
     images: ['https://picsum.photos/seed/aimatic-twitter/1200/630'],
   },
@@ -53,7 +54,7 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "AImatic",
+    "name": "AImatic Dev Solutions",
     "description": "Privacy-first automation engineering agency building custom, self-hosted business systems.",
     "url": "https://aimatic.com",
     "logo": "https://aimatic.com/logo.png",
@@ -91,6 +92,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ChatWidget />
           <Toaster />
         </ThemeProvider>
 
