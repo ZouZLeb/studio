@@ -1,14 +1,10 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
-import type { ChatMessage, Segment, ChatApiResponse } from '../types/chat';
+import { useState, useCallback, useRef, useEffect } from 'react';
+import type { ChatMessage, ChatApiResponse } from '../types/chat';
+import { getPersistentDeviceId, getBrowserFingerprint, signRequest } from '@/lib/security';
 
-// Generate a stable session ID per browser tab (not persisted intentionally)
-function generateSessionId(): string {
-  return `sess_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
-}
-
-// Sanitize user input on the client side before sending
+// Client-side sanitization
 function sanitizeClientInput(input: string): string {
   return input
     .replace(/<[^>]+>/g, '')
@@ -17,16 +13,14 @@ function sanitizeClientInput(input: string): string {
     .substring(0, 500);
 }
 
-const SESSION_ID = generateSessionId();
-
 const WELCOME_MESSAGE: ChatMessage = {
   id: 'welcome',
   role: 'assistant',
-  plainText: "Hi! I'm Ema, your AI assistant at AImatic Dev Solutions. 👋 I'm here to help you explore how AI and automation can transform your business. What can I help you with today?",
+  plainText: "Hi! I'm Ema, your AI assistant at AImatic. 👋 I recognize you! I'm here to help you explore how secure automation can transform your business. What can I help you with today?",
   segments: [
     {
       type: 'text',
-      content: "Hi! I'm Ema, your AI assistant at AImatic Dev Solutions. 👋 I'm here to help you explore how AI and automation can transform your business. What can I help you with today?"
+      content: "Hi! I'm Ema, your AI assistant at AImatic. 👋 I'm here to help you explore how secure automation can transform your business. What can I help you with today?"
     }
   ],
   timestamp: Date.now(),
@@ -36,15 +30,20 @@ export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [deviceId, setDeviceId] = useState<string>('');
   const abortRef = useRef<AbortController | null>(null);
+
+  // Initialize device ID on mount
+  useEffect(() => {
+    setDeviceId(getPersistentDeviceId());
+  }, []);
 
   const sendMessage = useCallback(async (rawInput: string) => {
     const input = sanitizeClientInput(rawInput);
-    if (!input || isLoading) return;
+    if (!input || isLoading || !deviceId) return;
 
     setError(null);
 
-    // Add user message immediately
     const userMessage: ChatMessage = {
       id: `user_${Date.now()}`,
       role: 'user',
@@ -53,7 +52,6 @@ export function useChat() {
       timestamp: Date.now(),
     };
 
-    // Add typing indicator for assistant
     const typingId = `typing_${Date.now()}`;
     const typingMessage: ChatMessage = {
       id: typingId,
@@ -67,28 +65,41 @@ export function useChat() {
     setMessages(prev => [...prev, userMessage, typingMessage]);
     setIsLoading(true);
 
-    // Cancel any in-flight request
     abortRef.current?.abort();
     abortRef.current = new AbortController();
 
     try {
+      const timestamp = Date.now();
+      const nonce = crypto.randomUUID();
+      const fingerprint = getBrowserFingerprint();
+      
+      const payload = {
+        message: input,
+        sessionId: deviceId, // Use persistent ID for context
+      };
+
+      // Sign request for multi-layer defense
+      const signature = await signRequest(payload, timestamp, nonce);
+
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: input,
-          sessionId: SESSION_ID,
-        }),
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Chat-Timestamp': timestamp.toString(),
+          'X-Chat-Nonce': nonce,
+          'X-Chat-Fingerprint': fingerprint,
+          'X-Chat-Signature': signature
+        },
+        body: JSON.stringify(payload),
         signal: abortRef.current.signal,
       });
 
       const data: ChatApiResponse = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Something went wrong.');
+        throw new Error(data.error || 'Connection issues. Please try again.');
       }
 
-      // Replace typing indicator with real response
       const assistantMessage: ChatMessage = {
         id: `assistant_${Date.now()}`,
         role: 'assistant',
@@ -105,28 +116,26 @@ export function useChat() {
     } catch (err: unknown) {
       if (err instanceof Error && err.name === 'AbortError') return;
 
-      const actualErrorText = err instanceof Error ? err.message : "I'm having trouble connecting right now. Please try again in a moment.";
+      const errorMessageText = err instanceof Error 
+        ? err.message 
+        : "I'm having trouble connecting. Security policies might be blocking the request. Please refresh.";
 
       const errorMessage: ChatMessage = {
         id: `error_${Date.now()}`,
         role: 'assistant',
-        plainText: actualErrorText,
-        segments: [{
-          type: 'text',
-          content: actualErrorText
-        }],
+        plainText: errorMessageText,
+        segments: [{ type: 'text', content: errorMessageText }],
         timestamp: Date.now(),
       };
 
       setMessages(prev =>
         prev.map(m => m.id === typingId ? errorMessage : m)
       );
-
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      setError(errorMessageText);
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading]);
+  }, [isLoading, deviceId]);
 
   const clearMessages = useCallback(() => {
     setMessages([WELCOME_MESSAGE]);

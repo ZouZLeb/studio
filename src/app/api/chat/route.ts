@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// ── Rate limiting (in-memory, per-instance) ───────────────────────────────
-// For production with multiple instances, replace with Upstash Redis
-const ipRequestMap = new Map<string, { count: number; windowStart: number; blocked: boolean }>();
+/**
+ * Backend Chat Handler with Security Layer
+ * Implements HMAC verification, rate limiting, and input sanitization.
+ */
 
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX = 5;               // 5 requests per minute per IP
-const BLOCK_AFTER_ABUSE = 3;            // abuse attempts before hard block
+const ipRequestMap = new Map<string, { count: number; windowStart: number; blocked: boolean }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 10;
+const CHAT_SECRET = process.env.NEXT_PUBLIC_CHAT_SECRET || 'dev_secret_only_for_local';
 
 function getRateLimitRecord(ip: string) {
   const now = Date.now();
   const record = ipRequestMap.get(ip);
-
   if (!record || now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
     const fresh = { count: 0, windowStart: now, blocked: false };
     ipRequestMap.set(ip, fresh);
@@ -20,170 +21,115 @@ function getRateLimitRecord(ip: string) {
   return record;
 }
 
-// Clean stale entries every 5 minutes to prevent memory leak
-setInterval(() => {
-  const cutoff = Date.now() - RATE_LIMIT_WINDOW_MS * 5;
-  for (const [key, val] of ipRequestMap.entries()) {
-    if (val.windowStart < cutoff) ipRequestMap.delete(key);
-  }
-}, 5 * 60 * 1000);
+// HMAC Verification Logic
+async function verifySignature(req: NextRequest, body: any): Promise<boolean> {
+  const signature = req.headers.get('X-Chat-Signature');
+  const timestamp = req.headers.get('X-Chat-Timestamp');
+  const nonce = req.headers.get('X-Chat-Nonce');
 
-// ── Input sanitization ────────────────────────────────────────────────────
+  if (!signature || !timestamp || !nonce) return false;
+
+  // Prevent replay attacks (requests older than 5 mins)
+  const now = Date.now();
+  if (Math.abs(now - parseInt(timestamp)) > 5 * 60 * 1000) return false;
+
+  const encoder = new TextEncoder();
+  const keyBuffer = encoder.encode(CHAT_SECRET);
+  const dataToSign = JSON.stringify({ ...body, timestamp: parseInt(timestamp), nonce });
+
+  try {
+    const key = await crypto.subtle.importKey(
+      'raw',
+      keyBuffer,
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['verify']
+    );
+
+    const sigBuffer = new Uint8Array(
+      signature.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16))
+    );
+
+    return await crypto.subtle.verify(
+      'HMAC',
+      key,
+      sigBuffer,
+      encoder.encode(dataToSign)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function sanitizeInput(input: unknown): string | null {
   if (typeof input !== 'string') return null;
-
-  let text = input
-    .replace(/\0/g, '')                    // null bytes
-    .replace(/<script[\s\S]*?<\/script>/gi, '') // script tags
-    .replace(/<[^>]+>/g, '')              // all html tags
-    .replace(/javascript:/gi, '')         // js protocol
-    .replace(/on\w+\s*=/gi, '')           // event handlers
-    .trim();
-
+  let text = input.replace(/<[^>]+>/g, '').trim();
   if (text.length === 0 || text.length > 500) return null;
-
-  // Reject non-printable heavy strings (encoding attacks)
-  const printable = (text.match(/[\x20-\x7E\u00A0-\uFFFF]/g) || []).length;
-  if (text.length > 10 && printable / text.length < 0.7) return null;
-
   return text;
 }
 
-function sanitizeSessionId(input: unknown): string {
-  if (typeof input !== 'string') return 'anonymous';
-  return input.replace(/[^a-zA-Z0-9_-]/g, '').substring(0, 64) || 'anonymous';
-}
-
-// ── Main handler ──────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
-    // 1. Get real IP (Cloudflare sends CF-Connecting-IP)
-    const ip =
-      req.headers.get('cf-connecting-ip') ||
-      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-      '0.0.0.0';
-
-    // 2. Rate limit check
+    const ip = req.headers.get('cf-connecting-ip') || '0.0.0.0';
     const record = getRateLimitRecord(ip);
 
-    if (record.blocked) {
-      return NextResponse.json(
-        { error: 'Too many requests.' },
-        { status: 429 }
-      );
+    if (record.blocked || record.count > RATE_LIMIT_MAX) {
+      return NextResponse.json({ error: 'System busy. Try again later.' }, { status: 429 });
     }
-
     record.count++;
 
-    if (record.count > RATE_LIMIT_MAX + BLOCK_AFTER_ABUSE) {
-      record.blocked = true;
-      return NextResponse.json(
-        { error: 'Too many requests.' },
-        { status: 429 }
-      );
+    const body = await req.json();
+    
+    // 1. Multi-layer Security Check: HMAC Verification
+    const isAuthentic = await verifySignature(req, body);
+    if (!isAuthentic) {
+      console.warn(`[SECURITY_ALERT] Invalid HMAC signature from IP: ${ip}`);
+      return NextResponse.json({ error: 'Request authentication failed.' }, { status: 403 });
     }
 
-    if (record.count > RATE_LIMIT_MAX) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please wait a moment.' },
-        { status: 429 }
-      );
-    }
-
-    // 3. Parse and validate body
-    let body: unknown;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
-    }
-
-    if (!body || typeof body !== 'object') {
-      return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
-    }
-
-    const { message, sessionId: rawSession } = body as Record<string, unknown>;
-
-    const sanitizedMessage = sanitizeInput(message);
+    // 2. Input Sanitization
+    const sanitizedMessage = sanitizeInput(body.message);
     if (!sanitizedMessage) {
-      return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid message content.' }, { status: 400 });
     }
 
-    const sessionId = sanitizeSessionId(rawSession);
-
-    // 4. Validate env vars
+    // 3. Forwarding to AI Webhook (n8n)
     const webhookUrl = process.env.N8N_WEBHOOK_URL;
-    const apiKey = process.env.N8N_API_KEY;
-
     if (!webhookUrl) {
-      console.error('Missing N8N_WEBHOOK_URL env var');
-      return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 });
+      return NextResponse.json({ 
+        success: true, 
+        plainText: "AImatic is currently in maintenance. Security verification passed, but the AI core is offline.",
+        segments: [{ type: 'text', content: "Maintenance Mode: AI Core Offline." }]
+      });
     }
 
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'x-forwarded-ip': ip,
-    };
-
-    if (apiKey) {
-      headers['x-api-key'] = apiKey;
-    }
-
-    // 5. Forward to n8n webhook
     const n8nResponse = await fetch(webhookUrl, {
       method: 'POST',
-      headers,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: sanitizedMessage,
-        sessionId,
+        sessionId: body.sessionId, // This is now the persistent UUID
+        fingerprint: req.headers.get('X-Chat-Fingerprint'),
         timestamp: Date.now(),
       }),
-      signal: AbortSignal.timeout(30000), // 30s timeout for LLM response
+      signal: AbortSignal.timeout(30000),
     });
 
-    if (!n8nResponse.ok) {
-      const status = n8nResponse.status;
-      let errorMessage = 'Service unavailable.';
-
-      try {
-        const errorData = await n8nResponse.json();
-        errorMessage = errorData.error?.message || errorData.error || errorData.message || `API Error: ${status}`;
-      } catch {
-        errorMessage = `API Error: ${status}`;
-      }
-
-      console.error(`[CHAT_API_ERROR] Status: ${status} | Message: ${errorMessage}`);
-
-      if (status === 429) {
-        return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
-      }
-      return NextResponse.json({ error: errorMessage }, { status });
-    }
+    if (!n8nResponse.ok) throw new Error('AI Core connection failure');
 
     const data = await n8nResponse.json();
-
-    // 6. Validate n8n response shape before passing to frontend
-    if (!data || typeof data !== 'object') {
-      return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 });
-    }
-
-    // Only pass through what the frontend needs — never leak internal fields
     return NextResponse.json({
-      success: data.success ?? true,
-      segments: Array.isArray(data.segments) ? data.segments : [],
-      plainText: typeof data.plainText === 'string' ? data.plainText : '',
+      success: true,
+      segments: data.segments || [],
+      plainText: data.plainText || '',
     });
 
   } catch (err: unknown) {
-    if (err instanceof Error && err.name === 'TimeoutError') {
-      return NextResponse.json({ error: 'Request timed out.' }, { status: 504 });
-    }
     console.error('Chat API error:', err);
-    return NextResponse.json({ error: 'Service unavailable.' }, { status: 503 });
+    return NextResponse.json({ error: 'Service temporarily unavailable.' }, { status: 503 });
   }
 }
 
-// Block all other HTTP methods
 export async function GET() {
   return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 });
 }
