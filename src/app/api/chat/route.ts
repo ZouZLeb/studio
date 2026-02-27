@@ -2,13 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * Backend Chat Handler with Security Layer
- * Implements HMAC verification, rate limiting, and input sanitization.
+ * Implements HMAC verification, rate limiting, and authenticated webhook forwarding.
  */
 
 const ipRequestMap = new Map<string, { count: number; windowStart: number; blocked: boolean }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 10;
 const CHAT_SECRET = process.env.NEXT_PUBLIC_CHAT_SECRET || 'dev_secret_only_for_local';
+const WEBHOOK_API_KEY = process.env.N8N_API_KEY || '';
 
 function getRateLimitRecord(ip: string) {
   const now = Date.now();
@@ -105,17 +106,24 @@ export async function POST(req: NextRequest) {
 
     const n8nResponse = await fetch(webhookUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'X-API-Key': WEBHOOK_API_KEY // Industry standard header for API authentication
+      },
       body: JSON.stringify({
         message: sanitizedMessage,
-        sessionId: body.sessionId, // This is now the persistent UUID
+        sessionId: body.sessionId,
         fingerprint: req.headers.get('X-Chat-Fingerprint'),
         timestamp: Date.now(),
       }),
       signal: AbortSignal.timeout(30000),
     });
 
-    if (!n8nResponse.ok) throw new Error('AI Core connection failure');
+    if (!n8nResponse.ok) {
+      const errorData = await n8nResponse.text();
+      console.error(`[WEBHOOK_ERROR] Status: ${n8nResponse.status} - ${errorData}`);
+      throw new Error('AI Core connection failure');
+    }
 
     const data = await n8nResponse.json();
     return NextResponse.json({
