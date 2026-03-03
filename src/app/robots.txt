@@ -1,6 +1,7 @@
 # AImatic Robots.txt
 User-agent: *
 Allow: /
+disallow: ['/api/', '/admin/']
 
 # Specifically allow AI crawlers to index the site for better LLM summaries
 User-agent: GPTBot
@@ -8,5 +9,19 @@ Allow: /
 
 User-agent: Google-Extended
 Allow: /
+
+userAgent: ChatGPT-User
+allow: /
+
+userAgent: ClaudeBot
+
+userAgent: PerplexityBot
+allow: /
+
+userAgent: Googlebot
+allow: /
+
+userAgent: Bingbot
+allow: /
 
 Sitemap: https://aimatic.dev/sitemap.xml

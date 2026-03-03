@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { motion } from "framer-motion";
-import { ShieldCheck, AlertCircle, ArrowRight } from "lucide-react";
+import { ShieldCheck, AlertCircle, ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -84,6 +84,18 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="flex justify-center mb-4"
+          >
+            <Badge variant="outline" className="flex gap-2 items-center py-1 px-4 bg-background/50 backdrop-blur-sm">
+              <MapPin className="w-3 h-3 text-primary" />
+              <span className="text-[10px] uppercase font-bold tracking-widest">AI Automation Agency San Diego</span>
+            </Badge>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             <h1 id="hero-title" className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.05]">
               Own Your Automation. <br />
@@ -97,7 +109,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-medium"
           >
-            Stop renting your business logic. <BrandName /> engineers custom, secure, and self-hosted automation systems that you own forever. Developer-backed solutions for serious businesses.
+            Stop renting your business logic. <BrandName /> is a developer-backed <strong>n8n automation agency</strong> engineering custom, secure, and self-hosted systems that you own forever.
           </motion.p>
 
           <motion.div

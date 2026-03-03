@@ -7,19 +7,19 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { ChatWidget } from '../components/chat';
 
 export const metadata: Metadata = {
-  title: 'AImatic | Secure AI Automation & Custom Software Engineering',
+  title: 'AImatic | AI Automation Agency San Diego | Secure Engineering',
   description:
-    'AImatic builds custom, secure AI business automation systems you own 100%. We specialize in private n8n workflows, secure API integrations, and developer-backed AI agents that cut costs and increase efficiency without data privacy risks.',
+    'AImatic is a San Diego based n8n automation agency. We build private AI chatbots for small business, automate lead generation, and engineer secure email follow-ups you own 100%.',
   keywords: [
-    'AI Automation Agency',
-    'Custom AI Development',
-    'Private AI Chatbots',
-    'n8n Workflow Engineering',
-    'Business Process Automation',
+    'AI automation agency San Diego',
+    'n8n automation agency',
+    'AI chatbot for small business',
+    'how to automate email follow-ups',
+    'automate lead generation with AI',
+    'how to save time in my business with automation',
     'Secure AI Integration',
     'Data Sovereignty',
     'Self-hosted AI Agents',
-    'AImatic Dev Solutions',
   ],
   authors: [{ name: 'AImatic Team', url: 'https://aimatic.dev' }],
   creator: 'AImatic Dev Solutions',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     title: 'AImatic | Private AI Automation & Custom Engineering',
-    description: 'Own your automation. Protect your data. Secure, self-hosted code that stays within your business walls.',
+    description: 'Own your automation. San Diego based agency specializing in secure, self-hosted AI for business growth.',
     url: 'https://aimatic.dev',
     siteName: 'AImatic Dev Solutions',
     images: [
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
         url: 'https://picsum.photos/seed/aimatic-og/1200/630',
         width: 1200,
         height: 630,
-        alt: 'AImatic Professional AI Automation',
+        alt: 'AImatic Professional AI Automation San Diego',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AImatic | Secure AI Automation',
-    description: 'Professional engineering for modern businesses. Own your code, secure your data.',
+    title: 'AImatic | Secure AI Automation San Diego',
+    description: 'Professional engineering for modern businesses. Automate lead generation and follow-ups securely.',
     images: ['https://picsum.photos/seed/aimatic-twitter/1200/630'],
   },
   robots: {
@@ -69,9 +69,10 @@ export default function RootLayout({
         name: 'AImatic Dev Solutions',
         url: 'https://aimatic.dev',
         logo: 'https://aimatic.dev/logo.png',
-        description: 'A developer-backed AI automation agency focusing on security, data sovereignty, and custom engineering for businesses.',
+        description: 'A developer-backed AI automation agency in San Diego focusing on security, n8n workflows, and custom engineering for small businesses.',
         address: {
           '@type': 'PostalAddress',
+          addressLocality: 'San Diego',
           addressRegion: 'CA',
           addressCountry: 'US'
         },
@@ -84,10 +85,10 @@ export default function RootLayout({
         knowsAbout: [
           'AI Automation',
           'n8n Workflows',
-          'Python Scripting',
-          'API Integration',
-          'Cybersecurity',
-          'Cloud Architecture'
+          'Email Follow-up Automation',
+          'Lead Generation AI',
+          'Secure API Integration',
+          'Private AI Chatbots'
         ]
       },
       {
