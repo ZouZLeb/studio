@@ -1,0 +1,1102 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SiteSettings",
+      "type": "object",
+      "description": "Global settings for the website, including company information, contact details, social links, and legal page references.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the SiteSettings entity. (This is a singleton entity, so there will typically be only one record with a fixed ID like 'global')."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The official name of the company displayed across the website."
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "The primary email address for customer inquiries and general contact.",
+          "format": "email"
+        },
+        "responseWithinHours": {
+          "type": "number",
+          "description": "The promised response time for inquiries, in hours."
+        },
+        "linkedinUrl": {
+          "type": "string",
+          "description": "URL to the company's LinkedIn profile.",
+          "format": "uri"
+        },
+        "githubUrl": {
+          "type": "string",
+          "description": "URL to the company's GitHub profile.",
+          "format": "uri"
+        },
+        "privacyPolicyUrl": {
+          "type": "string",
+          "description": "URL to the website's privacy policy page.",
+          "format": "uri"
+        },
+        "termsOfServiceUrl": {
+          "type": "string",
+          "description": "URL to the website's terms of service page.",
+          "format": "uri"
+        },
+        "pricingFooterNote": {
+          "type": "string",
+          "description": "A global note displayed below the pricing section, e.g., about included services and maintenance."
+        }
+      },
+      "required": [
+        "id",
+        "companyName",
+        "contactEmail",
+        "privacyPolicyUrl",
+        "termsOfServiceUrl"
+      ]
+    },
+    "HeroContent": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "HeroContent",
+      "type": "object",
+      "description": "Content for the main hero section of the website, including headlines, comparison visuals, and calls to action.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the HeroContent entity. (This is a singleton entity, so there will typically be only one record with a fixed ID like 'main')."
+        },
+        "headline": {
+          "type": "string",
+          "description": "The main, attention-grabbing headline for the hero section."
+        },
+        "subheadline": {
+          "type": "string",
+          "description": "The supporting subheadline providing more detail."
+        },
+        "beforeImageUrl": {
+          "type": "string",
+          "description": "URL for the 'before' image in the comparison visual.",
+          "format": "uri"
+        },
+        "beforeOverlayText": {
+          "type": "string",
+          "description": "Text overlaid on the 'before' comparison image."
+        },
+        "beforeStatusIcon": {
+          "type": "string",
+          "description": "Identifier for the status icon for the 'before' comparison (e.g., 'red-x', 'warning')."
+        },
+        "afterImageUrl": {
+          "type": "string",
+          "description": "URL for the 'after' image in the comparison visual.",
+          "format": "uri"
+        },
+        "afterOverlayText": {
+          "type": "string",
+          "description": "Text overlaid on the 'after' comparison image."
+        },
+        "afterStatusIcon": {
+          "type": "string",
+          "description": "Identifier for the status icon for the 'after' comparison (e.g., 'green-checkmark')."
+        },
+        "primaryCtaText": {
+          "type": "string",
+          "description": "Text for the primary call-to-action button."
+        },
+        "primaryCtaTarget": {
+          "type": "string",
+          "description": "Target for the primary CTA, typically a scroll target ID or URL."
+        },
+        "secondaryCtaText": {
+          "type": "string",
+          "description": "Text for the secondary call-to-action button."
+        },
+        "secondaryCtaTarget": {
+          "type": "string",
+          "description": "Target for the secondary CTA, typically a modal trigger or URL."
+        }
+      },
+      "required": [
+        "id",
+        "headline",
+        "subheadline",
+        "beforeImageUrl",
+        "beforeOverlayText",
+        "afterImageUrl",
+        "afterOverlayText",
+        "primaryCtaText",
+        "primaryCtaTarget",
+        "secondaryCtaText",
+        "secondaryCtaTarget"
+      ]
+    },
+    "ComparisonFeature": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ComparisonFeature",
+      "type": "object",
+      "description": "Represents a single row in the 'Why Custom Automation Beats Templates & Prompts' comparison table, detailing features and their status across different approaches.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ComparisonFeature entity."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the feature in the comparison table."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature being compared (e.g., 'Integration with existing systems')."
+        },
+        "chatgptStatus": {
+          "type": "string",
+          "description": "Status for ChatGPT/Templates (e.g., 'no', 'partial', 'yes')."
+        },
+        "chatgptText": {
+          "type": "string",
+          "description": "Brief description for ChatGPT/Templates."
+        },
+        "nocodeStatus": {
+          "type": "string",
+          "description": "Status for No-Code Tools (e.g., 'no', 'partial', 'yes')."
+        },
+        "nocodeText": {
+          "type": "string",
+          "description": "Brief description for No-Code Tools."
+        },
+        "customBuildStatus": {
+          "type": "string",
+          "description": "Status for Custom Build (e.g., 'no', 'partial', 'yes')."
+        },
+        "customBuildText": {
+          "type": "string",
+          "description": "Brief description for Custom Build."
+        },
+        "detailsExplanation": {
+          "type": "string",
+          "description": "Detailed explanation for the feature, displayed when the row is expanded."
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "featureName",
+        "chatgptStatus",
+        "chatgptText",
+        "nocodeStatus",
+        "nocodeText",
+        "customBuildStatus",
+        "customBuildText",
+        "detailsExplanation"
+      ]
+    },
+    "SecurityProcessStep": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SecurityProcessStep",
+      "type": "object",
+      "description": "A single step in the 'Security-First Build Process', detailing an aspect of the agency's security methodology.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the SecurityProcessStep entity."
+        },
+        "stepNumber": {
+          "type": "number",
+          "description": "The numerical order of the step in the process."
+        },
+        "iconIdentifier": {
+          "type": "string",
+          "description": "A string identifier for the icon associated with this step (e.g., 'Shield', 'Lock', 'Bug')."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the security process step."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description summarizing the step's purpose."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of detailed points explaining what the step involves.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "stepNumber",
+        "iconIdentifier",
+        "title",
+        "description",
+        "details"
+      ]
+    },
+    "CaseStudy": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "CaseStudy",
+      "type": "object",
+      "description": "A detailed record of a client's success story, used to build credibility and showcase results.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the CaseStudy entity."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the case study in the display."
+        },
+        "clientType": {
+          "type": "string",
+          "description": "An anonymized description of the client or role (e.g., 'E-commerce Operations Manager')."
+        },
+        "industry": {
+          "type": "string",
+          "description": "The industry the client operates in."
+        },
+        "problemStatement": {
+          "type": "string",
+          "description": "A description of the core problem the client faced before automation."
+        },
+        "solutionOverview": {
+          "type": "string",
+          "description": "A brief explanation of the custom automation solution implemented."
+        },
+        "beforeImageUrl": {
+          "type": "string",
+          "description": "URL of the image or mockup representing the 'before' state of the problem.",
+          "format": "uri"
+        },
+        "afterImageUrl": {
+          "type": "string",
+          "description": "URL of the image or mockup representing the 'after' state with the solution.",
+          "format": "uri"
+        },
+        "timeSavedMetric": {
+          "type": "string",
+          "description": "A prominent metric indicating time saved (e.g., '15 hours/week')."
+        },
+        "roiTimelineMetric": {
+          "type": "string",
+          "description": "A prominent metric indicating ROI timeline (e.g., '3 weeks')."
+        },
+        "errorReductionMetric": {
+          "type": "string",
+          "description": "A prominent metric indicating error reduction (e.g., '100%')."
+        },
+        "fullStoryTechStack": {
+          "type": "array",
+          "description": "List of technologies used in the full case study details.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullStoryTimeline": {
+          "type": "string",
+          "description": "The timeline for the project in the full case study details (e.g., '2 weeks')."
+        },
+        "fullStoryTestimonial": {
+          "type": "string",
+          "description": "A testimonial from the client for the full case study details."
+        },
+        "viewFullCaseStudyCtaText": {
+          "type": "string",
+          "description": "Text for the CTA button to view the full case study."
+        },
+        "viewFullCaseStudyCtaTarget": {
+          "type": "string",
+          "description": "Target for the CTA button to view the full case study (e.g., modal ID or PDF URL)."
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "clientType",
+        "problemStatement",
+        "solutionOverview",
+        "beforeImageUrl",
+        "afterImageUrl",
+        "timeSavedMetric",
+        "roiTimelineMetric",
+        "errorReductionMetric",
+        "viewFullCaseStudyCtaText",
+        "viewFullCaseStudyCtaTarget"
+      ]
+    },
+    "Service": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Service",
+      "type": "object",
+      "description": "A description of a service offered by the agency, including its purpose, examples, and typical ROI.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Service entity."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the service in the display."
+        },
+        "iconIdentifier": {
+          "type": "string",
+          "description": "A string identifier for the icon representing this service (e.g., 'Bot', 'Link2', 'MessageSquare')."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the service (e.g., 'AI-Powered Workflow Automation')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of what the service entails."
+        },
+        "examples": {
+          "type": "array",
+          "description": "An array of practical examples of this service in action.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "typicalRoi": {
+          "type": "string",
+          "description": "A statement describing the typical return on investment (e.g., 'Save 10-25 hours/week per employee')."
+        },
+        "displayColor": {
+          "type": "string",
+          "description": "A hint for the color associated with this service for UI display (e.g., 'blue', 'green')."
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "iconIdentifier",
+        "title",
+        "description",
+        "examples",
+        "typicalRoi",
+        "displayColor"
+      ]
+    },
+    "ROICalculatorSettings": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ROICalculatorSettings",
+      "type": "object",
+      "description": "Configuration settings for the interactive ROI Calculator, including default input values and solution cost.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ROICalculatorSettings entity. (This is a singleton entity, so there will typically be only one record with a fixed ID like 'defaults')."
+        },
+        "defaultHourlyRate": {
+          "type": "number",
+          "description": "The default hourly rate displayed in the calculator."
+        },
+        "defaultHoursPerWeek": {
+          "type": "number",
+          "description": "The default hours spent on manual tasks per week."
+        },
+        "defaultNumberOfEmployees": {
+          "type": "number",
+          "description": "The default number of employees affected by manual tasks."
+        },
+        "solutionAverageCost": {
+          "type": "number",
+          "description": "The average cost of the agency's solution used in the ROI calculation."
+        }
+      },
+      "required": [
+        "id",
+        "defaultHourlyRate",
+        "defaultHoursPerWeek",
+        "defaultNumberOfEmployees",
+        "solutionAverageCost"
+      ]
+    },
+    "TechCategory": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "TechCategory",
+      "type": "object",
+      "description": "A category for grouping related technologies in the 'Our Technology Stack' section.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the TechCategory entity."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the category in the display."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the technology category (e.g., 'AI & Machine Learning')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of what this category covers."
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "name",
+        "description"
+      ]
+    },
+    "Technology": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Technology",
+      "type": "object",
+      "description": "A specific technology used by the agency, displayed within a technology category.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Technology entity."
+        },
+        "techCategoryId": {
+          "type": "string",
+          "description": "Reference to TechCategory. (Relationship: TechCategory 1:N Technology)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the technology (e.g., 'OpenAI API')."
+        },
+        "logoUrl": {
+          "type": "string",
+          "description": "URL to the logo image of the technology.",
+          "format": "uri"
+        },
+        "useCaseFilterIds": {
+          "type": "array",
+          "description": "References to UseCaseFilter entities this technology is relevant for. (Relationship: Technology N:N UseCaseFilter)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "techCategoryId",
+        "name",
+        "logoUrl",
+        "useCaseFilterIds"
+      ]
+    },
+    "UseCaseFilter": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UseCaseFilter",
+      "type": "object",
+      "description": "A filter option for displaying relevant technologies based on industry or use case.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UseCaseFilter entity."
+        },
+        "label": {
+          "type": "string",
+          "description": "The display label for the use case filter (e.g., 'E-commerce', 'SaaS')."
+        },
+        "filterKey": {
+          "type": "string",
+          "description": "A programmatic key for the filter (e.g., 'ecommerce', 'saas')."
+        },
+        "order": {
+          "type": "number",
+          "description": "The order of the filter in the UI."
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "filterKey",
+        "order"
+      ]
+    },
+    "PricingTier": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "PricingTier",
+      "type": "object",
+      "description": "Defines a pricing plan or tier offered by the agency, including features, examples, and call to action.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the PricingTier entity."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the pricing tier in the display."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the pricing tier (e.g., 'Starter', 'Professional')."
+        },
+        "price": {
+          "type": "string",
+          "description": "The price or price range for this tier (e.g., '$399', '$1,500-$3,000')."
+        },
+        "priceDetail": {
+          "type": "string",
+          "description": "Additional detail about the price (e.g., 'one-time', 'custom')."
+        },
+        "bestFor": {
+          "type": "string",
+          "description": "A description of who this tier is best suited for."
+        },
+        "features": {
+          "type": "array",
+          "description": "An array of features included in this pricing tier.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "description": "An array of examples demonstrating what this tier can achieve.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeline": {
+          "type": "string",
+          "description": "The estimated project timeline for this tier (e.g., '1-2 weeks')."
+        },
+        "ctaText": {
+          "type": "string",
+          "description": "Text for the call-to-action button for this tier."
+        },
+        "ctaTarget": {
+          "type": "string",
+          "description": "The target URL or section ID for the CTA button."
+        },
+        "isHighlighted": {
+          "type": "boolean",
+          "description": "A flag indicating if this pricing tier should be visually highlighted (e.g., 'Most Popular')."
+        }
+      },
+      "required": [
+        "id",
+        "order",
+        "name",
+        "price",
+        "priceDetail",
+        "bestFor",
+        "features",
+        "examples",
+        "timeline",
+        "ctaText",
+        "ctaTarget",
+        "isHighlighted"
+      ]
+    },
+    "AboutPageContent": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AboutPageContent",
+      "type": "object",
+      "description": "Content for the 'About' section, detailing the agency's story, background, and contact information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AboutPageContent entity. (This is a singleton entity, so there will typically be only one record with a fixed ID like 'main')."
+        },
+        "headline": {
+          "type": "string",
+          "description": "The main headline for the about section."
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "URL to the professional headshot or team photo.",
+          "format": "uri"
+        },
+        "personalName": {
+          "type": "string",
+          "description": "The name of the individual or primary contact in the about section."
+        },
+        "personalTitle": {
+          "type": "string",
+          "description": "The title or role of the individual (e.g., 'Software Developer & Cybersecurity Analyst')."
+        },
+        "storyParagraphs": {
+          "type": "array",
+          "description": "An array of paragraphs that tell the agency's story.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "headline",
+        "photoUrl",
+        "personalName",
+        "personalTitle",
+        "storyParagraphs"
+      ]
+    },
+    "AboutCredential": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AboutCredential",
+      "type": "object",
+      "description": "An individual credential, certification, or experience highlight listed in the 'About' section.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AboutCredential entity."
+        },
+        "aboutPageContentId": {
+          "type": "string",
+          "description": "Reference to AboutPageContent. (Relationship: AboutPageContent 1:N AboutCredential)"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the credential in the display list."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text of the credential (e.g., '8+ years software development', 'AWS Certified Developer')."
+        },
+        "iconIdentifier": {
+          "type": "string",
+          "description": "A string identifier for an icon related to the credential (e.g., 'Calendar', 'Award')."
+        }
+      },
+      "required": [
+        "id",
+        "aboutPageContentId",
+        "order",
+        "text",
+        "iconIdentifier"
+      ]
+    },
+    "AboutPrinciple": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AboutPrinciple",
+      "type": "object",
+      "description": "A core value or principle of the agency, displayed in the 'About' section.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AboutPrinciple entity."
+        },
+        "aboutPageContentId": {
+          "type": "string",
+          "description": "Reference to AboutPageContent. (Relationship: AboutPageContent 1:N AboutPrinciple)"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the principle in the display list."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the principle (e.g., 'No BS', 'Security First')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief explanation of the principle."
+        }
+      },
+      "required": [
+        "id",
+        "aboutPageContentId",
+        "order",
+        "title",
+        "description"
+      ]
+    },
+    "WebsiteCta": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "WebsiteCta",
+      "type": "object",
+      "description": "A customizable call-to-action element that can be reused across different sections of the website.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the WebsiteCta entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "A descriptive name for internal reference (e.g., 'Main Consultation CTA', 'Download Case Study CTA')."
+        },
+        "buttonText": {
+          "type": "string",
+          "description": "The text displayed on the CTA button."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "The type of action the CTA performs (e.g., 'scroll', 'modal', 'download', 'email', 'link')."
+        },
+        "actionTarget": {
+          "type": "string",
+          "description": "The target for the action (e.g., section ID, modal ID, URL, email address, PDF URL)."
+        },
+        "supportingText": {
+          "type": "string",
+          "description": "Optional additional text displayed below the CTA button."
+        },
+        "visualIconIdentifier": {
+          "type": "string",
+          "description": "A string identifier for a visual icon associated with the CTA (e.g., 'Calendar', 'FileText', 'Mail')."
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "Flag to indicate if this is a primary CTA with distinct styling."
+        },
+        "highlightColor": {
+          "type": "string",
+          "description": "An optional color identifier for UI styling (e.g., 'blue', 'green')."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "buttonText",
+        "actionType",
+        "actionTarget"
+      ]
+    },
+    "TrustIndicator": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "TrustIndicator",
+      "type": "object",
+      "description": "A small statement designed to build trust, often with an associated icon.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the TrustIndicator entity."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text of the trust indicator (e.g., 'Response within 24 hours', 'Your data is never shared')."
+        },
+        "iconIdentifier": {
+          "type": "string",
+          "description": "A string identifier for the icon associated with the indicator (e.g., 'Clock', 'Shield')."
+        },
+        "sectionId": {
+          "type": "string",
+          "description": "Reference to the section where this indicator is displayed (e.g., 'ctaSectionId')."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the indicator within its section."
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "iconIdentifier",
+        "sectionId",
+        "order"
+      ]
+    },
+    "NavLink": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "NavLink",
+      "type": "object",
+      "description": "A navigation link used in the header or footer, including its display label and target URL/path.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the NavLink entity."
+        },
+        "label": {
+          "type": "string",
+          "description": "The display text for the navigation link."
+        },
+        "targetPath": {
+          "type": "string",
+          "description": "The URL path or section ID that the link points to (e.g., '/#about', '/services')."
+        },
+        "location": {
+          "type": "string",
+          "description": "Indicates where the link is displayed (e.g., 'header', 'footer-services', 'footer-company')."
+        },
+        "order": {
+          "type": "number",
+          "description": "The order of the link within its specified location."
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "targetPath",
+        "location",
+        "order"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/site_settings/{siteSettingId}",
+        "definition": {
+          "entityName": "SiteSettings",
+          "schema": {
+            "$ref": "#/backend/entities/SiteSettings"
+          },
+          "description": "Singleton collection for global website settings. Expected document ID: 'global'. Publicly readable, admin-only writable."
+        }
+      },
+      {
+        "path": "/hero_content/{heroContentId}",
+        "definition": {
+          "entityName": "HeroContent",
+          "schema": {
+            "$ref": "#/backend/entities/HeroContent"
+          },
+          "description": "Singleton collection for the main hero section content. Expected document ID: 'main'. Publicly readable, admin-only writable."
+        }
+      },
+      {
+        "path": "/comparison_features/{comparisonFeatureId}",
+        "definition": {
+          "entityName": "ComparisonFeature",
+          "schema": {
+            "$ref": "#/backend/entities/ComparisonFeature"
+          },
+          "description": "Collection for rows in the 'Why Custom Automation' comparison table. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "comparisonFeatureId",
+              "description": "Unique identifier for a comparison feature."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/security_process_steps/{securityProcessStepId}",
+        "definition": {
+          "entityName": "SecurityProcessStep",
+          "schema": {
+            "$ref": "#/backend/entities/SecurityProcessStep"
+          },
+          "description": "Collection for steps in the 'Security-First Build Process'. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "securityProcessStepId",
+              "description": "Unique identifier for a security process step."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/case_studies/{caseStudyId}",
+        "definition": {
+          "entityName": "CaseStudy",
+          "schema": {
+            "$ref": "#/backend/entities/CaseStudy"
+          },
+          "description": "Collection for client success stories. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "caseStudyId",
+              "description": "Unique identifier for a case study."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/services/{serviceId}",
+        "definition": {
+          "entityName": "Service",
+          "schema": {
+            "$ref": "#/backend/entities/Service"
+          },
+          "description": "Collection for services offered by the agency. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "serviceId",
+              "description": "Unique identifier for a service."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roi_calculator_settings/{roiCalculatorSettingId}",
+        "definition": {
+          "entityName": "ROICalculatorSettings",
+          "schema": {
+            "$ref": "#/backend/entities/ROICalculatorSettings"
+          },
+          "description": "Singleton collection for ROI Calculator configuration. Expected document ID: 'defaults'. Publicly readable, admin-only writable."
+        }
+      },
+      {
+        "path": "/tech_categories/{techCategoryId}",
+        "definition": {
+          "entityName": "TechCategory",
+          "schema": {
+            "$ref": "#/backend/entities/TechCategory"
+          },
+          "description": "Collection for categories of technology in the 'Our Technology Stack' section. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "techCategoryId",
+              "description": "Unique identifier for a technology category."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/technologies/{technologyId}",
+        "definition": {
+          "entityName": "Technology",
+          "schema": {
+            "$ref": "#/backend/entities/Technology"
+          },
+          "description": "Collection for specific technologies, linked to a TechCategory via 'techCategoryId'. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "technologyId",
+              "description": "Unique identifier for a technology."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/use_case_filters/{useCaseFilterId}",
+        "definition": {
+          "entityName": "UseCaseFilter",
+          "schema": {
+            "$ref": "#/backend/entities/UseCaseFilter"
+          },
+          "description": "Collection for filter options for technologies based on use cases. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "useCaseFilterId",
+              "description": "Unique identifier for a use case filter."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/pricing_tiers/{pricingTierId}",
+        "definition": {
+          "entityName": "PricingTier",
+          "schema": {
+            "$ref": "#/backend/entities/PricingTier"
+          },
+          "description": "Collection for pricing plans/tiers offered. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "pricingTierId",
+              "description": "Unique identifier for a pricing tier."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/about_page_content/{aboutPageContentId}",
+        "definition": {
+          "entityName": "AboutPageContent",
+          "schema": {
+            "$ref": "#/backend/entities/AboutPageContent"
+          },
+          "description": "Singleton collection for the 'About' section content. Expected document ID: 'main'. Publicly readable, admin-only writable."
+        }
+      },
+      {
+        "path": "/about_credentials/{aboutCredentialId}",
+        "definition": {
+          "entityName": "AboutCredential",
+          "schema": {
+            "$ref": "#/backend/entities/AboutCredential"
+          },
+          "description": "Collection for individual credentials listed in the 'About' section, linked to AboutPageContent via 'aboutPageContentId'. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "aboutCredentialId",
+              "description": "Unique identifier for an about credential."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/about_principles/{aboutPrincipleId}",
+        "definition": {
+          "entityName": "AboutPrinciple",
+          "schema": {
+            "$ref": "#/backend/entities/AboutPrinciple"
+          },
+          "description": "Collection for core values/principles listed in the 'About' section, linked to AboutPageContent via 'aboutPageContentId'. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "aboutPrincipleId",
+              "description": "Unique identifier for an about principle."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/website_ctas/{websiteCtaId}",
+        "definition": {
+          "entityName": "WebsiteCta",
+          "schema": {
+            "$ref": "#/backend/entities/WebsiteCta"
+          },
+          "description": "Collection for reusable call-to-action elements. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "websiteCtaId",
+              "description": "Unique identifier for a website CTA."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/trust_indicators/{trustIndicatorId}",
+        "definition": {
+          "entityName": "TrustIndicator",
+          "schema": {
+            "$ref": "#/backend/entities/TrustIndicator"
+          },
+          "description": "Collection for small trust-building statements. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "trustIndicatorId",
+              "description": "Unique identifier for a trust indicator."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/nav_links/{navLinkId}",
+        "definition": {
+          "entityName": "NavLink",
+          "schema": {
+            "$ref": "#/backend/entities/NavLink"
+          },
+          "description": "Collection for navigation links used in headers/footers. Publicly readable, admin-only writable.",
+          "params": [
+            {
+              "name": "navLinkId",
+              "description": "Unique identifier for a navigation link."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/admin_roles/{uid}",
+        "definition": {
+          "entityName": "AdminRole",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Dedicated collection for Database Access Control (DBAC) roles. The existence of a document at this path for a given UID grants administrative privileges to manage all content collections. Only authenticated users can manage their own admin role status, and only existing admins can grant/revoke roles to others.",
+          "params": [
+            {
+              "name": "uid",
+              "description": "The Firebase Authentication User ID (UID) of an administrator."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to support a secure, scalable, and debuggable content management backend for your marketing website, adhering to the core design principles and strategy mandates. All public-facing content (e.g., SiteSettings, HeroContent, CaseStudies) is stored in top-level collections, each representing a distinct entity type with a homogeneous security posture: publicly readable and writable only by authorized administrators. This approach significantly simplifies security rules and enhances debuggability.\n\n**Authorization Independence (CRITICAL):** This design achieves Authorization Independence by completely eliminating the need for `get()` calls within Firestore Security Rules to determine access for content documents. All content collections are `allow read: if true;`, meaning any client can read them without authentication or checking parent documents. Write access for the backend dashboard is granted by checking the *existence* of an administrator's UID in a dedicated `/admin_roles/{uid}` collection (e.g., `exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid))`). This existence check is an atomic operation and is independent of any content or hierarchical relationships, ensuring rules remain simple and performant.\n\n**Clarity of Intent & Debuggability:** The segregation of content types into distinct collections (e.g., `/case_studies`, `/services`) makes the access intent explicit. The rules for each collection will largely follow the same pattern: public read, admin write. This consistency makes it easy to understand and debug authorization logic.\n\n**DBAC (Database Access Control - No Custom Claims):** Admin roles are stored directly in the database within the `/admin_roles/{uid}` collection. Authorization for write operations across all content collections relies solely on `request.auth.uid` and the *existence* of a document in this role collection. This fulfills the mandate of DBAC, making role management transparent and rule evaluation efficient.\n\n**QAPs (Query Advantage Principle - Rules are not Filters):** For all public content collections, `allow read: if true;` directly supports QAPs. This rule grants full read access, meaning `list` operations will return all documents in the collection without the rules attempting to filter results based on content. The frontend application is responsible for any necessary client-side filtering or ordering of this public data. For administrative write operations, rules grant full control (create, update, delete) to an authenticated admin, ensuring that write operations are not inadvertently restricted by rule-based filtering efforts.\n\n**Structural Segregation (Homogeneous Security Posture):** Every collection (e.g., `/comparison_features`, `/security_process_steps`) is designed such that all documents within it share identical security requirements (public read, admin write). This avoids mixing data with different access needs, thereby simplifying security rules and maintaining a clean data model. Relationships between entities (e.g., `Technology` to `TechCategory` via `techCategoryId`) are managed through document fields containing IDs, rather than strict subcollection nesting, because there is no *authorization* benefit to nesting given the public-read, admin-write access model for all content.\n\n**Data Clarity and Predictability:** The structure uses descriptive path names (e.g., `{siteSettingId}`, `{caseStudyId}`). Singleton entities (e.g., `SiteSettings`, `HeroContent`) are given fixed, semantic IDs like `global` or `main` for predictable access. The schemas, as provided, ensure predictable fields and data types.\n\n**Backend Dashboard Tech Stack & Database Choice:** For the backend dashboard, Firebase Authentication provides robust login and authentication, integrating perfectly with Firestore for authorization (`request.auth.uid` and the `/admin_roles` collection). For image and static content storage, Firebase Storage is the recommended solution. Regarding your question about using a free Supabase database vs. a self-hosted PostgreSQL database on Oracle Cloud VPS: For a content management dashboard and a marketing site, a managed service like Supabase or Firebase Firestore offers significant advantages in terms of reduced operational overhead, scalability, and ease of use compared to a self-hosted PostgreSQL instance. Unless there are very specific requirements for deep database control or existing complex PostgreSQL functions that cannot be replicated easily, a managed solution allows you to focus more on building features and managing content rather than infrastructure. Supabase's generous free tier and integrated auth make it a strong contender if you prefer a SQL database, but given the provided schema and the request for a Firestore structure, Firestore's NoSQL model and direct integration with Firebase Auth simplify development and rule management, making it a highly suitable choice for this application."
+  }
+}

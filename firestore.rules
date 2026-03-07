@@ -1,0 +1,287 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * DASHBOARD CONTENT MANAGEMENT SECURITY MODEL
+     * 
+     * Core Philosophy:
+     * This ruleset implements a "Public Read, Admin Write" model designed for a marketing website with a
+     * secure backend dashboard. Authorization is decoupled from the content hierarchy, using a 
+     * dedicated administrative roles collection (DBAC) to grant modification privileges.
+     * 
+     * Data Structure:
+     * - Public Content: All marketing data (Hero, Case Studies, Pricing, etc.) is stored in top-level 
+     *   collections for direct, high-performance access.
+     * - Singletons: Special entities like SiteSettings or AboutPageContent use fixed document IDs 
+     *   (e.g., 'global', 'main') to simplify frontend fetching.
+     * - Admin Roles: Permissions are managed in the `/admin_roles/{uid}` collection.
+     * 
+     * Key Security Decisions:
+     * - Authorization Independence: Content documents do not store ownership fields because 
+     *   the site is managed by a centralized team of admins, not individual content owners.
+     * - Role-Based Writes: Any operation that modifies data (create, update, delete) requires the 
+     *   requesting user's UID to exist within the `admin_roles` collection.
+     * - Public Consumption: All marketing content is explicitly public (`allow read: if true`) 
+     *   to ensure the website remains accessible to unauthenticated visitors and SEO crawlers.
+     */
+
+    // --- HELPER FUNCTIONS ---
+
+    /** @description Checks if the user is authenticated with Firebase Auth. */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /** @description Checks if the user's UID exists in the admin_roles collection. */
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid));
+    }
+
+    /** @description Verifies administrative status and that the document being targeted actually exists. */
+    function isExistingAdmin() {
+      return isAdmin() && resource != null;
+    }
+
+    /** @description Validates that the internal 'id' field matches the document path ID. */
+    function matchesPathId(fieldId) {
+      return request.resource.data.id == fieldId;
+    }
+
+    // --- COLLECTION RULES ---
+
+    /**
+     * @description Administrative roles for Database Access Control.
+     * @path /admin_roles/{uid}
+     * @allow (get) Any signed-in user checking their own role or an admin checking any role.
+     * @deny (create, update, delete) Any user who is not already an authorized administrator.
+     * @principle Implements DBAC (Database Access Control) where roles are managed as data.
+     */
+    match /admin_roles/{uid} {
+      allow get: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow list: if isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    /**
+     * @description Global website settings and contact information.
+     * @path /site_settings/{siteSettingId}
+     * @allow (get, list) All visitors (public read).
+     * @deny (write) Any non-administrator attempting to modify global configuration.
+     * @principle Public consumption with administrative control over singleton configuration.
+     */
+    match /site_settings/{siteSettingId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(siteSettingId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Content for the hero section of the landing page.
+     * @path /hero_content/{heroContentId}
+     * @allow (get, list) All visitors.
+     * @deny (create) Administrators using an ID that doesn't match the internal data ID.
+     * @principle Ensures data consistency for singleton entities while protecting public content.
+     */
+    match /hero_content/{heroContentId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(heroContentId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Rows for the product/service comparison table.
+     * @path /comparison_features/{comparisonFeatureId}
+     * @allow (create) An administrator adding a new comparison row.
+     * @deny (delete) Anyone who is not an administrator.
+     * @principle Group-based write authorization for non-owner public collections.
+     */
+    match /comparison_features/{comparisonFeatureId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(comparisonFeatureId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Steps in the security-first methodology process.
+     * @path /security_process_steps/{securityProcessStepId}
+     * @allow (list) The frontend application displaying the process timeline.
+     * @deny (update) Modification of security steps by unauthenticated users.
+     * @principle Restricts write access to verified administrative accounts.
+     */
+    match /security_process_steps/{securityProcessStepId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(securityProcessStepId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Client case studies and success stories.
+     * @path /case_studies/{caseStudyId}
+     * @allow (get) Visitors reading specific client results.
+     * @deny (create) An admin attempting to create a case study without a matching ID field.
+     * @principle Enforces relational integrity on creation for public case studies.
+     */
+    match /case_studies/{caseStudyId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(caseStudyId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Core services offered by the agency.
+     * @path /services/{serviceId}
+     * @allow (list) Public users browsing the service catalog.
+     * @deny (delete) Accidental or malicious deletion by non-admins.
+     * @principle Validates document existence for all destructive operations.
+     */
+    match /services/{serviceId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(serviceId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Configuration for the interactive ROI calculator.
+     * @path /roi_calculator_settings/{roiCalculatorSettingId}
+     * @allow (get) The calculator widget fetching default rates and costs.
+     * @deny (write) Any modification to calculations not performed by an admin.
+     * @principle Singleton protection for critical business logic parameters.
+     */
+    match /roi_calculator_settings/{roiCalculatorSettingId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(roiCalculatorSettingId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Categories used to organize the technology stack.
+     * @path /tech_categories/{techCategoryId}
+     * @allow (list) Displaying tech category filters on the frontend.
+     * @deny (write) Users without the administrative role document.
+     * @principle Administrative gatekeeping for structural metadata.
+     */
+    match /tech_categories/{techCategoryId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(techCategoryId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Specific technologies and their logos.
+     * @path /technologies/{technologyId}
+     * @allow (create) Admin adding a new tool to the stack.
+     * @deny (update) Changing techCategoryId if the user is not an admin.
+     * @principle Protects public-facing tech stack information from tampering.
+     */
+    match /technologies/{technologyId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(technologyId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Filters for technologies based on use cases.
+     * @path /use_case_filters/{useCaseFilterId}
+     * @allow (get) The tech-stack filter component.
+     * @deny (delete) Deletion of critical UI filters by unauthorized parties.
+     * @principle Secure management of UI configuration data.
+     */
+    match /use_case_filters/{useCaseFilterId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(useCaseFilterId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Agency pricing plans and tiers.
+     * @path /pricing_tiers/{pricingTierId}
+     * @allow (list) Prospective clients viewing the pricing table.
+     * @deny (write) Attempting to modify pricing without admin credentials.
+     * @principle Prevents unauthorized pricing changes while allowing public visibility.
+     */
+    match /pricing_tiers/{pricingTierId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(pricingTierId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Main content for the 'About' section.
+     * @path /about_page_content/{aboutPageContentId}
+     * @allow (get) Public viewing of the agency story.
+     * @deny (create) Admins creating multiple 'About' documents instead of using the singleton.
+     * @principle Enforces path-based consistency for singleton content.
+     */
+    match /about_page_content/{aboutPageContentId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(aboutPageContentId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Personal credentials and certifications.
+     * @path /about_credentials/{aboutCredentialId}
+     * @allow (list) Public visitors viewing the resume/experience list.
+     * @deny (write) Any modification by non-admin accounts.
+     * @principle Restricts access to sensitive professional history updates.
+     */
+    match /about_credentials/{aboutCredentialId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(aboutCredentialId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Core principles and values.
+     * @path /about_principles/{aboutPrincipleId}
+     * @allow (get) Reading the 'No BS' or 'Security First' philosophy.
+     * @deny (write) Tampering with the company's core values.
+     * @principle Role-based protection of static marketing assets.
+     */
+    match /about_principles/{aboutPrincipleId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(aboutPrincipleId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Reusable Call-to-Action (CTA) elements.
+     * @path /website_ctas/{websiteCtaId}
+     * @allow (list) Frontend rendering buttons throughout the site.
+     * @deny (update) Changing action targets (URLs/Emails) by non-admins.
+     * @principle Protects against CTA hijacking or phishing redirection.
+     */
+    match /website_ctas/{websiteCtaId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(websiteCtaId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Trust-building indicators and statements.
+     * @path /trust_indicators/{trustIndicatorId}
+     * @allow (get) Public display of trust badges/metrics.
+     * @deny (create) Non-admins adding unverified trust statements.
+     * @principle Maintains the integrity of trust-based marketing content.
+     */
+    match /trust_indicators/{trustIndicatorId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(trustIndicatorId);
+      allow update, delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Global navigation links for headers and footers.
+     * @path /nav_links/{navLinkId}
+     * @allow (list) The site header and footer components.
+     * @deny (write) Users without administrative clearance.
+     * @principle Secures the primary navigation structure of the application.
+     */
+    match /nav_links/{navLinkId} {
+      allow get, list: if true;
+      allow create: if isAdmin() && matchesPathId(navLinkId);
+      allow update, delete: if isExistingAdmin();
+    }
+  }
+}
