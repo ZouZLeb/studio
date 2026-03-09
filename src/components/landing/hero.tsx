@@ -42,7 +42,7 @@ const ComparisonCard = ({
         </Badge>
       </div>
       
-      <CardContent className="p-6">
+      <CardContent className="py-12 px-6">
         <div className="flex items-center gap-3 mb-4">
           <div className={`p-2 rounded-lg ${type === "aimatic" ? "bg-primary/20" : "bg-destructive/10"}`}>
             {type === "aimatic" ? (

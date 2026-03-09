@@ -1,6 +1,8 @@
 import { Linkedin, Github, CodeXml } from "lucide-react";
 import Link from "next/link";
 import { BrandName } from "../brand-name";
+import Image from "next/image";
+import logo from "../../app/logo.png";
 
 export default function Footer() {
   return (
@@ -8,8 +10,8 @@ export default function Footer() {
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 font-headline">
-              <CodeXml className="text-primary"/>
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 font-headline text-foreground">
+              <Image src={logo} alt="AImatic Logo" width={28} height={28} className="h-7 w-auto" />
               <BrandName />
             </h3>
             <p className="text-muted-foreground text-sm mb-4">

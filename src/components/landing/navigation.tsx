@@ -8,6 +8,8 @@ import { BrandName } from "@/components/brand-name";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
+import Image from "next/image";
+import logo from "../../app/logo.png";
 import {
   Sheet,
   SheetContent,
@@ -41,9 +43,7 @@ export default function Navigation() {
       <header className="fixed top-0 z-50 w-full py-6 bg-transparent">
         <div className="container mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-primary/20">
-              <CodeXml className="w-6 h-6 text-primary" />
-            </div>
+            <Image src={logo} alt="AImatic Logo" width={32} height={32} className="h-8 w-auto" priority />
             <BrandName className="text-xl tracking-tight" />
           </div>
         </div>
@@ -62,12 +62,7 @@ export default function Navigation() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className={cn(
-            "p-1.5 rounded-lg transition-all duration-300",
-            "bg-primary/20 group-hover:bg-primary/30"
-          )}>
-            <CodeXml className="w-6 h-6 text-primary" />
-          </div>
+          <Image src={logo} alt="AImatic Logo" width={32} height={32} className="h-8 w-auto" priority />
           <BrandName className="text-xl tracking-tight text-foreground" />
         </Link>
         
@@ -106,7 +101,7 @@ export default function Navigation() {
               <SheetContent side="right" className="bg-background/95 backdrop-blur-xl border-l border-border/50 w-72">
                 <SheetHeader className="text-left pb-6 border-b border-border/30">
                   <SheetTitle className="flex items-center gap-2">
-                    <CodeXml className="text-primary w-5 h-5" />
+                    <Image src={logo} alt="AImatic Logo" width={24} height={24} className="h-6 w-auto" />
                     <BrandName className="text-lg" />
                   </SheetTitle>
                 </SheetHeader>
