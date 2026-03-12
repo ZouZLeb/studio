@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: 'AImatic Dev Solutions',
     images: [
       {
-        url: 'https://picsum.photos/seed/aimatic-og/1200/630',
+        url: 'https://aimatic.dev/aimatic_logo.png',
         width: 1200,
         height: 630,
         alt: 'AImatic Professional AI Automation San Diego',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AImatic | Secure AI Automation San Diego',
     description: 'Professional engineering for modern businesses. Automate lead generation and follow-ups securely.',
-    images: ['https://picsum.photos/seed/aimatic-twitter/1200/630'],
+    images: ['https://aimatic.dev/aimatic_logo.png'],
   },
   robots: {
     index: true,
@@ -69,7 +69,7 @@ export default function RootLayout({
         '@id': 'https://aimatic.dev/#organization',
         name: 'AImatic Dev Solutions',
         url: 'https://aimatic.dev',
-        logo: 'https://aimatic.dev/logo.png',
+        logo: 'https://aimatic.dev/aimatic_logo.png',
         description: 'A developer-backed AI automation agency in San Diego focusing on security, n8n workflows, and custom engineering for small businesses.',
         address: {
           '@type': 'PostalAddress',
@@ -111,6 +111,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Source+Code+Pro:wght@400;600&family=Merriweather:wght@400;700;900&display=swap"
           rel="stylesheet"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -41,20 +41,26 @@ export function WelcomePopup() {
         "fixed inset-0 z-[100] flex items-center justify-center p-6 bg-background/60 backdrop-blur-sm transition-opacity duration-500 ease-in-out",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
+      onClick={handleClose}
     >
       <Card 
         className={cn(
           "relative w-full max-w-lg overflow-hidden bg-card/90 backdrop-blur-xl border-primary/20 shadow-2xl transition-all duration-500 ease-out transform",
           isVisible ? "scale-100 translate-y-0" : "scale-95 translate-y-8"
         )}
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Decorative Background Elements */}
         <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 blur-[60px] rounded-full" />
         <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-fuchsia-500/10 blur-[60px] rounded-full" />
 
         <button 
-          onClick={handleClose}
-          className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors z-10"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClose();
+          }}
+          className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors z-[110]"
+          aria-label="Close welcome message"
         >
           <X className="w-5 h-5" />
         </button>

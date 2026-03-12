@@ -24,6 +24,16 @@ export function ChatWidget() {
 
   const isLimitReached = remainingMessages !== null && remainingMessages <= 0;
 
+  // Auto-expand textarea
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      const scrollHeight = inputRef.current.scrollHeight;
+      // Limit to ~3 lines (approx 24px per line)
+      inputRef.current.style.height = `${Math.min(scrollHeight, 72)}px`;
+    }
+  }, [input]);
+
   // Auto-scroll to bottom on new messages
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -66,7 +76,7 @@ export function ChatWidget() {
         onClick={() => setIsOpen(prev => !prev)}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
         className={`
-          fixed bottom-6 right-6 z-50
+          fixed bottom-6 right-6 z-[100]
           w-14 h-14 rounded-full shadow-2xl
           bg-gradient-to-br from-violet-600 to-indigo-700
           flex items-center justify-center
@@ -85,7 +95,7 @@ export function ChatWidget() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
             {remainingMessages !== null && (
-               <span className="absolute -top-3.5 -right-3.5 bg-rose-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full ring-2 ring-[#0f0f18] min-w-[18px] text-center">
+               <span className="absolute -top-3.5 -right-3.5 bg-rose-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full ring-2 ring-[#0f0f18] min-w-[20px] text-center shadow-lg">
                 {remainingMessages}
               </span>
             )}
@@ -96,7 +106,7 @@ export function ChatWidget() {
       {/* ── Chat panel ── */}
       <div
         className={`
-          fixed bottom-24 right-6 z-50
+          fixed bottom-24 right-6 z-[100]
           w-[360px] max-w-[calc(100vw-24px)]
           flex flex-col
           rounded-2xl overflow-hidden
@@ -186,9 +196,9 @@ export function ChatWidget() {
               placeholder={isLimitReached ? "Daily limit reached" : "Ask me anything..."}
               rows={1}
               className="
-                flex-1 bg-transparent text-white text-[14px] placeholder:text-white/30
+                flex-1 bg-transparent text-white text-[16px] placeholder:text-white/30
                 resize-none outline-none leading-relaxed
-                max-h-24 overflow-y-auto
+                max-h-[72px] overflow-y-auto
                 disabled:opacity-50
               "
               style={{ scrollbarWidth: 'none' }}
