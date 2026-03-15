@@ -43,11 +43,15 @@ export default function CtaSection() {
                   A quick 15-minute chat to see if we can help. No sales pitch, just honest advice.
                 </p>
                 <div className="mt-auto">
-                  <span className="btn-custom-glass w-full" onClick={() => setIsCalendlyOpen(true)}>
+                  <button 
+                    className="btn-custom-glass w-full" 
+                    onClick={() => setIsCalendlyOpen(true)}
+                    aria-label="Find a time to book a free call"
+                  >
                     <div className="btn-custom-glass-inner">
                       <div className="btn-custom-glass-text flex items-center justify-center gap-2">Find a Time</div>
                     </div>
-                  </span>
+                  </button>
                 </div>
               </Card>
             </motion.div>

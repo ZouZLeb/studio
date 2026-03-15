@@ -1,11 +1,30 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Inter, Source_Code_Pro, Merriweather } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ChatWidget } from '../components/chat';
-import { WelcomePopup } from '../components/landing/welcome-popup';
+import { GlobalDynamicComponents } from '@/components/global-dynamic-components';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-merriweather',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'AImatic | AI Automation Agency San Diego | Secure Engineering',
@@ -105,19 +124,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Source+Code+Pro:wght@400;600&family=Merriweather:wght@400;700;900&display=swap"
-          rel="stylesheet"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={cn('font-body antialiased overflow-x-hidden')}>
+      <body className={cn(
+        inter.variable,
+        merriweather.variable,
+        sourceCodePro.variable,
+        'font-body antialiased overflow-x-hidden'
+      )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -125,8 +143,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <WelcomePopup />
-          <ChatWidget />
+          <GlobalDynamicComponents />
           <Toaster />
         </ThemeProvider>
       </body>

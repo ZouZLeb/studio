@@ -52,7 +52,7 @@ const ComparisonCard = ({
             )}
           </div>
           <div>
-            <h3 className="font-black text-lg text-foreground tracking-tight">{title}</h3>
+            <h2 className="font-black text-lg text-foreground tracking-tight">{title}</h2>
             <p className="text-xs text-muted-foreground font-medium">{description}</p>
           </div>
         </div>
@@ -63,9 +63,12 @@ const ComparisonCard = ({
               src={imageData.imageUrl}
               alt={type === "aimatic" ? "Secure engineering illustration" : "Standard AI wrapper illustration"}
               fill
+              quality={60}
               className="object-cover opacity-90 transition-all duration-500"
               sizes="(max-width: 768px) 100vw, 50vw"
               data-ai-hint={imageData.imageHint}
+              priority
+              fetchPriority="high"
             />
           )}
           <div className={`absolute inset-0 bg-gradient-to-t ${type === "aimatic" ? "from-primary/20" : "from-black/40"} to-transparent pointer-events-none`} />

@@ -61,7 +61,7 @@ export default function DifferentiationTable() {
         >
           {/* Header - Hidden on small mobile, grid on desktop */}
           <div className="hidden md:grid grid-cols-4 p-6 border-b border-border/50 bg-muted/30 items-center">
-            <div className="font-headline text-[10px] uppercase font-black tracking-[0.2em] text-muted-foreground/60">
+            <div className="font-headline text-[10px] uppercase font-black tracking-[0.2em] text-muted-foreground">
               Core Engineering
             </div>
             <div className="text-xs uppercase font-bold text-muted-foreground/80 pl-4 border-l border-border/20">
@@ -91,7 +91,7 @@ export default function DifferentiationTable() {
                 <div className="flex flex-wrap gap-4 md:contents w-full">
                   {/* Standard AI */}
                   <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3 md:border-l md:border-border/20 md:pl-0 min-w-[140px] flex-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 md:hidden">Standard AI</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/80 md:hidden">Standard AI</span>
                     <div className="flex items-center gap-2.5">
                       <StatusIcon status={row.chatgpt.status as any} />
                       <span className="text-sm text-muted-foreground/80 font-medium">{row.chatgpt.text}</span>
@@ -100,7 +100,7 @@ export default function DifferentiationTable() {
 
                   {/* DIY Tools */}
                   <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3 md:border-l md:border-border/20 md:pl-0 min-w-[140px] flex-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/40 md:hidden">DIY Tools</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/80 md:hidden">DIY Tools</span>
                     <div className="flex items-center gap-2.5">
                       <StatusIcon status={row.nocode.status as any} />
                       <span className="text-sm text-muted-foreground/80 font-medium">{row.nocode.text}</span>

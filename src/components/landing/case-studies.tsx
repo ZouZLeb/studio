@@ -189,13 +189,15 @@ export default function CaseStudies() {
                     >
                       <div className="relative h-48 bg-muted/20 overflow-hidden">
                         {studyImg && (
-                          <Image
-                            src={studyImg.imageUrl}
-                            alt={study.clientType}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            data-ai-hint={studyImg.imageHint}
-                          />
+                            <Image
+                              src={studyImg.imageUrl}
+                              alt={study.clientType}
+                              fill
+                              quality={60}
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                              data-ai-hint={studyImg.imageHint}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <Badge variant="secondary" className="absolute bottom-2 left-2">{study.industry}</Badge>

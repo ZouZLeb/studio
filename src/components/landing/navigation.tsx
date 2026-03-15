@@ -94,7 +94,7 @@ export default function Navigation() {
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open menu">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>

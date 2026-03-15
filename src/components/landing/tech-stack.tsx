@@ -85,7 +85,7 @@ export default function TechStack() {
                     <tech.Logo size={28} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-bold text-sm leading-none mb-1 text-foreground">{tech.name}</h4>
+                    <h3 className="font-bold text-sm leading-none mb-1 text-foreground">{tech.name}</h3>
                     <p className="text-[10px] text-muted-foreground truncate">{tech.description}</p>
                   </div>
                 </div>

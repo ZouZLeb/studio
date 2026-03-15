@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     'localhost:9002'
   ],
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+    qualities: [25, 50, 60, 75, 90, 100],
     remotePatterns: [
       {
         protocol: 'https',
