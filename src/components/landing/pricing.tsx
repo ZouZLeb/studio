@@ -85,7 +85,7 @@ export default function Pricing() {
               <h3 className="text-2xl font-bold mb-2 flex items-center justify-center md:justify-start gap-2 text-white">
                 <Globe className="text-primary w-6 h-6" /> Ready for a Private Build?
               </h3>
-              <p className="text-gray-400 max-w-md">
+              <p className="text-gray-300 max-w-md">
                 Get an accurate quote based on your specific complexity using our calculator or book a strategy session.
               </p>
             </div>

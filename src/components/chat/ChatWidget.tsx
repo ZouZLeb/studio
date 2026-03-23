@@ -194,6 +194,7 @@ export function ChatWidget() {
               onKeyDown={handleKeyDown}
               disabled={isLoading || isLimitReached}
               placeholder={isLimitReached ? "Daily limit reached" : "Ask me anything..."}
+              aria-label="Message text"
               rows={1}
               className="
                 flex-1 bg-transparent text-white text-[16px] placeholder:text-white/30

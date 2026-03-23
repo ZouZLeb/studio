@@ -121,7 +121,7 @@ export function WelcomePopup() {
 
           </div>
 
-          <p className="text-center text-[11px] text-muted-foreground mt-6 uppercase tracking-widest font-semibold opacity-50">
+          <p className="text-center text-[11px] text-muted-foreground mt-6 uppercase tracking-widest font-semibold">
             Terms & conditions apply • San Diego based
           </p>
         </div>

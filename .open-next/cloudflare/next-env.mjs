@@ -1,0 +1,3 @@
+export const production = {"GOOGLE_GENAI_API_KEY":"AIzaSyBSMDJWb1hibPjrbMG-hO6nFZYRaICO9Rg","NEXT_PUBLIC_CHAT_SECRET":"UUVccNZNTKyx","N8N_API_KEY":"e3b14c0e1341375e314c23265e8e23bc1000d89eec645d905e04d79e0d563741","N8N_WEBHOOK_URL":"https://n8n.aimatic.dev/webhook/chatbot","SUPABASE_DB_PAA":"!-&9Ze4,T7M%hV@"};
+export const development = {"GOOGLE_GENAI_API_KEY":"AIzaSyBSMDJWb1hibPjrbMG-hO6nFZYRaICO9Rg","NEXT_PUBLIC_CHAT_SECRET":"UUVccNZNTKyx","N8N_API_KEY":"e3b14c0e1341375e314c23265e8e23bc1000d89eec645d905e04d79e0d563741","N8N_WEBHOOK_URL":"https://n8n.aimatic.dev/webhook/chatbot","SUPABASE_DB_PAA":"!-&9Ze4,T7M%hV@"};
+export const test = {"GOOGLE_GENAI_API_KEY":"","NEXT_PUBLIC_CHAT_SECRET":""};

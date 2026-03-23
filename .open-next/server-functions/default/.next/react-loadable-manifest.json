@@ -1,0 +1,27 @@
+{
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 7520,
+    "files": [
+      "static/chunks/139.0a92edaa0bd72a9e.js"
+    ]
+  },
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 1646,
+    "files": [
+      "static/chunks/646.f342b7cffc01feb0.js"
+    ]
+  },
+  "components\\global-dynamic-components.tsx -> ./chat": {
+    "id": 6390,
+    "files": [
+      "static/chunks/390.8d2f5d644ed583f3.js"
+    ]
+  },
+  "components\\global-dynamic-components.tsx -> ./landing/welcome-popup": {
+    "id": 6607,
+    "files": [
+      "static/chunks/353-9201d7d4dd63b5d6.js",
+      "static/chunks/607.dfb446d0502d2ac8.js"
+    ]
+  }
+}
