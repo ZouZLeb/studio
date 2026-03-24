@@ -8,7 +8,8 @@
   }
 
   :root {
-    --background: 210 40% 98%;
+    /* Made background a cool, distinct slate-gray rather than pure white */
+    --background: 210 30% 96%;
     --foreground: 224 71.4% 4.1%;
 
     --card: 0 0% 100%;
@@ -20,11 +21,11 @@
     --primary: 221 83% 45%;
     --primary-foreground: 210 20% 98%;
 
-    --secondary: 220 14.3% 95.9%;
+    --secondary: 220 14.3% 90%;
     --secondary-foreground: 220.9 39.3% 11%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 10% 30%;
+    --muted: 210 30% 92%;
+    --muted-foreground: 220 15% 40%;
 
     --accent: 173 80% 30%;
     --accent-foreground: 210 20% 98%;
@@ -32,8 +33,9 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    /* Stronger, more defined borders for crisp layout lines */
+    --border: 214 25% 85%;
+    --input: 214 25% 85%;
     --ring: 221 83% 45%;
 
     --radius: 2rem;

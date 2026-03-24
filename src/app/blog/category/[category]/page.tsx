@@ -37,12 +37,15 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-24">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-3 capitalize">
+      <div className="mb-16 text-center max-w-2xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+          Category
+        </div>
+        <h1 className="text-4xl md:text-5xl font-black font-headline tracking-tight mb-4 capitalize">
           {decodedCategory}
         </h1>
-        <p className="text-muted-foreground text-lg">
-          {posts.length} post{posts.length !== 1 ? 's' : ''} in this category.
+        <p className="text-muted-foreground text-lg leading-relaxed">
+          {posts.length} post{posts.length !== 1 ? 's' : ''} published.
         </p>
       </div>
 
