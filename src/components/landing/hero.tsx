@@ -63,7 +63,6 @@ const ComparisonCard = ({
               src={imageData.imageUrl}
               alt={type === "aimatic" ? "Secure engineering illustration" : "Standard AI wrapper illustration"}
               fill
-              quality={60}
               className="object-cover opacity-90 transition-all duration-500"
               sizes="(max-width: 768px) 100vw, 50vw"
               data-ai-hint={imageData.imageHint}

@@ -34,7 +34,6 @@ export default function AboutSection() {
                       src={headshot.imageUrl}
                       alt="The AImatic Team"
                       fill
-                      quality={60}
                       className="rounded-2xl object-cover shadow-lg transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 40vw"
                     />
