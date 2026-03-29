@@ -52,5 +52,8 @@ firestore-debug.log
 # tina
 tina/__generated__
 
+# blog content (managed via TinaCMS or separate)
+/content/blog/
+
 # blog media uploads (local only)
 /public/uploads
