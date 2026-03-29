@@ -7,12 +7,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://aimatic.dev';
   const posts = getAllPosts();
 
-  const blogPostEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.frontmatter.updatedAt ?? post.frontmatter.publishedAt),
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  }));
+  const blogPostEntries: MetadataRoute.Sitemap = posts.map((post) => {
+    let lastModified = new Date();
+    const rawDate = post.frontmatter.updatedAt ?? post.frontmatter.publishedAt;
+    if (rawDate) {
+      const parsed = new Date(rawDate);
+      if (!isNaN(parsed.getTime())) {
+        lastModified = parsed;
+      }
+    }
+
+    return {
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    };
+  });
 
   return [
     {

@@ -42,7 +42,11 @@ function buildCache() {
       };
     })
     .filter((post) => !post.frontmatter.draft)
-    .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime());
+    .sort((a, b) => {
+      const dateA = a.frontmatter.publishedAt ? new Date(a.frontmatter.publishedAt).getTime() : 0;
+      const dateB = b.frontmatter.publishedAt ? new Date(b.frontmatter.publishedAt).getTime() : 0;
+      return (Number.isNaN(dateB) ? 0 : dateB) - (Number.isNaN(dateA) ? 0 : dateA);
+    });
 
   fs.writeFileSync(CACHE_FILE, JSON.stringify(posts, null, 2));
   console.log(`[Blog Cache] Generated successfully with ${posts.length} posts.`);
