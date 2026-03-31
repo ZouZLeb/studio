@@ -1,0 +1,65 @@
+---
+title: "Claude Code Leak"
+slug: "claude-code-source-leaked"
+description: "Claude Code's source code was leaked via a map file in their NPM registry, exposing 1,900 files and 512,000+ lines of code"
+ogTitle: "Claude Code Source Code Leaked"
+ogDescription: "Discover the implications of Claude Code's source code leak and what it means for AI-powered coding tools"
+bannerImage: "https://www.pexels.com/photo/text-on-computer-monitor-6190327/"
+youtubeVideoId: ""
+publishedAt: "2026-03-31T14:30:00.000Z"
+draft: false
+category: "AI"
+tags:
+  - claudecode
+  - leak
+  - ai
+---
+
+# Claude Code's Source Code Leak: What You Need to Know
+## Hook Intro
+The entire source code of Claude Code, Anthropic's official AI coding CLI, was leaked via a sourcemap in npm, exposing 1,900 files and 512,000+ lines of code. This leak has significant implications for the AI-powered coding tool landscape.
+## TL;DR
+<Callout title="TL;DR" type="info">
+* Claude Code's source code was leaked via a sourcemap in npm
+* The leak exposes 1,900 files and 512,000+ lines of code
+* The codebase is production-grade, heavily architected, and uses a modular tool-based architecture
+* The leak has significant implications for the AI-powered coding tool landscape
+</Callout>
+## What Is Claude Code and Why It Matters
+Claude Code is Anthropic's official command-line interface that lets you interact with Claude directly from your terminal for software engineering tasks. It's an AI pair programmer that can edit files, run commands, search codebases, and manage git workflows — all through natural language. The leak of its source code has significant implications for the AI-powered coding tool landscape.
+## Technical Deep Dive
+The leaked source code reveals a production-grade, heavily architected system that runs on Bun (not Node), uses React with Ink for terminal UI rendering, and has a modular tool-based architecture. The codebase includes 40 built-in tools, 50 slash commands, and a query engine that handles all LLM API calls, streaming, and caching.
+```typescript
+// Example of a tool definition
+interface Tool {
+  name: string;
+  description: string;
+  execute: (args: any) => any;
+}
+```
+## Real-World Examples
+The leak of Claude Code's source code has already been archived to a public GitHub repository, where it has gained significant attention from the developer community. Companies and individuals can learn from the architecture and implementation of Claude Code to improve their own AI-powered coding tools.
+## What the Community Is Saying
+The community is abuzz with discussions about the implications of the leak. Some are concerned about the security implications, while others see it as an opportunity to learn from the codebase and improve their own tools.
+## Pros, Cons & Caveats
+| Pros | Cons |
+| --- | --- |
+| Production-grade codebase | Security implications |
+| Modular tool-based architecture | Intellectual property concerns |
+| Extensive documentation | Potential for unauthorized distribution |
+## How to Get Started
+1. Explore the leaked source code on GitHub
+2. Learn from the architecture and implementation
+3. Consider the security implications and take necessary precautions
+4. Join the discussion on social media and forums
+## FAQ
+Q: What is Claude Code?
+A: Claude Code is Anthropic's official command-line interface for interacting with Claude.
+Q: What was leaked?
+A: The entire source code of Claude Code was leaked via a sourcemap in npm.
+Q: What are the implications?
+A: The leak has significant implications for the AI-powered coding tool landscape, including security concerns and intellectual property issues.
+Q: How can I get started?
+A: Explore the leaked source code on GitHub, learn from the architecture and implementation, and consider the security implications.
+## Conclusion & Next Steps
+The leak of Claude Code's source code is a significant event in the AI-powered coding tool landscape. As you consider the implications and opportunities, reach out to AImatic for custom AI and automation solutions at hello@aimatic.dev.
