@@ -12,11 +12,12 @@ import {
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
+import { BrandName } from "../brand-name";
 
 const steps = [
   {
     title: "Free Problem Review",
-    description: "A quick 15-minute call to find where your business is losing time and where automation can help.",
+    description: "A quick 15-minute call to identify where your business is losing time and where automation can have the highest ROI.",
     icon: PhoneCall,
     badge: "Step 01",
     color: "text-blue-500",
@@ -24,39 +25,39 @@ const steps = [
   },
   {
     title: "Custom Project Roadmap",
-    description: "We provide a clear project scope with a fixed price. No hidden fees or recurring subscriptions.",
+    description: "We provide a clear architectural scope with fixed pricing. No hidden fees, no per-task costs, and no monthly licensing.",
     icon: FileText,
     badge: "Step 02",
     color: "text-amber-500",
     gradient: "from-amber-500/20 to-amber-500",
   },
   {
-    title: "Expert Build Phase",
-    description: "Our security-certified developers write the code and set up your private n8n or Python automation.",
+    title: "Expert Engineering Phase",
+    description: "Our security-certified developers build your private n8n or Python automation directly in your environment.",
     icon: Code2,
     badge: "Step 03",
     color: "text-purple-500",
     gradient: "from-purple-500 to-purple-500/20",
   },
   {
-    title: "Privacy & Data Security",
-    description: "We perform rigorous testing to ensure your company data stays 100% private and protected.",
+    title: "Security & Privacy Audit",
+    description: "We perform rigorous hardening and testing to ensure your business data stays 100% private and proprietary.",
     icon: ShieldCheck,
     badge: "Step 04",
     color: "text-green-500",
     gradient: "from-green-500/20 to-green-500",
   },
   {
-    title: "System Handover",
-    description: "You get the full keys. 100% ownership of your tools, source code, and complete documentation.",
+    title: "System Handover & IP",
+    description: "You receive the keys. 100% ownership of your tools, source code, and comprehensive documentation.",
     icon: Rocket,
     badge: "Step 05",
     color: "text-red-500",
     gradient: "from-red-500 to-red-500/20",
   },
   {
-    title: "Long-term Support",
-    description: "Optional monthly help to keep your systems updated, secure, and growing with your business.",
+    title: "Ongoing Maintenance",
+    description: "Optional monthly support to keep your systems updated, secure, and scaling with your company's growth.",
     icon: RefreshCcw,
     badge: "Step 06",
     color: "text-cyan-500",
@@ -70,16 +71,15 @@ export default function ProcessOverview() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-20">
           <h2 id="process-title" className="text-3xl md:text-5xl font-black font-headline mb-4 tracking-tight">
-            The AImatic Engineering Process
+            The <BrandName /> Engineering Lifecycle
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our step-by-step journey from manual business tasks to complete, secure, self-hosted automation.
+            A developer-backed journey from manual tasks to complete, secure, and self-hosted business automation.
           </p>
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          {/* Timeline Spine */}
-          <div className="absolute left-8 md:left-1/2 top-[60px] bottom-[60px] w-px bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 -translate-x-1/2 z-0" />
+          <div className="absolute left-8 md:left-1/2 top-[80px] bottom-[80px] w-px bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 -translate-x-1/2 z-0" />
 
           <div className="space-y-12 md:space-y-0">
             {steps.map((step, idx) => (
@@ -94,7 +94,6 @@ export default function ProcessOverview() {
                   idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 )}
               >
-                {/* Horizontal Connector Line (Desktop) */}
                 <div 
                   className={cn(
                     "absolute top-1/2 -translate-y-1/2 h-[2px] z-[1] hidden md:block pointer-events-none opacity-40",
@@ -104,7 +103,6 @@ export default function ProcessOverview() {
                   )} 
                 />
 
-                {/* Horizontal Connector Line (Mobile) */}
                 <div 
                   className={cn(
                     "absolute left-8 top-1/2 -translate-y-1/2 w-12 h-[2px] z-[1] block md:hidden pointer-events-none opacity-40",
@@ -113,7 +111,6 @@ export default function ProcessOverview() {
                   )} 
                 />
 
-                {/* Content Card */}
                 <article className={cn(
                   "w-full md:w-[42%] pl-20 md:pl-0 z-10",
                   idx % 2 === 0 ? "md:text-right" : "md:text-left"
@@ -138,7 +135,6 @@ export default function ProcessOverview() {
                   </Card>
                 </article>
 
-                {/* Icon Hub */}
                 <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
                   <div className={cn(
                     "w-12 h-12 rounded-full border-4 border-background bg-card flex items-center justify-center shadow-xl ring-1 ring-border",
@@ -157,16 +153,16 @@ export default function ProcessOverview() {
         <div className="mt-20 max-w-4xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center border-t border-border/30 pt-10">
             <div className="space-y-1">
-               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Zero Monthly Fees</h4>
-               <p className="text-[11px] text-muted-foreground">Run your business tools forever without task costs.</p>
+               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Zero SaaS Taxes</h4>
+               <p className="text-[11px] text-muted-foreground">Run your business tools forever without task-based fees.</p>
             </div>
             <div className="space-y-1">
                <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Full System Ownership</h4>
-               <p className="text-[11px] text-muted-foreground">You get 100% of the source code and documentation.</p>
+               <p className="text-[11px] text-muted-foreground">You own 100% of the source code and workflow logic.</p>
             </div>
             <div className="space-y-1">
-               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">100% Data Sovereignty</h4>
-               <p className="text-[11px] text-muted-foreground">Your sensitive business data never touches our servers.</p>
+               <h4 className="font-bold text-foreground text-sm uppercase tracking-tight">Privacy First</h4>
+               <p className="text-[11px] text-muted-foreground">Your sensitive proprietary data never touches our infrastructure.</p>
             </div>
           </div>
         </div>

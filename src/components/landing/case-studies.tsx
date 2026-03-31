@@ -27,10 +27,10 @@ import {
 const caseStudiesData = [
   {
     id: 1,
-    clientType: "Instant Lead Assistant",
+    clientType: "Automate Lead Generation",
     industry: "Sales & Real Estate",
-    problem: "Customer messages from Email and DMs were being missed or taking hours to answer.",
-    solution: "A private helper that answers customers instantly, books meetings, and updates your list automatically.",
+    problem: "How to automate email follow-ups and respond to DMs before leads go cold.",
+    solution: "A private n8n lead engine that answers customers instantly, books meetings, and updates your CRM automatically.",
     imageId: "case-leads",
     metrics: {
       timeSaved: 20,
@@ -71,7 +71,7 @@ const caseStudiesData = [
     id: 3,
     clientType: "The Client Update Bot",
     industry: "Professional Services",
-    problem: "Clients kept asking 'what's the status?' and answering them one-by-one was taking hours.",
+    problem: "Clients kept asking 'what's the status?' and answering manually was taking hours.",
     solution: "An automated helper that checks your project board and sends a friendly summary email to every client every Friday.",
     imageId: "case-pm",
     metrics: {
@@ -90,10 +90,10 @@ const caseStudiesData = [
   },
   {
     id: 4,
-    clientType: "24/7 Support Assistant",
+    clientType: "AI Chatbot for Small Business",
     industry: "E-commerce & Tech",
     problem: "Support tickets were piling up overnight and on weekends when the team was offline.",
-    solution: "A smart chatbot that knows everything about your products and solves common problems instantly at any hour.",
+    solution: "A smart knowledge-based assistant that knows your products and solves common problems instantly at any hour.",
     imageId: "case-support",
     metrics: {
       timeSaved: 40,
@@ -163,10 +163,10 @@ export default function CaseStudies() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline">
-            Real Examples of How We Help
+            How to Save Time in My Business with Automation
           </h2>
           <p className="text-lg text-muted-foreground mt-4 max-w-3xl mx-auto">
-            See how other businesses are using custom tools to save time and grow.
+            Real-world examples of how AImatic helps San Diego businesses automate lead generation and follow-ups.
           </p>
         </div>
 
@@ -187,15 +187,16 @@ export default function CaseStudies() {
                       className="h-full overflow-hidden bg-card/40 backdrop-blur-md cursor-pointer group flex flex-col border-border/50"
                       onClick={() => setSelectedCase(study)}
                     >
-                      <div className="relative h-48 bg-muted/20">
+                      <div className="relative h-48 bg-muted/20 overflow-hidden">
                         {studyImg && (
-                          <Image
-                            src={studyImg.imageUrl}
-                            alt={study.clientType}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            data-ai-hint={studyImg.imageHint}
-                          />
+                            <Image
+                              src={studyImg.imageUrl}
+                              alt={study.clientType}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                              data-ai-hint={studyImg.imageHint}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <Badge variant="secondary" className="absolute bottom-2 left-2">{study.industry}</Badge>
@@ -223,7 +224,7 @@ export default function CaseStudies() {
                               <CountUp end={study.metrics.roi} duration={2} />
                             </div>
                             <div className="text-[9px] uppercase font-bold text-muted-foreground">
-                              Pays off in {study.metrics.roiUnit}
+                              ROI in {study.metrics.roiUnit}
                             </div>
                           </div>
                           <div className="text-center">
@@ -237,7 +238,7 @@ export default function CaseStudies() {
                         </div>
                         
                         <Button variant="link" className="mt-4 self-start p-0 h-auto text-primary group-hover:underline text-xs shadow-none">
-                          See How it Works <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                          See Implementation <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
                         </Button>
                       </CardContent>
                     </Card>
@@ -281,8 +282,8 @@ export default function CaseStudies() {
                 "{selectedCase.fullDetails.testimonial}"
               </blockquote>
             )}
-            <Button size="lg" className="w-full mt-4" asChild>
-              <a href="#contact">Get a Similar System for Your Team</a>
+            <Button size="sm" className="mt-4 p-2" asChild>
+              <a href="#contact">Build This System for My Team</a>
             </Button>
           </div>
         </DialogContent>

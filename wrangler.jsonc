@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "aimatic",
+  // Set this to today's date
+  "compatibility_date": "2026-02-21",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "minify": true,
+  "keep_names": false,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  }
+}

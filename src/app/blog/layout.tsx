@@ -1,0 +1,25 @@
+import { BlogHeader } from "@/components/blog/BlogHeader";
+
+export default function BlogLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative min-h-screen flex flex-col">
+      {/* Refined Atmospheric Background (Synced with Main Landing Page) */}
+      <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none select-none">
+        <div className="absolute inset-0 bg-background transition-colors duration-700" />
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] mix-blend-overlay pointer-events-none" 
+             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+        />
+        <div className="absolute -top-[10%] -left-[5%] w-[60vw] h-[60vh] bg-fuchsia-600/20 dark:bg-fuchsia-500/15 blur-[120px] rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vh] bg-primary/10 dark:bg-primary/5 blur-[150px] rounded-full" />
+        <div className="absolute bottom-[-15%] right-[-10%] w-[70vw] h-[70vh] bg-indigo-600/20 dark:bg-indigo-700/20 blur-[140px] rounded-full" />
+        <div className="absolute top-[5%] right-[10%] w-[30vw] h-[30vh] bg-cyan-400/10 dark:bg-cyan-500/10 blur-[100px] rounded-full animate-pulse" style={{ animationDuration: '12s' }} />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 dark:via-white/[0.02] dark:to-white/[0.05] pointer-events-none" />
+      </div>
+
+      <BlogHeader />
+      <div className="flex-1 relative z-10">
+        {children}
+      </div>
+    </div>
+  );
+}

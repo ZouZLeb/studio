@@ -1,0 +1,43 @@
+[
+  {
+    "frontmatter": {
+      "title": "GitHub Uses Copilot Data",
+      "slug": "github-copilot-data-usage",
+      "description": "GitHub to use Copilot data from all user tiers to train AI models with automatic opt-in, sparking privacy concerns among developers",
+      "ogTitle": "GitHub Copilot Data Usage",
+      "ogDescription": "Learn about GitHub's decision to use Copilot data from all user tiers to improve their AI models and how it affects user privacy",
+      "bannerImage": "https://images.pexels.com/photos/14553707/pexels-photo-14553707.jpeg?auto=compress&cs=tinysrgb&w=1260",
+      "youtubeVideoId": "",
+      "publishedAt": "2026-03-29T14:30:00.000Z",
+      "draft": false,
+      "category": "AI",
+      "tags": [
+        "github",
+        "copilot",
+        "ai"
+      ]
+    },
+    "content": "<h1>Hook Intro</h1>\n<p>GitHub has announced that it will start using Copilot data from all user tiers to train and improve their AI models with automatic opt-in, raising concerns about user privacy.</p>\n<h1>TL;DR</h1>\n<div class=\"my-6 px-6 py-4 rounded-xl border-l-4 bg-primary/10 border-primary\"><h4 class=\"font-bold mb-2 mt-0\">TL;DR</h4><div class=\"[&>p]:m-0 text-sm\">\n* GitHub will use Copilot data from all user tiers to train AI models\n* Users can opt out of data collection in their settings\n* The data will be used to improve model performance and deliver more accurate code suggestions\n* The change will take effect on April 24\n</div></div>\n\n<h2>What Is GitHub Copilot and Why It Matters</h2>\n<p>GitHub Copilot is an AI-powered tool that helps developers write code faster and more efficiently. It uses machine learning algorithms to suggest code completions, refactor code, and even write entire functions. The tool has been widely adopted by developers, but the recent announcement has raised concerns about user privacy.</p>\n<h2>Technical Deep Dive</h2>\n<p>The Copilot data that GitHub will collect includes inputs, outputs, code snippets, and associated context. This data will be used to train and improve the AI models, allowing them to better understand development workflows and deliver more accurate code suggestions. The data collection will be automatic, but users can opt out in their settings.</p>\n<pre><code class=\"language-json\">{\n  &quot;inputs&quot;: &quot;code snippets&quot;,\n  &quot;outputs&quot;: &quot;suggested code&quot;,\n  &quot;context&quot;: &quot;development workflow&quot;\n}\n</code></pre>\n<h2>Real-World Examples</h2>\n<p>Companies like Microsoft have already seen improvements in their AI models by incorporating real-world interaction data. For example, Microsoft has reported increased acceptance rates in multiple languages after incorporating interaction data from their employees.</p>\n<h2>What the Community Is Saying</h2>\n<p>The community is divided on the issue, with some developers expressing concerns about user privacy and others seeing it as a necessary step to improve the AI models. On Reddit, some users have expressed frustration with the automatic opt-in, while others have praised GitHub for being transparent about the data collection.</p>\n<h2>Pros, Cons &amp; Caveats</h2>\n<table>\n<thead>\n<tr>\n<th>Pros</th>\n<th>Cons</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Improved AI models</td>\n<td>User privacy concerns</td>\n</tr>\n<tr>\n<td>More accurate code suggestions</td>\n<td>Automatic opt-in</td>\n</tr>\n<tr>\n<td>Faster development workflows</td>\n<td>Potential for biased models</td>\n</tr>\n</tbody></table>\n<h2>How to Get Started</h2>\n<p>To opt out of the data collection, follow these steps:</p>\n<ol>\n<li>Go to your GitHub settings</li>\n<li>Click on &quot;Privacy&quot;</li>\n<li>Disable the option to allow GitHub to collect interaction data</li>\n</ol>\n<h2>FAQ</h2>\n<p>Q: What data will GitHub collect?\nA: GitHub will collect inputs, outputs, code snippets, and associated context.\nQ: Can I opt out of the data collection?\nA: Yes, you can opt out in your settings.\nQ: Will the data collection affect my privacy?\nA: Yes, the data collection may raise concerns about user privacy.\nQ: How will the data be used?\nA: The data will be used to train and improve the AI models.\nQ: Can I still use GitHub Copilot if I opt out?\nA: Yes, you can still use GitHub Copilot even if you opt out of the data collection.</p>\n<h2>Conclusion &amp; Next Steps</h2>\n<p>If you have any questions or concerns about GitHub&#39;s decision to use Copilot data, please reach out to us at <a href=\"mailto:hello@aimatic.dev\">hello@aimatic.dev</a>. We can help you navigate the implications of this change and provide guidance on how to opt out of the data collection.</p>\n",
+    "slug": "github-copilot-data-usage"
+  },
+  {
+    "frontmatter": {
+      "title": "Welcome to the AImatic Blog",
+      "slug": "welcome-to-the-blog",
+      "description": "Introducing our new blog where we share AI automation insights, tutorials, and updates from the AImatic team.",
+      "ogTitle": "Welcome to the AImatic Blog",
+      "ogDescription": "Introducing our new blog — AI automation insights, tutorials, and updates from the AImatic team.",
+      "bannerImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000",
+      "youtubeVideoId": "",
+      "publishedAt": "2026-03-22T00:00:00.000Z",
+      "draft": false,
+      "category": "General",
+      "tags": [
+        "welcome",
+        "announcement"
+      ]
+    },
+    "content": "<p>Welcome to the AImatic blog! This is where we share insights on AI automation, n8n workflows, secure integrations, and real-world case studies from our work with small businesses in San Diego and beyond.</p>\n<div class=\"my-6 px-6 py-4 rounded-xl border-l-4 bg-primary/10 border-primary\"><h4 class=\"font-bold mb-2 mt-0\">Brand New Layout!</h4><div class=\"[&>p]:m-0 text-sm\">\nWe just updated our blog layout to support beautiful banner images, featured YouTube videos, and rich custom components right inside the MDX content! See them in action below.\n</div></div>\n\n<h2>What to Expect</h2>\n<p>We&#39;ll be posting regularly on topics like:</p>\n<ul>\n<li><strong>AI automation workflows</strong> — how to save hours each week using n8n and custom agents</li>\n<li><strong>Secure integrations</strong> — building private, self-hosted AI systems you actually own</li>\n<li><strong>Client case studies</strong> — real results from real businesses</li>\n<li><strong>Tips &amp; tricks</strong> — practical guides for getting more out of your automation stack</li>\n</ul>\n<p>Here is an example of embedding a secondary YouTube video directly within the text using our custom MDX components:</p>\n<div class=\"my-8 aspect-video w-full rounded-xl overflow-hidden shadow-lg border border-border\"><iframe class=\"w-full h-full\" src=\"https://www.youtube.com/embed/jNQXAC9IVRw\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div>\n\n<p>Stay tuned, and feel free to reach out at <a href=\"mailto:hello@aimatic.dev\">hello@aimatic.dev</a> with topics you&#39;d like us to cover.</p>\n",
+    "slug": "welcome-to-the-blog"
+  }
+]

@@ -10,8 +10,10 @@ const nextConfig: NextConfig = {
     '192.168.1.68',
     'localhost:9002'
   ],
-  serverExternalPackages: ['express', 'genkit', '@genkit-ai/google-genai', '@genkit-ai/next', '@genkit-ai/core'],
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+    // qualities: [25, 50, 60, 75, 90, 100],
     remotePatterns: [
       {
         protocol: 'https',
@@ -27,11 +29,31 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: '**.pexels.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'picsum.photos',
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+      },
+    ];
   },
 };
 

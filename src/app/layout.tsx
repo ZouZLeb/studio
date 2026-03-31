@@ -1,46 +1,80 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Inter, Source_Code_Pro, Merriweather } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
+import { GlobalDynamicComponents } from '@/components/global-dynamic-components';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  preload: false,
+});
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  preload: false,
+});
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-merriweather',
+  display: 'swap',
+  preload: false,
+});
 
 export const metadata: Metadata = {
-  title: 'AImatic | Professional AI Automation & Security Engineering',
+  title: 'AImatic | AI Automation Agency San Diego | Secure Engineering',
   description:
-    'AImatic builds custom, secure business automations. We specialize in n8n workflows, private AI systems, and secure API integrations that you own 100%. Stop renting your business logic.',
+    'AImatic is a San Diego based n8n automation agency. We build private AI chatbots for small business, automate lead generation, and engineer secure email follow-ups you own 100%.',
   keywords: [
-    'AI Automation Agency',
-    'Custom AI Development',
-    'n8n Workflows',
+    'AI automation agency San Diego',
+    'n8n automation agency',
+    'AI chatbot for small business',
+    'how to automate email follow-ups',
+    'automate lead generation with AI',
+    'how to save time in my business with automation',
     'Secure AI Integration',
-    'Business Process Automation',
     'Data Sovereignty',
-    'Private AI Chatbots',
-    'AImatic Automation',
+    'Self-hosted AI Agents',
   ],
-  authors: [{ name: 'AImatic Team' }],
+  authors: [{ name: 'AImatic Team', url: 'https://aimatic.dev' }],
+  creator: 'AImatic Dev Solutions',
   openGraph: {
-    title: 'AImatic | Custom Business Tools You Own',
-    description: 'Privacy-first automation engineering. Secure, self-hosted code that stays within your business walls.',
-    url: 'https://aimatic.com',
-    siteName: 'AImatic',
+    type: 'website',
+    locale: 'en_US',
+    title: 'AImatic | Private AI Automation & Custom Engineering',
+    description: 'Own your automation. San Diego based agency specializing in secure, self-hosted AI for business growth.',
+    url: 'https://aimatic.dev',
+    siteName: 'AImatic Dev Solutions',
     images: [
       {
-        url: 'https://picsum.photos/seed/aimatic-og/1200/630',
+        url: 'https://aimatic.dev/aimatic_logo.png',
         width: 1200,
         height: 630,
-        alt: 'AImatic Professional Automation',
+        alt: 'AImatic Professional AI Automation San Diego',
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AImatic | Secure AI Automation',
-    description: 'Own your automation. Protect your data. Professional engineering for modern businesses.',
-    images: ['https://picsum.photos/seed/aimatic-twitter/1200/630'],
+    title: 'AImatic | Secure AI Automation San Diego',
+    description: 'Professional engineering for modern businesses. Automate lead generation and follow-ups securely.',
+    images: ['https://aimatic.dev/aimatic_logo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: 'https://aimatic.dev',
   },
 };
 
@@ -49,41 +83,64 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Structured Data for AI/LLM Crawlers (Schema.org)
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "AImatic",
-    "description": "Privacy-first automation engineering agency building custom, self-hosted business systems.",
-    "url": "https://aimatic.com",
-    "logo": "https://aimatic.com/logo.png",
-    "sameAs": [
-      "https://github.com/aimatic",
-      "https://linkedin.com/company/aimatic"
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ProfessionalService',
+        '@id': 'https://aimatic.dev/#organization',
+        name: 'AImatic Dev Solutions',
+        url: 'https://aimatic.dev',
+        logo: 'https://aimatic.dev/aimatic_logo.png',
+        description: 'A developer-backed AI automation agency in San Diego focusing on security, n8n workflows, and custom engineering for small businesses.',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'San Diego',
+          addressRegion: 'CA',
+          addressCountry: 'US'
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'customer service',
+          email: 'hello@aimatic.dev'
+        },
+        priceRange: '$$',
+        knowsAbout: [
+          'AI Automation',
+          'n8n Workflows',
+          'Email Follow-up Automation',
+          'Lead Generation AI',
+          'Secure API Integration',
+          'Private AI Chatbots'
+        ]
+      },
+      {
+        '@type': 'WebSite',
+        '@id': 'https://aimatic.dev/#website',
+        url: 'https://aimatic.dev',
+        name: 'AImatic Dev Solutions',
+        publisher: { '@id': 'https://aimatic.dev/#organization' }
+      }
     ],
-    "serviceType": [
-      "AI Workflow Automation",
-      "System Integration",
-      "Custom Software Development",
-      "Security Consulting"
-    ]
   };
 
   return (
     <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Source+Code+Pro:wght@400;600&display=swap"
-          rel="stylesheet"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={cn('font-body antialiased')}>
+      <body 
+        suppressHydrationWarning
+        className={cn(
+        inter.variable,
+        merriweather.variable,
+        sourceCodePro.variable,
+        'font-body antialiased overflow-x-hidden'
+      )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -91,34 +148,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <GlobalDynamicComponents />
           <Toaster />
         </ThemeProvider>
-
-        {/* Analytics & Monitoring */}
-        <Script id="hotjar-snippet" strategy="afterInteractive">
-          {`
-            (function(h,o,t,j,a,r){
-                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:0,hjsv:6};
-                a=o.getElementsByTagName('head')[0];
-                r=o.createElement('script');r.async=1;
-                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                a.appendChild(r);
-            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-          `}
-        </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-0000000000"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-0000000000');
-          `}
-        </Script>
       </body>
     </html>
   );

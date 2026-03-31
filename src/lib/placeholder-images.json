@@ -3,56 +3,50 @@
     {
       "id": "hero-before",
       "description": "A screenshot of the ChatGPT interface.",
-      "imageUrl": "https://images.unsplash.com/photo-1762330467572-5199bc772a20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjaGF0Ym90JTIwaW50ZXJmYWNlfGVufDB8fHx8MTc2OTkzMDAzM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/hero-before.jpg",
       "imageHint": "chatbot interface"
     },
     {
       "id": "hero-after",
       "description": "A screenshot of a code editor with integration code.",
-      "imageUrl": "https://images.unsplash.com/photo-1603943761979-879c839ac8e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZWRpdG9yfGVufDB8fHx8MTc2OTg2NDAyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/hero-after.jpg",
       "imageHint": "code editor"
     },
     {
       "id": "case-leads",
       "description": "AI Agent responding to leads across channels.",
-      "imageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjdXN0b21lciUyMHNlcnZpY2V8ZW58MHx8fHwxNzY5OTM0NTAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/case-leads.jpg",
       "imageHint": "customer service"
     },
     {
       "id": "case-marketing",
       "description": "A marketing automation flow diagram.",
-      "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjBhdXRvbWF0aW9ufGVufDB8fHx8MTc2OTkzNDUwMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/case-marketing.jpg",
       "imageHint": "marketing automation"
     },
     {
       "id": "case-pm",
       "description": "Project management dashboard with blueprints.",
-      "imageUrl": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwbWFuYWdlbWVudHxlbnwwfHx8fDE3Njk5MzQ1MDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/case-pm.jpg",
       "imageHint": "project management"
     },
     {
       "id": "case-billing",
       "description": "Automated invoice and quote generation interface.",
-      "imageUrl": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZvaWNlfGVufDB8fHx8MTc2OTkzNDUwMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/case-billing.jpg",
       "imageHint": "invoice billing"
     },
     {
       "id": "case-hr",
       "description": "Recruitment and onboarding flow.",
-      "imageUrl": "https://images.unsplash.com/photo-1521791136064-7986c2920216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxodW1hbiUyMHJlc291cmNlc3xlbnwwfHx8fDE3Njk5MzQ1MDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/case-hr.jpg",
       "imageHint": "human resources"
     },
     {
       "id": "case-support",
       "description": "Private knowledge base AI assistant.",
-      "imageUrl": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhbCUyMHJvYm90fGVufDB8fHx8MTc2OTkzNDUwMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/case-support.jpg",
       "imageHint": "ai robot"
-    },
-    {
-      "id": "about-headshot",
-      "description": "A professional headshot of the founder.",
-      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3Njk5MTMxNDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional headshot"
     }
   ]
 }

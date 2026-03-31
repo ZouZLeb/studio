@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { motion } from "framer-motion";
-import { ShieldCheck, AlertCircle, ArrowRight } from "lucide-react";
+import { ShieldCheck, AlertCircle, ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { BrandName } from "@/components/brand-name";
 
 const ComparisonCard = ({
   type,
@@ -17,7 +18,7 @@ const ComparisonCard = ({
   imageId,
 }: {
   type: "competitor" | "aimatic";
-  label: string;
+  label: React.ReactNode;
   title: string;
   description: string;
   imageId: string;
@@ -29,7 +30,7 @@ const ComparisonCard = ({
       className={`relative overflow-hidden border-2 transition-all duration-300 ${
         type === "aimatic" 
           ? "border-primary/50 bg-primary/5 shadow-primary/10 shadow-xl" 
-          : "border-destructive/100 bg-muted/30 grayscale-[0.5] opacity-80"
+          : "border-destructive/40 bg-muted/30 grayscale-[0.5] opacity-80"
       }`}
     >
       <div className="absolute top-4 right-4 z-20">
@@ -41,7 +42,7 @@ const ComparisonCard = ({
         </Badge>
       </div>
       
-      <CardContent className="p-6">
+      <CardContent className="py-12 px-6">
         <div className="flex items-center gap-3 mb-4">
           <div className={`p-2 rounded-lg ${type === "aimatic" ? "bg-primary/20" : "bg-destructive/10"}`}>
             {type === "aimatic" ? (
@@ -51,7 +52,7 @@ const ComparisonCard = ({
             )}
           </div>
           <div>
-            <h3 className="font-black text-lg text-foreground tracking-tight">{title}</h3>
+            <h2 className="font-black text-lg text-foreground tracking-tight">{title}</h2>
             <p className="text-xs text-muted-foreground font-medium">{description}</p>
           </div>
         </div>
@@ -60,11 +61,13 @@ const ComparisonCard = ({
           {imageData && (
             <Image
               src={imageData.imageUrl}
-              alt={`${label}: ${description}`}
+              alt={type === "aimatic" ? "Secure engineering illustration" : "Standard AI wrapper illustration"}
               fill
               className="object-cover opacity-90 transition-all duration-500"
               sizes="(max-width: 768px) 100vw, 50vw"
               data-ai-hint={imageData.imageHint}
+              priority
+              fetchPriority="high"
             />
           )}
           <div className={`absolute inset-0 bg-gradient-to-t ${type === "aimatic" ? "from-primary/20" : "from-black/40"} to-transparent pointer-events-none`} />
@@ -83,6 +86,18 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="flex justify-center mb-4"
+          >
+            <Badge variant="outline" className="flex gap-2 items-center py-1 px-4 bg-background/50 backdrop-blur-sm">
+              <MapPin className="w-3 h-3 text-primary" />
+              <span className="text-[10px] uppercase font-bold tracking-widest">AI Automation Agency San Diego</span>
+            </Badge>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             <h1 id="hero-title" className="text-4xl md:text-6xl lg:text-7xl font-black font-headline mb-6 tracking-tight leading-[1.05]">
               Own Your Automation. <br />
@@ -96,8 +111,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-medium"
           >
-            Don't rent your business logic from generic AI agencies. 
-            AImatic builds custom, high-security systems you own forever. Professional automation for business owners.
+            Stop renting your business logic. <BrandName /> is a developer-backed <strong>n8n automation agency</strong> engineering custom, secure, and self-hosted systems that you own forever.
           </motion.p>
 
           <motion.div
@@ -106,7 +120,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" className="px-8" asChild aria-label="Book a free automation audit">
+            <Button size="sm" className="px-8 py-2" asChild aria-label="Book a free automation audit">
               <Link href="#contact" className="flex items-center gap-2">
                 Get Your Free Audit <ArrowRight className="w-4 h-4" />
               </Link>
@@ -128,7 +142,7 @@ export default function Hero() {
               type="competitor"
               label="Standard Agencies"
               title="The 'Prompt' Wrapper"
-              description="Fragile tools built on rented platforms with no data privacy."
+              description="Fragile tools built on rented platforms with zero data privacy."
               imageId="hero-before"
             />
           </motion.div>
@@ -140,7 +154,7 @@ export default function Hero() {
           >
             <ComparisonCard
               type="aimatic"
-              label="The AImatic Way"
+              label={<>The <BrandName className="px-1 text-foreground"/> Way</>}
               title="Custom Engineering"
               description="Secure, self-hosted code that stays within your business walls."
               imageId="hero-after"

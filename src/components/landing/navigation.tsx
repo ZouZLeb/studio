@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { useScroll } from "framer-motion";
 import { CodeXml, Menu } from "lucide-react";
 import Link from "next/link";
+import { BrandName } from "@/components/brand-name";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
+import Image from "next/image";
+import logo from "../../app/logo.png";
 import {
   Sheet,
   SheetContent,
@@ -16,10 +19,11 @@ import {
 } from "@/components/ui/sheet";
 
 const navItems = [
-  { name: 'Why AImatic', href: '#why-custom' },
-  { name: 'Projects', href: '#case-studies' },
-  { name: 'Process', href: '#lifecycle' },
-  { name: 'Calculator', href: '#roi-calculator' },
+  { id: 'why', name: <>Why <BrandName /></>, href: '#why-custom' },
+  { id: 'projects', name: 'Projects', href: '#case-studies' },
+  { id: 'process', name: 'Process', href: '#lifecycle' },
+  { id: 'calculator', name: 'Calculator', href: '#roi-calculator' },
+  { id: 'blog', name: 'Blog', href: '/blog' },
 ];
 
 export default function Navigation() {
@@ -40,10 +44,8 @@ export default function Navigation() {
       <header className="fixed top-0 z-50 w-full py-6 bg-transparent">
         <div className="container mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-primary/20">
-              <CodeXml className="w-6 h-6 text-primary" />
-            </div>
-            <span className="font-black text-xl tracking-tight font-headline">AImatic</span>
+            <Image src={logo} alt="AImatic Logo" width={32} height={32} className="h-8 w-auto" priority />
+            <BrandName className="text-xl tracking-tight" />
           </div>
         </div>
       </header>
@@ -61,22 +63,15 @@ export default function Navigation() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className={cn(
-            "p-1.5 rounded-lg transition-all duration-300",
-            "bg-primary/20 group-hover:bg-primary/30"
-          )}>
-            <CodeXml className="w-6 h-6 text-primary" />
-          </div>
-          <span className="font-black text-xl tracking-tight transition-colors font-headline text-foreground">
-            AImatic
-          </span>
+          <Image src={logo} alt="AImatic Logo" width={32} height={32} className="h-8 w-auto" priority />
+          <BrandName className="text-xl tracking-tight text-foreground" />
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
           {navItems.map((item) => (
             <Link 
-              key={item.name}
+              key={item.id}
               href={item.href} 
               className="transition-all duration-200 text-muted-foreground hover:text-primary"
             >
@@ -100,21 +95,21 @@ export default function Navigation() {
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open menu">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="bg-background/95 backdrop-blur-xl border-l border-border/50 w-72">
                 <SheetHeader className="text-left pb-6 border-b border-border/30">
                   <SheetTitle className="flex items-center gap-2">
-                    <CodeXml className="text-primary w-5 h-5" />
-                    <span className="font-headline font-black text-lg">AImatic</span>
+                    <Image src={logo} alt="AImatic Logo" width={24} height={24} className="h-6 w-auto" />
+                    <BrandName className="text-lg" />
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-8">
                   {navItems.map((item) => (
                     <Link
-                      key={item.name}
+                      key={item.id}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                       className="text-sm font-bold uppercase tracking-[0.15em] text-muted-foreground hover:text-primary transition-colors"

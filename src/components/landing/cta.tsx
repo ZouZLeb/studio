@@ -43,11 +43,15 @@ export default function CtaSection() {
                   A quick 15-minute chat to see if we can help. No sales pitch, just honest advice.
                 </p>
                 <div className="mt-auto">
-                  <span className="btn-custom-glass w-full" onClick={() => setIsCalendlyOpen(true)}>
+                  <button 
+                    className="btn-custom-glass w-full" 
+                    onClick={() => setIsCalendlyOpen(true)}
+                    aria-label="Find a time to book a free call"
+                  >
                     <div className="btn-custom-glass-inner">
                       <div className="btn-custom-glass-text flex items-center justify-center gap-2">Find a Time</div>
                     </div>
-                  </span>
+                  </button>
                 </div>
               </Card>
             </motion.div>
@@ -55,9 +59,9 @@ export default function CtaSection() {
           
           <div className="border-t border-border pt-8">
             <p className="text-muted-foreground mb-4">Or send us an email:</p>
-            <a href="mailto:hello@secureautomate.com" className="text-xl font-semibold text-primary hover:underline flex items-center justify-center gap-2">
+            <a href="mailto:hello@aimatic.dev?subject=Inquiry for&mailto:test?subject=Inquiry%20for&body=Hello%20Joseph%2C%20%0D%0A%0D%0AI%20came%20across%20your%20service%20and%20would%20really%20like%20to%20discuss... " className="text-xl font-semibold text-primary hover:underline flex items-center justify-center gap-2">
               <Mail className="w-6 h-6" />
-              hello@secureautomate.com
+              hello@aimatic.dev
             </a>
           </div>
 
