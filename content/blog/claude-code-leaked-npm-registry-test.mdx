@@ -1,0 +1,90 @@
+---
+title: "Claude Code Leaked"
+slug: "claude-code-leaked-npm-registry"
+description: "Claude Code's source code was leaked via a map file in their NPM registry, exposing 1,900 TypeScript files and 512,000+ lines of code."
+ogTitle: "Claude Code Source Code Leaked"
+ogDescription: "Discover the implications of Claude Code's source code leak and how it affects the AI-powered coding tool landscape."
+bannerImage: "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg"
+youtubeVideoId: ""
+publishedAt: "2026-03-31T14:30:00.000Z"
+draft: false
+category: "AI"
+tags:
+  - claude-code
+  - npm-registry
+  - source-code-leak
+---
+
+# Hook Intro
+
+Claude Code, Anthropic's flagship agentic CLI tool, had its entire source code exposed through a source map file published to the npm registry. This leak has significant implications for the AI-powered coding tool landscape.
+
+## TL;DR
+
+<Callout title="TL;DR" type="info">
+* Claude Code's source code was leaked via a map file in their NPM registry
+* The leak exposes 1,900 TypeScript files and 512,000+ lines of code
+* The codebase reveals a production-grade, heavily architected system with a modular tool-based architecture
+* The leak has sparked interest and debate in the developer community
+</Callout>
+
+## What Is Claude Code and Why It Matters
+
+Claude Code is Anthropic's official command-line interface that lets you interact with Claude directly from your terminal for software engineering tasks. It's an AI pair programmer that can edit files, run commands, search codebases, and manage git workflows — all through natural language. The leaked source code reveals a sophisticated system with a plugin-like tool architecture, a query engine, multi-agent orchestration, an IDE bridge system, and a persistent memory system.
+
+## Technical Deep Dive
+
+The leaked codebase is a treasure trove for developers and researchers. It includes:
+* A tool system with ~40 tools, each with its own permission-gated capabilities
+* A query engine that handles LLM API calls, streaming, caching, and orchestration
+* Multi-agent orchestration that allows Claude Code to spawn sub-agents to handle complex tasks
+* An IDE bridge system that connects IDE extensions to the CLI via JWT-authenticated channels
+* A persistent memory system that stores context about the user, project, and preferences across sessions
+
+```typescript
+// Simplified view of the tool architecture
+execute(context: ToolContext): Promise<ToolResult>;
+
+```
+
+## Real-World Examples
+
+Companies like AImatic are already exploring the implications of the Claude Code leak. By studying the leaked source code, developers can gain insights into the design and architecture of AI-powered coding tools.
+
+## What the Community Is Saying
+
+The community is abuzz with discussion and debate about the Claude Code leak. On Reddit, Hacker News, and Twitter, developers are sharing their thoughts and opinions on the implications of the leak.
+
+## Pros, Cons & Caveats
+
+| Pros | Cons |
+
+| --- | --- |
+
+| Insights into AI-powered coding tool design | Potential security risks |
+
+| Improved understanding of modular tool-based architecture | Limited context about the AI's core model weights |
+
+| Opportunities for innovation and experimentation | Uncertainty about the leak's impact on the developer community |
+
+## How to Get Started
+
+1. Explore the leaked source code on GitHub
+2. Study the tool system and query engine architecture
+3. Experiment with the IDE bridge system and persistent memory system
+4. Join the discussion on Reddit, Hacker News, and Twitter
+
+## FAQ
+
+Q: What is Claude Code?
+A: Claude Code is Anthropic's flagship agentic CLI tool.
+Q: What was leaked?
+A: The entire source code of Claude Code was leaked via a source map file in the npm registry.
+Q: What are the implications of the leak?
+A: The leak has significant implications for the AI-powered coding tool landscape, including potential security risks and opportunities for innovation.
+Q: How can I get started with the leaked source code?
+A: Explore the leaked source code on GitHub, study the tool system and query engine architecture, and experiment with the IDE bridge system and persistent memory system.
+
+## Conclusion & Next Steps
+
+The Claude Code leak is a significant event in the AI-powered coding tool landscape. As the community continues to discuss and debate the implications of the leak, AImatic is here to provide guidance and support. Reach out to us at hello@aimatic.dev to learn more about how we can help you navigate the world of AI and automation.
