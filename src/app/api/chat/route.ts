@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Required for Cloudflare Workers: forces the edge runtime.
+// Without this, OpenNext may fall back to the Node.js runtime, which cannot
+// properly handle POST requests in the Cloudflare Workers deployment environment.
+export const runtime = 'edge';
+
 /**
  * Backend Chat Handler with Security Layer
  * Implements HMAC verification, rate limiting, and authenticated webhook forwarding.
@@ -186,4 +191,16 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({ error: 'Method not allowed.' }, { status: 405 });
+}
+
+// Handle CORS preflight requests so browsers don't block the POST
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': 'https://aimatic.dev',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, X-Chat-Signature, X-Chat-Timestamp, X-Chat-Nonce, X-Chat-Fingerprint',
+    },
+  });
 }
