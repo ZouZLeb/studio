@@ -52,13 +52,14 @@ async function verifySignature(req: NextRequest, body: any): Promise<boolean> {
     return true;
   }
 
-  // Prevent replay attacks (requests older than 5 mins)
+  // Prevent replay attacks (requests older than 1 hour to allow for local clock skew)
   const now = Date.now();
-  if (Math.abs(now - parseInt(timestamp)) > 5 * 60 * 1000) return false;
+  if (Math.abs(now - parseInt(timestamp)) > 60 * 60 * 1000) return false;
 
   const encoder = new TextEncoder();
   const keyBuffer = encoder.encode(CHAT_SECRET);
-  const dataToSign = JSON.stringify({ ...body, timestamp: parseInt(timestamp), nonce });
+  // Use deterministic string concatenation exactly matching the client
+  const dataToSign = `${body.sessionId}:${body.message}:${timestamp}:${nonce}`;
 
   try {
     const key = await crypto.subtle.importKey(
