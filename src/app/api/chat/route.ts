@@ -13,7 +13,9 @@ const RATE_LIMIT_MAX = 10;
 const SESSION_LIMIT_MAX = 30;
 const SESSION_WINDOW_MS = 24 * 60 * 60 * 1000;
 
-const CHAT_SECRET = process.env.NEXT_PUBLIC_CHAT_SECRET || 'dev_secret_only_for_local';
+// NOTE: Use CHAT_SECRET (no NEXT_PUBLIC_ prefix) for the server.
+// NEXT_PUBLIC_ variables are baked into the client at build time and are unavailable at runtime on Cloudflare Workers.
+const CHAT_SECRET = process.env.CHAT_SECRET || process.env.NEXT_PUBLIC_CHAT_SECRET || 'dev_secret_only_for_local';
 const WEBHOOK_API_KEY = process.env.N8N_API_KEY || '';
 
 function getRateLimitRecord(ip: string) {
