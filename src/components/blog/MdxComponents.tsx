@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 export const mdxComponents = {
   // Custom YouTube embed component for use inside MDX body
@@ -20,4 +21,28 @@ export const mdxComponents = {
       <div className="[&>p]:m-0 text-sm">{children}</div>
     </div>
   ),
+  // FAQ Wrapper
+  FAQ: ({ children }: { children: React.ReactNode }) => (
+    <div className="my-8 border border-border rounded-xl p-6 bg-card">
+      <h3 className="text-2xl font-bold mt-0 mb-4">Frequently Asked Questions</h3>
+      <Accordion type="single" collapsible className="w-full">
+        {children}
+      </Accordion>
+    </div>
+  ),
+  // FAQ Item
+  FAQItem: ({ question, children, value }: { question: string, children: React.ReactNode, value?: string }) => {
+    // Generate a default value if not provided explicitly
+    const itemValue = value || question.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    return (
+      <AccordionItem value={itemValue} className="border-border">
+        <AccordionTrigger className="text-left font-semibold text-base hover:text-primary">
+          {question}
+        </AccordionTrigger>
+        <AccordionContent className="text-muted-foreground leading-relaxed prose prose-sm dark:prose-invert max-w-none">
+          {children}
+        </AccordionContent>
+      </AccordionItem>
+    );
+  },
 };

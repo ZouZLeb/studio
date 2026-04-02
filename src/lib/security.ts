@@ -74,11 +74,8 @@ export async function signRequest(payload: any, timestamp: number, nonce: string
   const encoder = new TextEncoder();
   const keyBuffer = encoder.encode(SECRET_KEY);
   
-  const dataToSign = JSON.stringify({
-    ...payload,
-    timestamp,
-    nonce
-  });
+  // Use deterministic string concatenation instead of JSON.stringify which is sensitive to key order
+  const dataToSign = `${payload.sessionId}:${payload.message}:${timestamp}:${nonce}`;
 
   try {
     const key = await crypto.subtle.importKey(

@@ -1,0 +1,37 @@
+name: Sync Main to Cloudflare
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge main into cloudflare
+        run: |
+          # Fetch all branches
+          git fetch origin cloudflare:cloudflare
+          git checkout cloudflare
+          
+          # Merge main into cloudflare
+          # Using '-X ours' ensures that if there's a conflict (e.g. in a blog post), 
+          # the version on the cloudflare branch is kept.
+          git merge origin/main --no-ff -m "chore: auto-sync main into cloudflare" -X ours
+          
+          # Push the changes back to cloudflare
+          git push origin cloudflare
