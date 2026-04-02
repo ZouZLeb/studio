@@ -2,9 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { ChatMessage, ChatApiResponse } from '../types/chat';
-import { getPersistentDeviceId, getBrowserFingerprint, signRequest, generateUUID } from '@/lib/security';
+import { getPersistentDeviceId } from '@/lib/security';
 
-// Client-side sanitization
 function sanitizeClientInput(input: string): string {
   return input
     .replace(/<[^>]+>/g, '')
@@ -16,7 +15,7 @@ function sanitizeClientInput(input: string): string {
 const WELCOME_MESSAGE: ChatMessage = {
   id: 'welcome',
   role: 'assistant',
-  plainText: "Hi! I'm Ema, your AI assistant at AImatic. 👋 I recognize you! I'm here to help you explore how secure automation can transform your business. What can I help you with today?",
+  plainText: "Hi! I'm Ema, your AI assistant at AImatic. 👋 I'm here to help you explore how secure automation can transform your business. What can I help you with today?",
   segments: [
     {
       type: 'text',
@@ -34,7 +33,6 @@ export function useChat() {
   const [remainingMessages, setRemainingMessages] = useState<number | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
-  // Initialize device ID on mount
   useEffect(() => {
     setDeviceId(getPersistentDeviceId());
   }, []);
@@ -42,8 +40,7 @@ export function useChat() {
   const sendMessage = useCallback(async (rawInput: string) => {
     const input = sanitizeClientInput(rawInput);
     if (!input || isLoading || !deviceId) return;
-    
-    // Check local limit if we have it (optimization)
+
     if (remainingMessages !== null && remainingMessages <= 0) {
       setError("Daily limit reached. Please come back later.");
       return;
@@ -76,28 +73,12 @@ export function useChat() {
     abortRef.current = new AbortController();
 
     try {
-      const timestamp = Date.now();
-      const nonce = generateUUID();
-      const fingerprint = getBrowserFingerprint();
-      
-      const payload = {
-        message: input,
-        sessionId: deviceId, // Use persistent ID for context
-      };
-
-      // Sign request for multi-layer defense
-      const signature = await signRequest(payload, timestamp, nonce);
-
+      // Only Content-Type header — avoids CORS preflight (OPTIONS) which caused
+      // 405 Method Not Allowed errors on the live Cloudflare deployment.
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'X-Chat-Timestamp': timestamp.toString(),
-          'X-Chat-Nonce': nonce,
-          'X-Chat-Fingerprint': fingerprint,
-          'X-Chat-Signature': signature
-        },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: input, sessionId: deviceId }),
         signal: abortRef.current.signal,
       });
 
@@ -120,16 +101,14 @@ export function useChat() {
         isTyping: false,
       };
 
-      setMessages(prev =>
-        prev.map(m => m.id === typingId ? assistantMessage : m)
-      );
+      setMessages(prev => prev.map(m => m.id === typingId ? assistantMessage : m));
 
     } catch (err: unknown) {
       if (err instanceof Error && err.name === 'AbortError') return;
 
-      const errorMessageText = err instanceof Error 
-        ? err.message 
-        : "I'm having trouble connecting. Security policies might be blocking the request. Please refresh.";
+      const errorMessageText = err instanceof Error
+        ? err.message
+        : "I'm having trouble connecting. Please refresh and try again.";
 
       const errorMessage: ChatMessage = {
         id: `error_${Date.now()}`,
@@ -139,9 +118,7 @@ export function useChat() {
         timestamp: Date.now(),
       };
 
-      setMessages(prev =>
-        prev.map(m => m.id === typingId ? errorMessage : m)
-      );
+      setMessages(prev => prev.map(m => m.id === typingId ? errorMessage : m));
       setError(errorMessageText);
     } finally {
       setIsLoading(false);
