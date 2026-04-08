@@ -1,6 +1,4 @@
 import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/posts';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import { mdxComponents } from '@/components/blog/MdxComponents';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
@@ -173,12 +171,11 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
-        {/* MDX body dynamically compiled for React components */}
+        {/* MDX body pre-compiled at build time */}
         <article 
           className="prose prose-neutral dark:prose-invert max-w-none"
-        >
-          <MDXRemote source={post.rawContent} components={mdxComponents} />
-        </article>
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
 
         {/* Related posts */}
         {related.length > 0 && (
