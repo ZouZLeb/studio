@@ -20,6 +20,7 @@ export type PostFrontmatter = {
 export type Post = {
   frontmatter: PostFrontmatter;
   content: string;
+  rawContent: string;
   slug: string;
 };
 

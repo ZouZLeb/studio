@@ -54,3 +54,6 @@ tina/__generated__
 
 # blog media uploads (local only)
 /public/uploads
+
+# Ignore test.mdx
+/content/blog/test.mdx

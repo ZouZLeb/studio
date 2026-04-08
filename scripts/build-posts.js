@@ -38,6 +38,7 @@ function buildCache() {
       return {
         frontmatter: data,
         content: html,
+        rawContent: content,
         slug: data.slug || file.replace(/\.mdx?$/, ''),
       };
     })
