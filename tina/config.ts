@@ -8,6 +8,11 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public",
+    host: true,
+  },
+
+  server: {
+    allowedOrigins: ["private"],
   },
 
   media: {
@@ -162,6 +167,42 @@ export default defineConfig({
                   {
                     name: "children",
                     label: "Content",
+                    type: "rich-text",
+                    required: true,
+                  },
+                ],
+              },
+              {
+                name: "FAQ",
+                label: "FAQ Wrapper",
+                fields: [
+                  {
+                    name: "children",
+                    label: "FAQ Items",
+                    type: "rich-text",
+                    required: true,
+                  },
+                ],
+              },
+              {
+                name: "FAQItem",
+                label: "FAQ Item",
+                fields: [
+                  {
+                    name: "question",
+                    label: "Question",
+                    type: "string",
+                    required: true,
+                  },
+                  {
+                    name: "value",
+                    label: "Value (Accordion ID)",
+                    type: "string",
+                    description: "Leave empty to auto-generate from the question.",
+                  },
+                  {
+                    name: "children",
+                    label: "Answer Content",
                     type: "rich-text",
                     required: true,
                   },
