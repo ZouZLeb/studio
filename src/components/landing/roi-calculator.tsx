@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "../ui/card";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
@@ -15,9 +16,9 @@ const COMPLEXITY_LEVELS = [
 ];
 
 const MAINTENANCE_LEVELS = [
-  { label: "Build Only", multiplier: 0, description: "You manage it" },
-  { label: "Priority", multiplier: 1, description: "We help you out" },
-  { label: "Managed", multiplier: 2, description: "Full maintenance" },
+  { label: "Build Only", multiplier: 0, description: "Full documentation & hand-over" },
+  { label: "Priority", multiplier: 1, description: "Direct engineer access & emergency support" },
+  { label: "Managed", multiplier: 2, description: "Proactive maintenance, hosting & security" },
 ];
 
 export default function RoiCalculator() {
@@ -191,7 +192,20 @@ export default function RoiCalculator() {
                   <div className="text-3xl lg:text-4xl font-black tracking-tighter text-foreground" aria-live="polite">
                     {formatCurrency(calculations.monthlyCost)}
                   </div>
-                  <div className="text-[10px] opacity-70 font-medium">Priority support and security updates</div>
+                  <div className="h-4 overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={maintenanceIdx}
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-[10px] opacity-70 font-medium"
+                      >
+                        {MAINTENANCE_LEVELS[maintenanceIdx].description}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
 
