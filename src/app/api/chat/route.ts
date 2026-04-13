@@ -57,9 +57,10 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const sessionId = body.sessionId;
+    const fingerprint = body.fingerprint;
 
-    if (!sessionId) {
-      return NextResponse.json({ error: 'Session required.' }, { status: 400 });
+    if (!sessionId || !fingerprint) {
+      return NextResponse.json({ error: 'Session and fingerprint required.' }, { status: 400 });
     }
 
     // Session-based Usage Limit (30 messages / 24h)
@@ -101,6 +102,7 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         message: sanitizedMessage,
         sessionId: body.sessionId,
+        fingerprint: body.fingerprint,
         timestamp: Date.now(),
         messageCount: usage.count
       }),
