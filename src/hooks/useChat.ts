@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { ChatMessage, ChatApiResponse } from '../types/chat';
-import { getPersistentDeviceId } from '@/lib/security';
+import { getPersistentDeviceId, getBrowserFingerprint } from '@/lib/security';
 
 function sanitizeClientInput(input: string): string {
   return input
@@ -30,11 +30,13 @@ export function useChat() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [deviceId, setDeviceId] = useState<string>('');
+  const [fingerprint, setFingerprint] = useState<string>('');
   const [remainingMessages, setRemainingMessages] = useState<number | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     setDeviceId(getPersistentDeviceId());
+    setFingerprint(getBrowserFingerprint());
   }, []);
 
   const sendMessage = useCallback(async (rawInput: string) => {
@@ -78,7 +80,7 @@ export function useChat() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input, sessionId: deviceId }),
+        body: JSON.stringify({ message: input, sessionId: deviceId, fingerprint }),
         signal: abortRef.current.signal,
       });
 
@@ -123,7 +125,7 @@ export function useChat() {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, deviceId, remainingMessages]);
+  }, [isLoading, deviceId, fingerprint, remainingMessages]);
 
   const clearMessages = useCallback(() => {
     setMessages([WELCOME_MESSAGE]);
