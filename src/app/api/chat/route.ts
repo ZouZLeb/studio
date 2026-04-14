@@ -112,7 +112,13 @@ export async function POST(req: NextRequest) {
     if (!n8nResponse.ok) {
       const errorData = await n8nResponse.text();
       console.error(`[WEBHOOK_ERROR] Status: ${n8nResponse.status} - ${errorData}`);
-      throw new Error('AI Core connection failure');
+      const cleanText = errorData.trim();
+      const isSimpleText = cleanText.length > 0 && cleanText.length < 500 && !cleanText.startsWith('<') && !cleanText.startsWith('{') && !cleanText.startsWith('[');
+
+      if (isSimpleText) {
+        return NextResponse.json({ error: cleanText }, { status: n8nResponse.status });
+      }
+      return NextResponse.json({ error: `AI Core Error (${n8nResponse.status})` }, { status: n8nResponse.status });
     }
 
     const data = await n8nResponse.json();

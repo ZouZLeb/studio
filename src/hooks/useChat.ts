@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { ChatMessage, ChatApiResponse } from '../types/chat';
-import { getPersistentDeviceId, getBrowserFingerprint } from '@/lib/security';
+import { getDailySessionId, getBrowserFingerprint } from '@/lib/security';
 
 function sanitizeClientInput(input: string): string {
   return input
@@ -29,19 +29,12 @@ export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [deviceId, setDeviceId] = useState<string>('');
-  const [fingerprint, setFingerprint] = useState<string>('');
   const [remainingMessages, setRemainingMessages] = useState<number | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
-  useEffect(() => {
-    setDeviceId(getPersistentDeviceId());
-    setFingerprint(getBrowserFingerprint());
-  }, []);
-
   const sendMessage = useCallback(async (rawInput: string) => {
     const input = sanitizeClientInput(rawInput);
-    if (!input || isLoading || !deviceId) return;
+    if (!input || isLoading) return;
 
     if (remainingMessages !== null && remainingMessages <= 0) {
       setError("Daily limit reached. Please come back later.");
@@ -75,12 +68,15 @@ export function useChat() {
     abortRef.current = new AbortController();
 
     try {
+      const dynamicSessionId = getDailySessionId();
+      const currentFingerprint = getBrowserFingerprint();
+
       // Only Content-Type header — avoids CORS preflight (OPTIONS) which caused
       // 405 Method Not Allowed errors on the live Cloudflare deployment.
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input, sessionId: deviceId, fingerprint }),
+        body: JSON.stringify({ message: input, sessionId: dynamicSessionId, fingerprint: currentFingerprint }),
         signal: abortRef.current.signal,
       });
 
@@ -125,7 +121,7 @@ export function useChat() {
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, deviceId, fingerprint, remainingMessages]);
+  }, [isLoading, remainingMessages]);
 
   const clearMessages = useCallback(() => {
     setMessages([WELCOME_MESSAGE]);
