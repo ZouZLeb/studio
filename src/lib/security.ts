@@ -24,18 +24,16 @@ export function generateUUID(): string {
 }
 
 /**
- * Generates or retrieves a persistent UUID for the device/user.
- * This allows the AI agent to maintain context across sessions.
+ * Generates a session ID based on the device fingerprint and the current date.
+ * This ensures a unique, consistent session per device per day, naturally resetting daily.
  */
-export function getPersistentDeviceId(): string {
+export function getDailySessionId(): string {
   if (typeof window === 'undefined') return 'server_side';
 
-  let deviceId = localStorage.getItem(STORAGE_KEY);
-  if (!deviceId) {
-    deviceId = `aim_${generateUUID()}`;
-    localStorage.setItem(STORAGE_KEY, deviceId);
-  }
-  return deviceId;
+  const fp = getBrowserFingerprint();
+  const d = new Date();
+  const dateStr = `${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}`;
+  return `sess_${fp}_${dateStr}`;
 }
 
 /**
